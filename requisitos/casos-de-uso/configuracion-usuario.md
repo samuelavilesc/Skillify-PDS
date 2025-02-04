@@ -13,3 +13,7 @@ entonces la aplicación actualizará mi información correctamente.
 - [ ] El usuario puede cambiar su contraseña.
 - [ ] El usuario puede cambiar su foto de perfil
 - [ ] El sistema guarda los cambios y los mantiene en futuras sesiones.
+
+### Ventana ejemplo configuracion
+
+![Pantalla de logros](imagenes/configure-user.png)
