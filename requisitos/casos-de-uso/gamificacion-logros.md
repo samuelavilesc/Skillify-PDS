@@ -13,3 +13,7 @@ entonces recibiré una insignia o recompensa si cumplo los criterios.
 - [ ] Se otorgan insignias al completar ciertos hitos (ej. 10 respuestas correctas seguidas).
 - [ ] Se muestra una sección con los logros obtenidos.
 - [ ] Los logros se guardan y se pueden ver en futuras sesiones.
+
+### Ventana ejemplo logros
+
+![Pantalla de logros](imagenes/achievements.png)

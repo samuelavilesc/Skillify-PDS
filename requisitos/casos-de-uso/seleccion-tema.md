@@ -14,3 +14,7 @@ entonces podré acceder al contenido de la lección.
 - [ ] Puede seleccionar un tema y comenzar la lección.
 - [ ] Si no hay temas cargados, se muestra un mensaje indicando que debe añadir uno.
 - [ ] La lista se obtiene desde un archivo JSON.
+
+### Ejemplo ventana selección
+
+![Pantalla principal](imagenes/main-window.png)

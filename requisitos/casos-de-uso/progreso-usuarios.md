@@ -13,3 +13,7 @@ entonces podré visualizar mi progreso en cada tema.
 - [ ] Se muestra un porcentaje de progreso en cada tema.
 - [ ] Se registra el número de preguntas correctas e incorrectas.
 - [ ] Los datos de progreso se almacenan y persisten entre sesiones.
+
+### Ventana ejemplo progreso
+
+![Pantalla principal](imagenes/main-window.png)
