@@ -1,52 +1,76 @@
 package com.pds.skillify;
 
-import java.awt.Color;
-import java.awt.EventQueue;
-import java.awt.Font;
-
-import javax.swing.ImageIcon;
+import java.awt.*;
+import java.io.IOException;
+import java.io.InputStream;
 import javax.swing.UIManager;
-
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
 import com.pds.skillify.ui.LoginWindow;
+import com.pds.skillify.ui.MainWindow;
 
 public class Skillify {
 
-	private final static int BORDER_ROUNDNESS = 30;
-	private final static Color GREEN_COLOR = new Color(0x80D855);
+    private final static int BORDER_ROUNDNESS = 30;
+    private final static Color GREEN_COLOR = new Color(0x80D855);
+    private final static String FONT_RESOURCE_PATH = "/Roboto-Regular.ttf"; // Ruta en resources
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					Font font = new Font("Segoe UI", Font.PLAIN, 14);
-					Font buttonFont = new Font("Segoe UI", Font.PLAIN, 12);
+    public static void main(String[] args) {
+        EventQueue.invokeLater(new Runnable() {
+            public void run() {
+                try {
+                    // Cargar la fuente desde resources
+                    Font robotoFont = loadRobotoFromResources();
 
-					UIManager.put("Label.font", font);
-					UIManager.put("TextField.font", font);
-					UIManager.put("PasswordField.font", font);
-					UIManager.put("TextArea.font", font);
-					UIManager.put("ComboBox.font", font);
-					UIManager.put("CheckBox.font", font);
-					UIManager.put("RadioButton.font", font);
-					UIManager.put("Button.font", buttonFont);
+                    // Aplicar la fuente globalmente
+                    UIManager.put("Label.font", robotoFont);
+                    UIManager.put("TextField.font", robotoFont);
+                    UIManager.put("PasswordField.font", robotoFont);
+                    UIManager.put("TextArea.font", robotoFont);
+                    UIManager.put("ComboBox.font", robotoFont);
+                    UIManager.put("CheckBox.font", robotoFont);
+                    UIManager.put("RadioButton.font", robotoFont);
+                    UIManager.put("Button.font", robotoFont);
 
-					UIManager.put("Button.foreground", Color.WHITE);
-					UIManager.put("Button.background", GREEN_COLOR);
+                    UIManager.put("Button.foreground", Color.WHITE);
+                    UIManager.put("Button.background", GREEN_COLOR);
 
-					UIManager.put("Button.arc", BORDER_ROUNDNESS);
-					UIManager.put("Component.arc", BORDER_ROUNDNESS);
-					UIManager.put("TextComponent.arc", BORDER_ROUNDNESS);
-					UIManager.put("ProgressBar.arc", BORDER_ROUNDNESS);
+                    UIManager.put("Button.arc", BORDER_ROUNDNESS);
+                    UIManager.put("Component.arc", BORDER_ROUNDNESS);
+                    UIManager.put("TextComponent.arc", BORDER_ROUNDNESS);
+                    UIManager.put("ProgressBar.arc", BORDER_ROUNDNESS);
 
-					UIManager.setLookAndFeel(new FlatMacLightLaf());
+                    UIManager.setLookAndFeel(new FlatMacLightLaf());
 
-					new LoginWindow();
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+                    new LoginWindow();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+    }
 
+    /**
+     * Carga la fuente Roboto desde los recursos internos (resources/)
+     */
+    private static Font loadRobotoFromResources() {
+        try {
+            // Obtener la fuente como un stream desde los recursos
+            InputStream fontStream = Skillify.class.getResourceAsStream(FONT_RESOURCE_PATH);
+            if (fontStream == null) {
+                throw new IOException("No se pudo encontrar la fuente en resources.");
+            }
+
+            // Crear la fuente desde el InputStream y establecer tamaño 14
+            Font roboto = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(Font.PLAIN, 14);
+
+            // Registrar la fuente en el sistema para que la reconozca Java
+            GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
+            ge.registerFont(roboto);
+
+            return roboto;
+        } catch (IOException | FontFormatException e) {
+            e.printStackTrace();
+            return new Font("SansSerif", Font.PLAIN, 14); // Fallback en caso de error
+        }
+    }
 }
