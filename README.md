@@ -1,7 +1,7 @@
 # Skillify
 
 ## Descripción
-Skillify es una aplicación de aprendizaje desarrollada en Java como parte de la asignatura **Procesos de Desarrollo de Software** del **Grado en Ingeniería Informática** de la **Universidad de Murcia**, guiado por el profesor **Jesus Sánchez Cuadrado**. 
+Skillify es una aplicación de aprendizaje desarrollada en Java como parte de la asignatura **Procesos de Desarrollo de Software** del **Grado en Ingeniería Informática** de la **Universidad de Murcia**, guiado por el profesor **Jesús Sánchez Cuadrado**. 
 
 El objetivo de Skillify es proporcionar una plataforma interactiva que facilite el aprendizaje de diversas habilidades.
 
