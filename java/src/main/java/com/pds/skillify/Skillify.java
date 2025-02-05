@@ -5,8 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
+import com.pds.skillify.ui.AchievementsWindow;
+import com.pds.skillify.ui.ConfigureUserWindow;
 import com.pds.skillify.ui.LoginWindow;
 import com.pds.skillify.ui.MainWindow;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class Skillify {
 
@@ -41,7 +47,11 @@ public class Skillify {
 
                     UIManager.setLookAndFeel(new FlatMacLightLaf());
 
+                    
+                
+
                     new LoginWindow();
+
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
