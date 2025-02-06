@@ -21,6 +21,11 @@ public class ConfigureUserWindow extends JFrame {
     private static final int HEIGHT = 460;
 
     public ConfigureUserWindow() {
+        initialize();
+        setVisible(true);
+    }
+
+    private void initialize() {
         setTitle("Skillify");
         setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
         setSize(WIDTH, HEIGHT);
@@ -146,8 +151,35 @@ public class ConfigureUserWindow extends JFrame {
         btnGuardar.setPreferredSize(new Dimension(120, 30));
         SwingUtilities.updateComponentTreeUI(btnGuardar);
         add(btnGuardar, gbc);
+    }
 
-        setVisible(true);
+    // Getters para acceder a los JTextField y JPasswordField
+    public JTextField getTxtEmail() {
+        return txtEmail;
+    }
+
+    public JPasswordField getTxtNuevaContrasena() {
+        return txtNuevaContrasena;
+    }
+
+    public JButton getBtnGuardar() {
+        return btnGuardar;
+    }
+
+    public JLabel getLblImagenPerfil() {
+        return lblImagenPerfil;
+    }
+
+    public JLabel getLblUsuario() {
+        return lblUsuario;
+    }
+
+    public JLabel getLblEmail() {
+        return lblEmail;
+    }
+
+    public JLabel getLblNuevaContrasena() {
+        return lblNuevaContrasena;
     }
 
     public static void main(String[] args) {
