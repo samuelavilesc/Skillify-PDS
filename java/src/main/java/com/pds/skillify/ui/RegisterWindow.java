@@ -110,7 +110,7 @@ public class RegisterWindow extends JFrame {
 
 		add(panelCentro, BorderLayout.CENTER);
 
-		JLabel genericAvatarLabel = new JLabel(new ImageIcon(getClass().getResource("/Generic_avatar.png")));
+		JLabel genericAvatarLabel = new JLabel(new ImageIcon(getClass().getResource("/user.png")));
 		gbc.gridx = 0;
 		gbc.gridy = 6;
 		gbc.gridwidth = 1;
