@@ -45,7 +45,7 @@ public class User {
 	public Set<Course> getAllCourses() {
 	    return new HashSet<>(coursesToProgress.keySet());
 	}
-
+  
 	public ImageIcon getProfilePic() {
 		return profilePic;
 	}
