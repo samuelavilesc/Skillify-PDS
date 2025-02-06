@@ -14,7 +14,7 @@ import com.pds.persistence.UserDAO;
 
 public class UserCatalog {
 
-	private Map<String, User> users; // Mapa que relaciona números de usernames con usuarios.
+	private Map<String, User> users; // Mapa que relaciona nombre de usuario con usuarios.
 	private static UserCatalog unicaInstancia;
 	private FactoriaDAO factoria;
 	private UserDAO adaptadorUsuario;
@@ -29,6 +29,7 @@ public class UserCatalog {
 			//adaptadorUsuario = factoria.getUserDAO();
 			users = new HashMap<>();
 			//this.loadCatalog();
+			//users.put("usuario",new User("usuario","123","email@email.com",new ImageIcon(getClass().getResource("/user.png"))));
 			users.put("usuario",new User("usuario","123","email@email.com",new ImageIcon(getClass().getResource("/user.png"))));
 		//} catch (DAOException eDAO) {
 			//eDAO.printStackTrace();

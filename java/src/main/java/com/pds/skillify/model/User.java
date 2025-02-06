@@ -22,6 +22,7 @@ public class User {
 		this.courses=new ArrayList<Course>();
 	}
 	
+	
 	public ImageIcon getProfilePic() {
 		return profilePic;
 	}

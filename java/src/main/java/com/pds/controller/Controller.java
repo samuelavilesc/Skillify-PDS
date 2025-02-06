@@ -85,7 +85,7 @@ public class Controller {
 		}
 
 		User newUser = new User(username, password, email, pfp);
-
+		this.actualUser = newUser;
 		// si no esta registrado, lo añadimos al catalogo de usuarios
 		if (!catalog.existsUser(newUser)) {
 			catalog.addUser(newUser);
