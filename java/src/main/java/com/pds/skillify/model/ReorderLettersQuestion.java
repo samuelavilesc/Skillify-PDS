@@ -3,21 +3,33 @@ package com.pds.skillify.model;
 import java.util.Arrays;
 
 public class ReorderLettersQuestion extends Question {
-    private String correctAnswer;
+	private String correctAnswer;
 
-    public ReorderLettersQuestion(String statement, String correctAnswer) {
-        super(statement);
-        this.correctAnswer = correctAnswer;
-    }
+	// Constructor por defecto para JSON deserialization.
+	public ReorderLettersQuestion() {
+	}
 
-    @Override
-    public boolean checkAnswer(String answer) {
-        char[] answerArray = answer.trim().toCharArray();
-        char[] correctArray = correctAnswer.toCharArray();
+	public ReorderLettersQuestion(String statement, String correctAnswer) {
+		super(statement);
+		this.correctAnswer = correctAnswer;
+	}
 
-        Arrays.sort(answerArray);
-        Arrays.sort(correctArray);
+	public String getCorrectAnswer() {
+		return correctAnswer;
+	}
 
-        return Arrays.equals(answerArray, correctArray);
-    }
+	public void setCorrectAnswer(String correctAnswer) {
+		this.correctAnswer = correctAnswer;
+	}
+
+	@Override
+	public boolean checkAnswer(String answer) {
+		char[] answerArray = answer.trim().toCharArray();
+		char[] correctArray = correctAnswer.toCharArray();
+
+		Arrays.sort(answerArray);
+		Arrays.sort(correctArray);
+
+		return Arrays.equals(answerArray, correctArray);
+	}
 }

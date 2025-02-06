@@ -61,9 +61,10 @@ public class MainWindow extends JFrame {
 
         // Modelo de la lista de cursos
         courseListModel = new DefaultListModel<>();
-        courseListModel.addElement(new Course("Curso 1", 40,"Curso 1 muy curso curso curso curso"));
-        courseListModel.addElement(new Course("Curso 2", 70,"Curso 2 muy curso curso curso curso"));
-        courseListModel.addElement(new Course("Curso 3", 25,"Curso 3 muy curso curso curso curso"));
+        //TODO: usar el currentUsers.GetAllCourses () desde el controlador
+        // courseListModel.addElement(new Course("Curso 1", 40,"Curso 1 muy curso curso curso curso"));
+        // courseListModel.addElement(new Course("Curso 2", 70,"Curso 2 muy curso curso curso curso"));
+        // courseListModel.addElement(new Course("Curso 3", 25,"Curso 3 muy curso curso curso curso"));
 
         // JList con render personalizado
         courseList = new JList<>(courseListModel);
@@ -141,7 +142,9 @@ public class MainWindow extends JFrame {
 
             courseTitle.setText(course.getName());
             courseDescription.setText(course.getDescription()); // Nueva línea para descripción
-            progressBar.setValue(course.getProgress());
+            
+            // TODO: ahora es a partir del mapa del currentUser, hacer en controlador
+            // progressBar.setValue(course.getProgress());
 
             if (isSelected) {
                 setBackground(new Color(220, 220, 220));

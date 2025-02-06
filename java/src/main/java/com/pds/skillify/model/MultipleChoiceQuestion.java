@@ -6,6 +6,9 @@ public class MultipleChoiceQuestion extends Question {
     private List<String> options;
     private int correctAnswer;
 
+	// Constructor por defecto para JSON deserialization.
+    public MultipleChoiceQuestion() {}
+    
     public MultipleChoiceQuestion(String statement, List<String> options, int correctAnswer) {
         super(statement);
         this.options = options;
@@ -24,6 +27,18 @@ public class MultipleChoiceQuestion extends Question {
 
     public List<String> getOptions() {
         return options;
+    }
+    
+    public void setOptions(List<String> options) {
+        this.options = options;
+    }
+    
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
+
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
     }
 }
 
