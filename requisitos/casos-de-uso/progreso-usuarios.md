@@ -1,19 +1,14 @@
-## Progreso del Usuario
+# Casos de Uso - Sistema de Gestión de la Aplicación
 
-Como **usuario autenticado**, quiero poder **ver mi progreso en los temas de aprendizaje**, para conocer cuánto he avanzado.
+## 5. Progreso del Usuario
 
-### Criterios de Aceptación:
+- **Identificador**: Progreso del Usuario  
+- **Actores**: Usuario autenticado  
+- **Descripción**: Permite a los usuarios visualizar su progreso en los temas de aprendizaje, mostrando cuánto han avanzado en cada uno.  
 
-Dado que me encuentro en la ventana principal,  
-cuando accedo a mi perfil,  
-entonces podré visualizar mi progreso en cada tema.
-
-### Checklist de ayuda al desarrollo
-
-- [ ] Se muestra un porcentaje de progreso en cada tema.
-- [ ] Se registra el número de preguntas correctas e incorrectas.
-- [ ] Los datos de progreso se almacenan y persisten entre sesiones.
-
-### Ventana ejemplo progreso
-
-![Pantalla principal](imagenes/main-window.png)
+### Pasos:  
+1. El usuario accede a la ventana principal.  
+2. El usuario selecciona su perfil.  
+3. El sistema muestra el porcentaje de progreso en cada tema.  
+4. Se detallan las preguntas correctas e incorrectas del usuario.  
+5. Los datos de progreso se almacenan y se mantienen en futuras sesiones.  
