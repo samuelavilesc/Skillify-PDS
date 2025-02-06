@@ -3,6 +3,8 @@ package com.pds.skillify.ui;
 import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+
+import com.pds.skillify.model.Course;
 import com.pds.skillify.ui.controller.MainWindowController;
 
 @SuppressWarnings("serial")
@@ -86,30 +88,6 @@ public class MainWindow extends JFrame {
         getContentPane().add(bottomPanel, BorderLayout.SOUTH);
     }
 
-    /**
-     * Clase interna para representar un Curso
-     */
-    private static class Course {
-        private String name;
-        private int progress;
-        private String description;
-        public Course(String name, int progress, String desc) {
-            this.name = name;
-            this.progress = progress;
-            this.description=desc;
-        }
-
-        public String getName() {
-            return name;
-        }
-        public String getDescription() {
-            return description;
-        }
-
-        public int getProgress() {
-            return progress;
-        }
-    }
 
     /**
      * Renderizador de la lista de cursos dentro de la ventana

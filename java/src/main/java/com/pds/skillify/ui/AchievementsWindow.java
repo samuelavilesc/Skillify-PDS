@@ -1,26 +1,27 @@
 package com.pds.skillify.ui;
 
 import javax.swing.*;
+
+import com.pds.controller.Controller;
+import com.pds.skillify.model.Course;
+
 import java.awt.*;
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 @SuppressWarnings("serial")
 public class AchievementsWindow extends JFrame {
 
     private static final int WIDTH = 700;
     private static final int HEIGHT = 300;
-
+   
     private JLabel lblTitulo, lblAvatar;
     private JPanel panelCursos;
 
-    public AchievementsWindow(List<String> cursos) {
-        initialize(cursos);
+    public AchievementsWindow() {
+        initialize();
         setVisible(true);
     }
 
-    private void initialize(List<String> cursos) {
+    private void initialize() {
         setTitle("Skillify");
         setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
         setSize(WIDTH, HEIGHT);
@@ -40,7 +41,7 @@ public class AchievementsWindow extends JFrame {
         lblTitulo.setFont(new Font("Arial", Font.BOLD, 28));
 
         // **Cargar imagen del avatar**
-        ImageIcon iconoAvatar = new ImageIcon(getClass().getResource("/Generic_avatar.png"));
+        ImageIcon iconoAvatar = new ImageIcon(getClass().getResource("/user.png"));
         lblAvatar = new JLabel(new ImageIcon(iconoAvatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
 
         // **Panel para centrar título y avatar juntos con separación**
@@ -55,7 +56,7 @@ public class AchievementsWindow extends JFrame {
         panelCursos = new JPanel(new FlowLayout(FlowLayout.CENTER, 60, 5)); // Cursos alineados en horizontal
         panelCursos.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        actualizarCursos(cursos); // Genera los cursos dinámicamente
+        actualizarCursos(); // Genera los cursos dinámicamente
 
         // **Hacer que el panel tenga scroll si hay más de 4 cursos**
         JScrollPane scrollPane = new JScrollPane(panelCursos, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
@@ -64,18 +65,18 @@ public class AchievementsWindow extends JFrame {
         add(scrollPane, BorderLayout.CENTER);
     }
 
-    public void actualizarCursos(List<String> cursos) {
+    public void actualizarCursos() {
         panelCursos.removeAll(); // Limpiar panel antes de actualizar
 
         ImageIcon iconoMedalla = new ImageIcon(getClass().getResource("/achievement.png"));
 
-        for (String curso : cursos) {
+        for (Course curso : Controller.getInstance().getFinishedCourses()) {
             JPanel panelCurso = new JPanel(new BorderLayout());
 
             JLabel lblMedalla = new JLabel(new ImageIcon(iconoMedalla.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH)));
             lblMedalla.setHorizontalAlignment(SwingConstants.CENTER);
 
-            JLabel lblNombreCurso = new JLabel(curso, SwingConstants.CENTER);
+            JLabel lblNombreCurso = new JLabel(curso.getName(), SwingConstants.CENTER);
             lblNombreCurso.setFont(new Font("Arial", Font.BOLD, 16));
 
             panelCurso.add(lblMedalla, BorderLayout.NORTH);
@@ -88,16 +89,4 @@ public class AchievementsWindow extends JFrame {
         panelCursos.repaint();
     }
 
-    public static void main(String[] args) {
-        try {
-            // Simulación de cursos completados por el usuario
-            List<String> cursosCompletados = new ArrayList<>(Arrays.asList(
-                    "Java Básico", "Python Intermedio", "SQL Avanzado", "C++ Fundamentos", "JavaScript Avanzado", "React", "Spring Boot"
-            ));
-
-            new AchievementsWindow(cursosCompletados);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }

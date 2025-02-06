@@ -37,7 +37,7 @@ public class ConfigureUserWindow extends JFrame {
         gbc.insets = new Insets(5, 10, 5, 10); // Reducir separación entre elementos
 
         // Cargar imagen de perfil desde resources
-        URL imageUrl = getClass().getResource("/Generic_avatar.png");
+        URL imageUrl = getClass().getResource("/user.png");
         if (imageUrl != null) {
             iconoPerfil = new ImageIcon(imageUrl);
         } else {
@@ -182,13 +182,4 @@ public class ConfigureUserWindow extends JFrame {
         return lblNuevaContrasena;
     }
 
-    public static void main(String[] args) {
-        try {
-            // Aplicar el Look and Feel del sistema
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
-            SwingUtilities.invokeLater(ConfigureUserWindow::new);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
 }
