@@ -93,8 +93,6 @@ public class LoginWindowController {
 			}
 		});
 	}
-<<<<<<< Updated upstream
-=======
 
 	private boolean validateFields(String username, String password) {
 		boolean isValid = true;
@@ -122,4 +120,4 @@ public class LoginWindowController {
 	}
 
 }
->>>>>>> Stashed changes
+
