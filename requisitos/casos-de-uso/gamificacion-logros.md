@@ -1,19 +1,15 @@
-## Gamificación y Logros
+# Casos de Uso - Sistema de Gestión de la Aplicación
 
-Como **usuario autenticado**, quiero **ganar insignias y recompensas al completar lecciones**, para sentirme motivado a seguir aprendiendo.
+## 4. Gamificación y Logros
 
-### Criterios de Aceptación:
+- **Identificador**: Gamificación y Logros  
+- **Actores**: Usuario autenticado  
+- **Descripción**: Permite a los usuarios ganar insignias y recompensas al completar lecciones, fomentando la motivación y el aprendizaje continuo.  
 
-Dado que me encuentro en la ventana principal,  
-cuando completo una lección con éxito,  
-entonces recibiré una insignia o recompensa si cumplo los criterios.
-
-### Checklist de ayuda al desarrollo
-
-- [ ] Se otorgan insignias al completar ciertos hitos (ej. 10 respuestas correctas seguidas).
-- [ ] Se muestra una sección con los logros obtenidos.
-- [ ] Los logros se guardan y se pueden ver en futuras sesiones.
-
-### Ventana ejemplo logros
-
-![Pantalla de logros](imagenes/achievements.png)
+### Pasos:  
+1. El usuario accede a la ventana principal.  
+2. El usuario completa una lección con éxito.  
+3. El sistema evalúa si el usuario cumple los criterios para recibir una insignia o recompensa.  
+4. Si el usuario cumple los criterios, el sistema otorga la insignia o recompensa.  
+5. El usuario puede visualizar sus logros en la sección de logros.  
+6. Los logros se guardan y permanecen disponibles en futuras sesiones.  
