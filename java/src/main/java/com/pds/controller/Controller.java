@@ -97,4 +97,7 @@ public class Controller {
 		return false;
 
 	}
+	public void setNewPfP(ImageIcon image) {
+		this.actualUser.setProfilePic(image);
+	}
 }

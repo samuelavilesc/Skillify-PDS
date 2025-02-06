@@ -6,6 +6,7 @@ import javax.swing.JButton;
 import javax.swing.JList;
 
 import com.pds.skillify.model.Course;
+import com.pds.skillify.ui.AchievementsWindow;
 import com.pds.skillify.ui.ConfigureUserWindow;
 import com.pds.skillify.ui.MainWindow;
 
@@ -47,7 +48,7 @@ public class MainWindowController {
         profileButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // TODO: Implementar acción para ver perfil de usuario
+                new AchievementsWindow();
             }
         });
     }
