@@ -1,23 +1,44 @@
 package com.pds.skillify.model;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class Course {
+
 	private String name;
-    private int progress;
-    private String description;
-    public Course(String name, int progress, String desc) {
+	private String description;
+	private List<Question> questions;
+
+	public Course(String name, String desc) {
+		this.name = name;
+		this.description = desc;
+		this.questions = new ArrayList<>();
+	}
+	
+	public Course(String name, List<Question> questions) {
         this.name = name;
-        this.progress = progress;
-        this.description=desc;
+        this.questions = new ArrayList<>(questions);
+    }
+	
+	public void addQuestion(Question question) {
+        questions.add(question);
     }
 
-    public String getName() {
-        return name;
+    public void shuffleQuestions() {
+        Collections.shuffle(questions);
     }
-    public String getDescription() {
-        return description;
+    
+	public String getName() {
+		return name;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+	
+	public List<Question> getQuestions() {
+        return new ArrayList<>(questions);
     }
 
-    public int getProgress() {
-        return progress;
-    }
 }
