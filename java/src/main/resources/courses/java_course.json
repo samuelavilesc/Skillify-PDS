@@ -1,0 +1,22 @@
+{
+  "name": "Fundamentos de Java",
+  "description": "Una introducción a la programación en Java.",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuál es la palabra clave para crear un objeto en Java?",
+      "options": ["new", "create", "init"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "El constructor por defecto tiene ______ parámetros.",
+      "correctAnswer": "cero"
+    },
+    {
+      "type": "reorder_letters",
+      "statement": "Ordena las letras: AJAV",
+      "correctAnswer": "JAVA"
+    }
+  ]
+}
