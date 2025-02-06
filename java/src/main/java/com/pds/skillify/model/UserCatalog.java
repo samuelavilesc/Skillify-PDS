@@ -6,13 +6,15 @@ import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 
+import javax.swing.ImageIcon;
+
 import com.pds.persistence.DAOException;
 import com.pds.persistence.FactoriaDAO;
 import com.pds.persistence.UserDAO;
 
 public class UserCatalog {
 
-	private Map<String, User> users; // Mapa que relaciona números de teléfono con usuarios.
+	private Map<String, User> users; // Mapa que relaciona números de usernames con usuarios.
 	private static UserCatalog unicaInstancia;
 	private FactoriaDAO factoria;
 	private UserDAO adaptadorUsuario;
@@ -22,14 +24,15 @@ public class UserCatalog {
 	 * usuarios desde la base de datos utilizando el adaptador DAO.
 	 */
 	private UserCatalog() {
-		try {
-			factoria = FactoriaDAO.getInstance(FactoriaDAO.DAO_TDS);
-			adaptadorUsuario = factoria.getUserDAO();
+		//try {
+			//factoria = FactoriaDAO.getInstance(FactoriaDAO.DAO_TDS);
+			//adaptadorUsuario = factoria.getUserDAO();
 			users = new HashMap<>();
-			this.loadCatalog();
-		} catch (DAOException eDAO) {
-			eDAO.printStackTrace();
-		}
+			//this.loadCatalog();
+			users.put("usuario",new User("usuario","123","email@email.com",new ImageIcon(getClass().getResource("/user.png"))));
+		//} catch (DAOException eDAO) {
+			//eDAO.printStackTrace();
+		//}
 	}
 
 	/**
@@ -53,10 +56,10 @@ public class UserCatalog {
 	}
 
 	/**
-	 * Busca un usuario por su número de teléfono.
+	 * Busca un usuario por su username.
 	 *
-	 * @param telefono Número de teléfono del usuario.
-	 * @return El usuario correspondiente al número de teléfono, o null si no
+	 * @param username Username del usuario.
+	 * @return El usuario correspondiente al username, o null si no
 	 *         existe.
 	 */
 	public User getUser(String username) {
@@ -74,9 +77,9 @@ public class UserCatalog {
 	}
 
 	/**
-	 * Busca un usuario por su número de teléfono, devolviendo un objeto `Optional`.
+	 * Busca un usuario por su username, devolviendo un objeto `Optional`.
 	 *
-	 * @param tlf Número de teléfono del usuario.
+	 * @param username Username del usuario buscado.
 	 * @return Un `Optional` que contiene el usuario si existe, o vacío si no.
 	 */
 	public Optional<User> findUser(String username) {

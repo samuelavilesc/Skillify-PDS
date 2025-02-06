@@ -5,19 +5,14 @@ import java.io.IOException;
 import java.io.InputStream;
 import javax.swing.UIManager;
 import com.formdev.flatlaf.themes.FlatMacLightLaf;
-import com.pds.skillify.ui.AchievementsWindow;
-import com.pds.skillify.ui.ConfigureUserWindow;
 import com.pds.skillify.ui.LoginWindow;
-import com.pds.skillify.ui.MainWindow;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 public class Skillify {
 
     private final static int BORDER_ROUNDNESS = 30;
     private final static Color GREEN_COLOR = new Color(0x80D855);
+    private final static Color ERROR_BORDER_COLOR = new Color(0xFF4C4C); // Rojo error
+    private final static Color DEFAULT_BORDER_COLOR = new Color(0xDDDDDD); // Gris claro
     private final static String FONT_RESOURCE_PATH = "/Roboto-Regular.ttf"; // Ruta en resources
 
     public static void main(String[] args) {
@@ -27,7 +22,7 @@ public class Skillify {
                     // Cargar la fuente desde resources
                     Font robotoFont = loadRobotoFromResources();
 
-                    // Aplicar la fuente globalmente
+                    // Aplicar la fuente globalmente en UIManager
                     UIManager.put("Label.font", robotoFont);
                     UIManager.put("TextField.font", robotoFont);
                     UIManager.put("PasswordField.font", robotoFont);
@@ -40,15 +35,13 @@ public class Skillify {
                     UIManager.put("Button.foreground", Color.WHITE);
                     UIManager.put("Button.background", GREEN_COLOR);
 
+                    // Aplicar bordes redondeados a todos los componentes
                     UIManager.put("Button.arc", BORDER_ROUNDNESS);
                     UIManager.put("Component.arc", BORDER_ROUNDNESS);
                     UIManager.put("TextComponent.arc", BORDER_ROUNDNESS);
                     UIManager.put("ProgressBar.arc", BORDER_ROUNDNESS);
 
                     UIManager.setLookAndFeel(new FlatMacLightLaf());
-
-                    
-                
 
                     new LoginWindow();
 
