@@ -39,7 +39,7 @@ public interface UserDAO {
 	 * @return El usuario correspondiente al código, o {@code null} si no se
 	 *         encuentra.
 	 */
-	public User loadUser(int codigo);
+	public User loadUser(Long id);
 
 	/**
 	 * Recupera todos los usuarios almacenados en la base de datos.

@@ -1,48 +1,75 @@
 package com.pds.skillify.model;
 
+import com.fasterxml.jackson.annotation.JsonSubTypes;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.Objects;
 
-import com.fasterxml.jackson.annotation.JsonSubTypes;
-
+@SuppressWarnings("serial")
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
-@JsonSubTypes({ @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "multiple_choice"),
-		@JsonSubTypes.Type(value = FillInTheBlankQuestion.class, name = "fill_in_blank"),
-		@JsonSubTypes.Type(value = ReorderLettersQuestion.class, name = "reorder_letters") })
-public abstract class Question {
-	protected String statement;
+@JsonSubTypes({
+        @JsonSubTypes.Type(value = MultipleChoiceQuestion.class, name = "multiple_choice"),
+        @JsonSubTypes.Type(value = FillInTheBlankQuestion.class, name = "fill_in_blank"),
+        @JsonSubTypes.Type(value = ReorderLettersQuestion.class, name = "reorder_letters")
+})
+@Entity
+@Inheritance(strategy = InheritanceType.SINGLE_TABLE) // Usa una sola tabla para todas las preguntas
+@DiscriminatorColumn(name = "question_type", discriminatorType = DiscriminatorType.STRING)
+@Table(name = "questions")
+public abstract class Question implements Serializable {
 
-	// Constructor por defecto para JSON deserialization.
-	public Question() {
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	public Question(String statement) {
-		this.statement = statement;
-	}
+    protected String statement;
 
-	public String getStatement() {
-		return statement;
-	}
+    @ManyToOne
+    @JoinColumn(name = "course_id", nullable = false)
+    private Course course;
 
-	public void setStatement(String statement) {
-		this.statement = statement;
-	}
+    // Constructor por defecto requerido por JPA
+    public Question() {}
 
-	public abstract boolean checkAnswer(String answer);
+    public Question(String statement, Course course) {
+        this.statement = statement;
+        this.course = course;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		Question question = (Question) o;
-		return Objects.equals(statement, question.statement);
-	}
+    public Long getId() {
+        return id;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(statement);
-	}
+    public String getStatement() {
+        return statement;
+    }
+
+    public void setStatement(String statement) {
+        this.statement = statement;
+    }
+
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
+
+    public abstract boolean checkAnswer(String answer);
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Question question = (Question) o;
+        return Objects.equals(statement, question.statement);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(statement);
+    }
 }

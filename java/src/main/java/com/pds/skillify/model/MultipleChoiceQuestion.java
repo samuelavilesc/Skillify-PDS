@@ -1,63 +1,69 @@
 package com.pds.skillify.model;
 
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
+@Entity
+@DiscriminatorValue("multiple_choice")
 public class MultipleChoiceQuestion extends Question {
-	private List<String> options;
-	private int correctAnswer;
 
-	// Constructor por defecto para JSON deserialization.
-	public MultipleChoiceQuestion() {
-	}
+    @ElementCollection
+    @CollectionTable(name = "multiple_choice_options", joinColumns = @JoinColumn(name = "question_id"))
+    @Column(name = "option_text", nullable = false)
+    private List<String> options;
 
-	public MultipleChoiceQuestion(String statement, List<String> options, int correctAnswer) {
-		super(statement);
-		this.options = options;
-		this.correctAnswer = correctAnswer;
-	}
+    @Column(nullable = false)
+    private int correctAnswer;
 
-	@Override
-	public boolean checkAnswer(String answer) {
-		try {
-			int index = Integer.parseInt(answer);
-			return index == correctAnswer;
-		} catch (NumberFormatException e) {
-			return false;
-		}
-	}
+    // Constructor por defecto requerido por JPA
+    public MultipleChoiceQuestion() {}
 
-	public List<String> getOptions() {
-		return options;
-	}
+    public MultipleChoiceQuestion(String statement, List<String> options, int correctAnswer, Course course) {
+        super(statement, course);
+        this.options = options;
+        this.correctAnswer = correctAnswer;
+    }
 
-	public void setOptions(List<String> options) {
-		this.options = options;
-	}
+    @Override
+    public boolean checkAnswer(String answer) {
+        try {
+            int index = Integer.parseInt(answer);
+            return index == correctAnswer;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
-	public int getCorrectAnswer() {
-		return correctAnswer;
-	}
+    public List<String> getOptions() {
+        return options;
+    }
 
-	public void setCorrectAnswer(int correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
+    public void setOptions(List<String> options) {
+        this.options = options;
+    }
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false; // Llama a equals de la superclase
+    public int getCorrectAnswer() {
+        return correctAnswer;
+    }
 
-		MultipleChoiceQuestion that = (MultipleChoiceQuestion) o;
-		return correctAnswer == that.correctAnswer && Objects.equals(options, that.options);
-	}
+    public void setCorrectAnswer(int correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), options, correctAnswer);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false; // Llama a equals de la superclase
+
+        MultipleChoiceQuestion that = (MultipleChoiceQuestion) o;
+        return correctAnswer == that.correctAnswer && Objects.equals(options, that.options);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), options, correctAnswer);
+    }
 }

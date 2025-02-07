@@ -35,10 +35,10 @@ public interface CourseDAO {
 	/**
 	 * Recupera un curso del sistema a partir de su código único.
 	 * 
-	 * @param codigo El código único del curso.
+	 * @param id El código único del curso.
 	 * @return El curso correspondiente al código proporcionado.
 	 */
-	public Course recuperarGrupo(int codigo);
+	public Course recuperarGrupo(Long id);
 
 	/**
 	 * Recupera todos los cursos registrados en el sistema.

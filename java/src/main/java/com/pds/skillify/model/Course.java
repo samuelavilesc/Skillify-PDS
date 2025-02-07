@@ -1,65 +1,80 @@
 package com.pds.skillify.model;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Course {
+@Entity
+@Table(name = "courses")
+public class Course implements Serializable {
 
-	private String name;
-	private String description;
-	private List<Question> questions;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	// Constructor por defecto necesario para JSON deserialization
-	public Course() {
-		this.questions = new ArrayList<>();
-	}
+    @Column(unique = true, nullable = false)
+    private String name;
 
-	public Course(String name, String desc) {
-		this.name = name;
-		this.description = desc;
-		this.questions = new ArrayList<>();
-	}
+    @Lob
+    private String description;
 
-	public Course(String name, String desc, List<Question> questions) {
-		this.name = name;
-		this.description = desc;
-		this.questions = new ArrayList<>(questions);
-	}
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
+    private List<Question> questions = new ArrayList<>();
 
-	public void addQuestion(Question question) {
-		questions.add(question);
-	}
+    // Constructor vacío requerido por JPA
+    public Course() {}
 
-	public void shuffleQuestions() {
-		Collections.shuffle(questions);
-	}
+    public Course(String name, String desc) {
+        this.name = name;
+        this.description = desc;
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Course(String name, String desc, List<Question> questions) {
+        this.name = name;
+        this.description = desc;
+        this.questions = new ArrayList<>(questions);
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setCourse(this); // Establece la relación en la pregunta
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void shuffleQuestions() {
+        Collections.shuffle(questions);
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public List<Question> getQuestions() {
-		return new ArrayList<>(questions);
-	}
-	
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public List<Question> getQuestions() {
+        return new ArrayList<>(questions);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,5 +89,4 @@ public class Course {
     public int hashCode() {
         return Objects.hash(name, description, questions);
     }
-
 }
