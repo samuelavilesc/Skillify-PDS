@@ -4,6 +4,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
 import java.io.IOException;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
@@ -53,13 +56,23 @@ public class MainWindowController {
 	 * futuro).
 	 */
 	private void handleClickOnProfile(JButton profileButton) {
-		profileButton.addActionListener(new ActionListener() {
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				new AchievementsWindow();
-			}
-		});
-	}
+        profileButton.addActionListener(e -> {
+            List<String> courses = Arrays.asList(
+                "Introducción a la Programación",
+                "Java desde Cero",
+                "Python para Principiantes",
+                "Desarrollo Web con HTML y CSS",
+                "JavaScript Interactivo",
+                "SQL y Bases de Datos",
+                "Estructuras de Datos y Algoritmos",
+                "Programación Orientada a Objetos",
+                "Desarrollo de APIs con Spring Boot"
+            );
+            
+            // List<String> completedCourses = Controller.getInstance().getCompletedCourses();
+            new AchievementsWindow(courses); // Abre la ventana de logros con la lista de cursos
+        });
+    }
 
 	/**
 	 * Maneja el clic en el botón de importar curso.

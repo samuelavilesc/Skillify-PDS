@@ -6,6 +6,8 @@ import com.pds.skillify.ui.controller.ConfigureUserController;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 public class ConfigureUserWindow extends JFrame {
     private static final long serialVersionUID = 5433790596127130763L;
@@ -29,6 +31,7 @@ public class ConfigureUserWindow extends JFrame {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setLayout(new GridBagLayout());
+     
 
         GridBagConstraints gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 10, 5, 10);

@@ -1,92 +1,153 @@
 package com.pds.skillify.ui;
 
 import javax.swing.*;
-
 import com.pds.controller.Controller;
-import com.pds.skillify.model.Course;
-
 import java.awt.*;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class AchievementsWindow extends JFrame {
 
-    private static final int WIDTH = 700;
-    private static final int HEIGHT = 300;
-   
-    private JLabel lblTitulo, lblAvatar;
-    private JPanel panelCursos;
+	private static final int WIDTH = 500;
+	private static final int HEIGHT = 650;
 
-    public AchievementsWindow() {
-        initialize();
-        setVisible(true);
-    }
+	private JLabel lblTitulo, lblAvatar;
+	private JPanel panelLogros, panelEstadisticas;
+	private JLabel lblHorasEstudio, lblRachaActual, lblMejorRacha;
+	private JLabel lblHorasValor, lblRachaActualValor, lblMejorRachaValor;
+	private Controller controller;
 
-    private void initialize() {
-        setTitle("Skillify");
-        setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
-        setSize(WIDTH, HEIGHT);
-        setLocationRelativeTo(null);
-        setResizable(false);
-        setLayout(new BorderLayout());
+	public AchievementsWindow(List<String> logrosUsuario) {
+		controller = Controller.getInstance(); // Obtener el controlador
+		initialize();
+		actualizarLogros(logrosUsuario);
+		setVisible(true);
+	}
 
-        // **Panel superior con el título y el avatar centrados**
-        JPanel topPanel = new JPanel(new GridBagLayout());
-        GridBagConstraints gbc = new GridBagConstraints();
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        gbc.insets = new Insets(10, 10, 10, 10);
+	private void initialize() {
+		setTitle("Skillify");
+		setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
+		setSize(WIDTH, HEIGHT);
+		setLocationRelativeTo(null);
+		setResizable(false);
+		setLayout(new BorderLayout());
 
-        // **Título "Tus logros"**
-        lblTitulo = new JLabel("Tus logros");
-        lblTitulo.setFont(new Font("Arial", Font.BOLD, 28));
+		// **Panel superior con título y avatar**
+		JPanel topPanel = new JPanel(new BorderLayout());
+		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
 
-        // **Cargar imagen del avatar**
-        ImageIcon iconoAvatar = new ImageIcon(getClass().getResource("/user.png"));
-        lblAvatar = new JLabel(new ImageIcon(iconoAvatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH)));
+		// **Título "Tus logros"**
+		lblTitulo = new JLabel("Tus logros");
+		lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
 
-        // **Panel para centrar título y avatar juntos con separación**
-        JPanel tituloAvatarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 15, 10));
-        tituloAvatarPanel.add(lblTitulo);
-        tituloAvatarPanel.add(lblAvatar);
+		// **Cargar imagen del avatar del usuario**
+		ImageIcon avatarIcon;
+		if (controller.getActualUser() != null && controller.getActualUser().getProfilePic() != null) {
+			avatarIcon = new ImageIcon(controller.getActualUser().getProfilePic().getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+		} else {
+			avatarIcon = new ImageIcon(getClass().getResource("/user.png"));
+		}
 
-        topPanel.add(tituloAvatarPanel, gbc);
-        add(topPanel, BorderLayout.NORTH);
+		lblAvatar = new JLabel(avatarIcon);
 
-        // **Panel central con los cursos en horizontal**
-        panelCursos = new JPanel(new FlowLayout(FlowLayout.CENTER, 60, 5)); // Cursos alineados en horizontal
-        panelCursos.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
+		// **Panel para alinear título y avatar**
+		JPanel tituloPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
+		tituloPanel.add(lblTitulo);
+		tituloPanel.add(lblAvatar);
 
-        actualizarCursos(); // Genera los cursos dinámicamente
+		topPanel.add(tituloPanel, BorderLayout.WEST);
+		add(topPanel, BorderLayout.NORTH);
 
-        // **Hacer que el panel tenga scroll si hay más de 4 cursos**
-        JScrollPane scrollPane = new JScrollPane(panelCursos, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBorder(null); // Eliminar bordes del scroll
+		// **Panel central con logros**
+		panelLogros = new JPanel();
+		panelLogros.setLayout(new BoxLayout(panelLogros, BoxLayout.Y_AXIS));
+		panelLogros.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-        add(scrollPane, BorderLayout.CENTER);
-    }
+		JScrollPane scrollPane = new JScrollPane(panelLogros, JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED, JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+		scrollPane.setBorder(null);
 
-    public void actualizarCursos() {
-        panelCursos.removeAll(); // Limpiar panel antes de actualizar
+		add(scrollPane, BorderLayout.CENTER);
 
-        ImageIcon iconoMedalla = new ImageIcon(getClass().getResource("/achievement.png"));
+		// **Panel inferior con estadísticas en horizontal**
+		panelEstadisticas = new JPanel(new GridLayout(2, 3, 20, 5)); // 2 filas, 3 columnas, espacio horizontal y vertical
+		panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadísticas del Usuario"));
 
-        for (Course curso : Controller.getInstance().getFinishedCourses()) {
-            JPanel panelCurso = new JPanel(new BorderLayout());
+		// **Obtener datos del usuario**
+		int horasEstudio = controller.getActualUser().getCodigo();
+		int rachaActual = controller.getActualUser().getCodigo();
+		int mejorRacha = controller.getActualUser().getCodigo();
 
-            JLabel lblMedalla = new JLabel(new ImageIcon(iconoMedalla.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH)));
-            lblMedalla.setHorizontalAlignment(SwingConstants.CENTER);
+		/*
+        int horasEstudio = controller.getActualUser().getStudyHours();
+        int rachaActual = controller.getActualUser().getCurrentStreak();
+        int mejorRacha = controller.getActualUser().getBestStreak();
 
-            JLabel lblNombreCurso = new JLabel(curso.getName(), SwingConstants.CENTER);
-            lblNombreCurso.setFont(new Font("Arial", Font.BOLD, 16));
+		 */
 
-            panelCurso.add(lblMedalla, BorderLayout.NORTH);
-            panelCurso.add(lblNombreCurso, BorderLayout.SOUTH);
+		// **Primera fila: nombres de las estadísticas**
+		lblHorasEstudio = new JLabel("Horas de estudio", SwingConstants.CENTER);
+		lblRachaActual = new JLabel("Racha actual", SwingConstants.CENTER);
+		lblMejorRacha = new JLabel("Mejor racha", SwingConstants.CENTER);
 
-            panelCursos.add(panelCurso);
-        }
+		// **Segunda fila: valores más grandes**
+		lblHorasValor = new JLabel(String.valueOf(horasEstudio), SwingConstants.CENTER);
+		lblRachaActualValor = new JLabel(String.valueOf(rachaActual), SwingConstants.CENTER);
+		lblMejorRachaValor = new JLabel(String.valueOf(mejorRacha), SwingConstants.CENTER);
 
-        panelCursos.revalidate();
-        panelCursos.repaint();
-    }
+		// **Fuente más grande para los valores**
+		Font valorFont = new Font("Arial", Font.BOLD, 22);
+		lblHorasValor.setFont(valorFont);
+		lblRachaActualValor.setFont(valorFont);
+		lblMejorRachaValor.setFont(valorFont);
 
+		// **Fuente en negrita para los nombres**
+		Font tituloFont = new Font("Arial", Font.BOLD, 14);
+		lblHorasEstudio.setFont(tituloFont);
+		lblRachaActual.setFont(tituloFont);
+		lblMejorRacha.setFont(tituloFont);
+
+		// **Añadir componentes al panel de estadísticas**
+		panelEstadisticas.add(lblHorasEstudio);
+		panelEstadisticas.add(lblRachaActual);
+		panelEstadisticas.add(lblMejorRacha);
+
+		panelEstadisticas.add(lblHorasValor);
+		panelEstadisticas.add(lblRachaActualValor);
+		panelEstadisticas.add(lblMejorRachaValor);
+
+		// **Añadir el panel de estadísticas en la parte inferior**
+		add(panelEstadisticas, BorderLayout.SOUTH);
+	}
+
+	public void actualizarLogros(List<String> logrosUsuario) {
+		panelLogros.removeAll(); // Limpiar panel antes de actualizar
+
+		if (logrosUsuario.isEmpty()) {
+			JLabel noLogros = new JLabel("Aún no tienes logros. ¡Sigue aprendiendo!");
+			noLogros.setFont(new Font("Arial", Font.ITALIC, 14));
+			noLogros.setForeground(Color.GRAY);
+			noLogros.setHorizontalAlignment(SwingConstants.CENTER);
+			panelLogros.add(noLogros);
+		} else {
+			ImageIcon iconoMedalla = new ImageIcon(getClass().getResource("/achievement.png"));
+
+			for (String logro : logrosUsuario) {
+				JPanel panelCurso = new JPanel(new BorderLayout());
+				panelCurso.setBorder(BorderFactory.createEmptyBorder(5, 5, 5, 5));
+
+				JLabel lblMedalla = new JLabel(new ImageIcon(iconoMedalla.getImage().getScaledInstance(60, 60, Image.SCALE_SMOOTH)));
+				lblMedalla.setHorizontalAlignment(SwingConstants.CENTER);
+
+				JLabel lblNombreCurso = new JLabel(logro, SwingConstants.CENTER);
+				lblNombreCurso.setFont(new Font("Arial", Font.BOLD, 16));
+
+				panelCurso.add(lblMedalla, BorderLayout.WEST);
+				panelCurso.add(lblNombreCurso, BorderLayout.CENTER);
+				panelLogros.add(panelCurso);
+			}
+		}
+
+		panelLogros.revalidate();
+		panelLogros.repaint();
+	}
 }
