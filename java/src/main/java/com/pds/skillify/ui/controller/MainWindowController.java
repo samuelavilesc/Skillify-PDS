@@ -91,6 +91,7 @@ public class MainWindowController {
 					if (Controller.getInstance().currentUserAlreadyHasCourse(selectedFile.getAbsolutePath())) {
 						JOptionPane.showMessageDialog(view, "Ya has importado ese curso anteriormente.", "Error",
 								JOptionPane.ERROR_MESSAGE);
+						return;
 					}
 
 					Controller.getInstance().addCourseToCurrentUser(selectedFile.getAbsolutePath());
