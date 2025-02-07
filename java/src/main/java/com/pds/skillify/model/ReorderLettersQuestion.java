@@ -1,6 +1,7 @@
 package com.pds.skillify.model;
 
 import java.util.Arrays;
+import java.util.Objects;
 
 public class ReorderLettersQuestion extends Question {
 	private String correctAnswer;
@@ -31,5 +32,23 @@ public class ReorderLettersQuestion extends Question {
 		Arrays.sort(correctArray);
 
 		return Arrays.equals(answerArray, correctArray);
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		if (!super.equals(o))
+			return false; // Llama a equals de la superclase
+
+		ReorderLettersQuestion that = (ReorderLettersQuestion) o;
+		return Objects.equals(correctAnswer, that.correctAnswer);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(super.hashCode(), correctAnswer);
 	}
 }

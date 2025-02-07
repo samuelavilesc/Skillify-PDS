@@ -1,6 +1,9 @@
 package com.pds.skillify.model;
 
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
+
+import java.util.Objects;
+
 import com.fasterxml.jackson.annotation.JsonSubTypes;
 
 @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property = "type")
@@ -27,4 +30,19 @@ public abstract class Question {
 	}
 
 	public abstract boolean checkAnswer(String answer);
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Question question = (Question) o;
+		return Objects.equals(statement, question.statement);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(statement);
+	}
 }

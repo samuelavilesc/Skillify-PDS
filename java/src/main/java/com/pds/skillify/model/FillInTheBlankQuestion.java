@@ -1,5 +1,7 @@
 package com.pds.skillify.model;
 
+import java.util.Objects;
+
 public class FillInTheBlankQuestion extends Question {
 	private String correctAnswer;
 
@@ -24,4 +26,19 @@ public class FillInTheBlankQuestion extends Question {
 	public boolean checkAnswer(String answer) {
 		return correctAnswer.equalsIgnoreCase(answer.trim());
 	}
+	
+	@Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        FillInTheBlankQuestion that = (FillInTheBlankQuestion) o;
+        return Objects.equals(correctAnswer, that.correctAnswer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), correctAnswer);
+    }
 }
