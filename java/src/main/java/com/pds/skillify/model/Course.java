@@ -1,17 +1,11 @@
 package com.pds.skillify.model;
 
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import java.util.Objects;
 
 public class Course {
-
-	private static final ObjectMapper objectMapper = new ObjectMapper();
 
 	private String name;
 	private String description;
@@ -42,19 +36,6 @@ public class Course {
 		Collections.shuffle(questions);
 	}
 
-	public static Course loadCourseFromJson(String filename) {
-	    try {
-	        InputStream inputStream = Course.class.getClassLoader().getResourceAsStream(filename);
-	        if (inputStream == null) {
-	            throw new FileNotFoundException("El archivo no se encontró.");
-	        }
-	        return objectMapper.readValue(inputStream, Course.class);
-	    } catch (IOException e) {
-	        e.printStackTrace();
-	        return null;
-	    }
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -78,5 +59,20 @@ public class Course {
 	public List<Question> getQuestions() {
 		return new ArrayList<>(questions);
 	}
+	
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Course course = (Course) o;
+        return Objects.equals(name, course.name) &&
+               Objects.equals(description, course.description) &&
+               Objects.equals(questions, course.questions);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(name, description, questions);
+    }
 
 }

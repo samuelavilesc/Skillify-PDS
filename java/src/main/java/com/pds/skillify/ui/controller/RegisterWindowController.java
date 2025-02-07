@@ -26,17 +26,17 @@ public class RegisterWindowController {
 
     private void handleClickOnSelectAvatar(JButton selectAvatarButton) {
         selectAvatarButton.addActionListener(e -> {
-            JFileChooser fileChooser = new JFileChooser();
-            fileChooser.setDialogTitle("Seleccionar Avatar");
-            fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
-                    "Archivos de imagen (*.jpg, *.png)", "jpg", "png"));
+			JFileChooser fileChooser = new JFileChooser();
+			fileChooser.setDialogTitle("Seleccionar Avatar");
+			fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+					"Archivos de imagen (*.jpg, *.png)", "jpg", "png"));
 
-            int seleccion = fileChooser.showOpenDialog(null);
-            if (seleccion == JFileChooser.APPROVE_OPTION) {
-                File selectedFile = fileChooser.getSelectedFile();
-                ImageIcon newAvatar = new ImageIcon(selectedFile.getAbsolutePath());
-                view.setAvatar(newAvatar); // Actualiza la imagen en la interfaz
-            }
+			int seleccion = fileChooser.showOpenDialog(null);
+			if (seleccion == JFileChooser.APPROVE_OPTION) {
+				File selectedFile = fileChooser.getSelectedFile();
+				ImageIcon newAvatar = new ImageIcon(selectedFile.getAbsolutePath());
+				view.setAvatar(newAvatar); // Actualiza la imagen en la interfaz
+			}
         });
     }
 

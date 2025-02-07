@@ -2,12 +2,14 @@ package com.pds.controller;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import javax.swing.ImageIcon;
 
 import com.pds.skillify.model.Course;
 import com.pds.skillify.model.User;
 import com.pds.skillify.model.UserCatalog;
+import com.pds.skillify.utils.CourseJSONUtils;
 
 public class Controller {
 	// Catálogo de usuarios que almacena y gestiona todos los usuarios del sistema.
@@ -61,6 +63,24 @@ public class Controller {
 		this.actualUser = actualUser;
 	}
 
+	public void addCourseToCurrentUser(String filePath) {
+		Course newCourse = CourseJSONUtils.loadCourseFromJson(filePath);
+		actualUser.addCourse(newCourse);
+	}
+
+	public Set<Course> getAllCurrentUserCourses() {
+		return actualUser.getAllCourses();
+	}
+
+	public int getCurrentUsersProgressInCourse(Course course) {
+		return actualUser.getCourseProgress(course);
+	}
+	
+	public boolean currentUserAlreadyHasCourse(String filePath) {
+		Course course = CourseJSONUtils.loadCourseFromJson(filePath);
+		return actualUser.alreadyHasCourse(course);
+	}
+
 	public boolean login(String username, String password) {
 		// si alguno de los campos esta vacio, no puede iniciar sesion
 		if (username.isEmpty() || password.isEmpty()) {
@@ -97,6 +117,7 @@ public class Controller {
 		return false;
 
 	}
+
 	public void setNewPfP(ImageIcon image) {
 		this.actualUser.setProfilePic(image);
 	}

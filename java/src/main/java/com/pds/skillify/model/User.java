@@ -15,6 +15,8 @@ public class User {
 	private String email;
 	private int codigo;
 	private Map<Course, Integer> coursesToProgress;
+	
+	private final static int PROGRESS_FOR_NON_EXISTANT_COURSE = -1;
 
 	// Constructor para registro
 	public User(String username, String password, String email, ImageIcon profilePic) {
@@ -27,9 +29,15 @@ public class User {
 	}
 
 	public void addCourse(Course course) {
-		coursesToProgress.put(course, 0);
+		if (!alreadyHasCourse(course)) {
+			coursesToProgress.put(course, 0);
+		}
 	}
-	
+
+	public boolean alreadyHasCourse(Course course) {
+		return coursesToProgress.containsKey(course);
+	}
+
 	public void updateCourseProgress(Course course, int progress) {
 		if (progress < 0 || progress > 100) {
 			throw new IllegalArgumentException("El progreso debe estar entre 0 y 100.");
@@ -37,15 +45,14 @@ public class User {
 		coursesToProgress.put(course, progress);
 	}
 
-	// -1 si no existe el Course.
 	public int getCourseProgress(Course course) {
-		return coursesToProgress.getOrDefault(course, -1);
+		return coursesToProgress.getOrDefault(course, PROGRESS_FOR_NON_EXISTANT_COURSE);
 	}
-	
+
 	public Set<Course> getAllCourses() {
-	    return new HashSet<>(coursesToProgress.keySet());
+		return new HashSet<>(coursesToProgress.keySet());
 	}
-  
+
 	public ImageIcon getProfilePic() {
 		return profilePic;
 	}
