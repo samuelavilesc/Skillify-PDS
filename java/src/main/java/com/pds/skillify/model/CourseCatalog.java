@@ -77,13 +77,23 @@ public class CourseCatalog {
      * @param course Curso a añadir.
      */
     public void addCourse(Course course) {
-        courses.put(course.getName(), course);
-        try {
-            courseDAO.registrarGrupo(course);
-        } catch (Exception e) {
-            e.printStackTrace();
+        // Verificar si el curso ya existe en la BD por nombre (o ID si aplica)
+        Course existingCourse = courseDAO.getCourseByName(course.getName());
+
+        if (existingCourse == null) { 
+            // Si el curso no existe, lo guardamos en la BD y en el catálogo
+            courses.put(course.getName(), course);
+            try {
+                courseDAO.registerCourse(course);
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            // Si el curso ya existe, lo añadimos al catálogo sin registrarlo nuevamente
+            courses.put(existingCourse.getName(), existingCourse);
         }
     }
+
 
     /**
      * Elimina un curso del catálogo y de la base de datos.
@@ -93,7 +103,7 @@ public class CourseCatalog {
     public void removeCourse(Course course) {
         courses.remove(course.getName());
         try {
-            courseDAO.borrarGrupo(course);
+            courseDAO.deleteCourse(course);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -103,7 +113,7 @@ public class CourseCatalog {
      * Carga todos los cursos desde la base de datos y los almacena en el catálogo.
      */
     private void loadCatalog() {
-        List<Course> coursesFromDB = courseDAO.recuperarTodosGrupos();
+        List<Course> coursesFromDB = courseDAO.getAllCourses();
 		for (Course course : coursesFromDB) {
 		    courses.put(course.getName(), course);
 		}

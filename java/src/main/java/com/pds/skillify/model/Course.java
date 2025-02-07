@@ -21,8 +21,9 @@ public class Course implements Serializable {
     @Lob
     private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
-    private List<Question> questions = new ArrayList<>();
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Question> questions;
+
 
     // Constructor vacío requerido por JPA
     public Course() {}

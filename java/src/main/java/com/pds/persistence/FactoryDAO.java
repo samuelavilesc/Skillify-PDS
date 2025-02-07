@@ -51,5 +51,5 @@ public abstract class FactoryDAO {
 
     public abstract UserDAO getUserDAO();
     public abstract CourseDAO getCourseDAO();
-    public abstract QuestionDAO getQuestionDAO();
+ 
 }

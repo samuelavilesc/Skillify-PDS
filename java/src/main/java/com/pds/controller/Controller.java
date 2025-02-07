@@ -11,7 +11,7 @@ public class Controller {
     // Catálogos que gestionan usuarios, cursos y preguntas
     private UserCatalog userCatalog;
     private CourseCatalog courseCatalog;
-    private QuestionCatalog questionCatalog;
+   
 
     // Instancia única del controlador (Singleton).
     private static Controller uniqueInstance = null;
@@ -44,7 +44,7 @@ public class Controller {
     private void initializeCatalogs() {
         this.userCatalog = UserCatalog.getInstance();
         this.courseCatalog = CourseCatalog.getInstance();
-        this.questionCatalog = QuestionCatalog.getInstance();
+        
     }
 
     /**
@@ -78,11 +78,26 @@ public class Controller {
     public void addCourseToCurrentUser(String filePath) {
         Course newCourse = CourseJSONUtils.loadCourseFromJson(filePath);
         
-        if (!actualUser.alreadyHasCourse(newCourse)) {
-            actualUser.addCourse(newCourse);
-            courseCatalog.addCourse(newCourse); // Guardar en la base de datos
+        if (actualUser == null) {
+            throw new IllegalStateException("No hay usuario autenticado.");
+        }
+
+        // Buscar si el curso ya existe en la base de datos
+        Course existingCourse = courseCatalog.getCourse(newCourse.getName());
+
+        if (existingCourse == null) {
+            // Si el curso no existe, guardarlo en la BD antes de asignarlo
+            courseCatalog.addCourse(newCourse);
+            existingCourse = newCourse;
+        }
+
+        // Verificar que el usuario no tenga ya este curso
+        if (!actualUser.alreadyHasCourse(existingCourse)) {
+            actualUser.addCourse(existingCourse);
+            userCatalog.updateUser(actualUser);
         }
     }
+
 
     /**
      * Obtiene todos los cursos del usuario actual.
@@ -166,5 +181,6 @@ public class Controller {
      */
     public void setNewPfP(ImageIcon image) {
         this.actualUser.setProfilePic(image);
+        userCatalog.updateUser(actualUser);
     }
 }

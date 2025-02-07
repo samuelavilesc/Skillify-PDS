@@ -124,4 +124,22 @@ public class UserCatalog {
             users.put(user.getEmail(), user);
         }
     }
+    /**
+     * Actualiza los datos de un usuario en el catálogo y en la base de datos.
+     *
+     * @param user Usuario con los datos actualizados.
+     */
+    public void updateUser(User user) {
+        if (users.containsKey(user.getEmail())) {
+            users.put(user.getEmail(), user); // Actualizar el usuario en el catálogo
+            try {
+                userDAO.modifyUser(user); // Actualizar el usuario en la base de datos
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            System.err.println("Error: El usuario no existe en el catálogo.");
+        }
+    }
+
 }

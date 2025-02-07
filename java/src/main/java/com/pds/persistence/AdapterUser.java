@@ -45,15 +45,26 @@ public class AdapterUser implements UserDAO {
     @Override
     public User loadUser(Long id) {
         EntityManager em = emf.createEntityManager();
-        User user = em.find(User.class, id);
-        em.close();
+        User user = null;
+        try {
+            user = em.createQuery(
+                "SELECT u FROM User u LEFT JOIN FETCH u.answeredQuestions WHERE u.id = :id", User.class)
+                .setParameter("id", id)
+                .getSingleResult();
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            em.close();
+        }
         return user;
     }
 
     @Override
     public List<User> loadAllUsers() {
         EntityManager em = emf.createEntityManager();
-        List<User> users = em.createQuery("SELECT u FROM User u", User.class).getResultList();
+        List<User> users = em.createQuery(
+            "SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.answeredQuestions", User.class)
+            .getResultList();
         em.close();
         return users;
     }

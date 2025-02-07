@@ -19,8 +19,5 @@ public class FactoryDAOImp extends FactoryDAO {
         return new AdapterCourse(emf);
     }
 
-    @Override
-    public QuestionDAO getQuestionDAO() {
-        return new AdapterQuestion(emf);
-    }
+   
 }

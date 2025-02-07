@@ -27,9 +27,8 @@ public abstract class Question implements Serializable {
     protected String statement;
 
     @ManyToOne
-    @JoinColumn(name = "course_id", nullable = false)
+    @JoinColumn(name = "course_id", nullable = false) // No puede ser nulo
     private Course course;
-
     // Constructor por defecto requerido por JPA
     public Question() {}
 
