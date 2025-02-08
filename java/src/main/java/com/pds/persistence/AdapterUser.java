@@ -3,6 +3,8 @@ package com.pds.persistence;
 import com.pds.skillify.model.User;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 public class AdapterUser implements UserDAO {
@@ -13,6 +15,7 @@ public class AdapterUser implements UserDAO {
     }
 
     @Override
+    @Transactional
     public void registerUser(User user) {
         EntityManager em = emf.createEntityManager();
         em.getTransaction().begin();
@@ -43,6 +46,7 @@ public class AdapterUser implements UserDAO {
     }
 
     @Override
+    @Transactional
     public User loadUser(Long id) {
         EntityManager em = emf.createEntityManager();
         User user = null;

@@ -1,0 +1,63 @@
+{
+    "name": "Biología y el Cuerpo Humano",
+    "description": "Aprende sobre el funcionamiento del cuerpo humano, sus sistemas y datos curiosos de la biología.",
+    "questions": [
+      {
+        "type": "fill_in_blank",
+        "statement": "¿Cuál es el órgano más grande del cuerpo humano?",
+        "correctAnswer": "piel"
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "¿Qué tipo de células transportan oxígeno en la sangre?",
+        "options": ["Neuronas", "Glóbulos rojos", "Plaquetas"],
+        "correctAnswer": 1
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "¿Cuál es la función principal de los riñones?",
+        "options": ["Producción de glóbulos blancos", "Filtrar desechos y producir orina", "Absorber nutrientes"],
+        "correctAnswer": 1
+      },
+      {
+        "type": "fill_in_blank",
+        "statement": "¿Cuántas cámaras tiene el corazón humano?",
+        "correctAnswer": "4"
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "¿Cómo se llama la molécula responsable del color de la sangre?",
+        "options": ["Clorofila", "Hemoglobina", "Melanina"],
+        "correctAnswer": 1
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "¿Cuál es el nombre del proceso mediante el cual las células obtienen energía?",
+        "options": ["Fotosíntesis", "Respiración celular", "Fermentación"],
+        "correctAnswer": 1
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "¿Cuál es la función principal del sistema inmunológico?",
+        "options": ["Transportar oxígeno", "Proteger al cuerpo contra enfermedades", "Controlar la temperatura corporal"],
+        "correctAnswer": 1
+      },
+      {
+        "type": "reorder_letters",
+        "statement": "Ordena las letras para formar un órgano del cuerpo: OLIZP",
+        "correctAnswer": "Pulmón"
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "¿Cuál de estos huesos se encuentra en la pierna?",
+        "options": ["Fémur", "Radio", "Escápula"],
+        "correctAnswer": 0
+      },
+      {
+        "type": "reorder_letters",
+        "statement": "Ordena las letras para formar una parte del sistema nervioso: ENOCREB",
+        "correctAnswer": "Cerebro"
+      }
+    ]
+  }
+  

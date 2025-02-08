@@ -1,0 +1,66 @@
+{
+  "name": "Cultura General",
+  "description": "Un curso rápido con preguntas básicas de cultura general.",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuál es el río más largo del mundo?",
+      "options": ["Amazonas", "Nilo", "Misisipi"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "¿Qué tipo de animal es la ballena?",
+      "correctAnswer": "mamífero"
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "¿Cuál es el océano más grande del mundo?",
+      "correctAnswer": "Pacífico"
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿En qué año llegó Cristóbal Colón a América?",
+      "options": ["1492", "1942", "1612"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "Jeff Bezos es el fundador de ____.",
+      "correctAnswer": "AMAZON"
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuántos huesos tiene el cuerpo humano?",
+      "options": ["206", "193", "216"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuántas estrellas hay en la bandera estadounidense?",
+      "options": ["50", "52", "48"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "Italia tiene forma de ____.",
+      "correctAnswer": "bota"
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "¿Cuál es el futbolista con más balones de oro?",
+      "correctAnswer": "Messi"
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuál es la capital de Irlanda?",
+      "options": ["Berlín", "Dublín", "Copenhague"],
+      "correctAnswer": 1
+    },
+    {
+      "type": "reorder_letters",
+      "statement": "Ordena las letras para formar un país: ACNIFA",
+      "correctAnswer": "África"
+    }
+  ]
+}

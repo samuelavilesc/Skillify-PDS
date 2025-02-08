@@ -11,7 +11,11 @@ import java.util.TimerTask;
 
 public class CourseExecutionWindow extends JFrame {
 
-    private static final Color GREEN_COLOR = new Color(0x80D855);
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static final Color GREEN_COLOR = new Color(0x80D855);
     private static final Color ERROR_COLOR = new Color(0xFF4C4C);
     private static final Color DEFAULT_TEXT_COLOR = Color.BLACK;
 
@@ -94,8 +98,9 @@ public class CourseExecutionWindow extends JFrame {
         optionsGroup = new ButtonGroup();
         optionButtons = new JRadioButton[question.getOptions().size()];
 
-        JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        optionsPanel.setOpaque(false);
+        JPanel optionsPanel = new JPanel();
+        optionsPanel.setLayout(new GridLayout(1, 0, 10, 5)); // Distribuye en una fila horizontal
+        optionsPanel.setOpaque(true);
 
         for (int i = 0; i < question.getOptions().size(); i++) {
             JRadioButton option = new JRadioButton(question.getOptions().get(i));
@@ -103,14 +108,19 @@ public class CourseExecutionWindow extends JFrame {
             option.setActionCommand(String.valueOf(i));
             option.setBackground(Color.WHITE);
             option.setForeground(DEFAULT_TEXT_COLOR);
-
             optionsGroup.add(option);
             optionButtons[i] = option;
             optionsPanel.add(option);
         }
 
-        responsePanel.add(optionsPanel);
+        // *Agregar scroll horizontal si las respuestas son muy largas*
+        JScrollPane scrollPane = new JScrollPane(optionsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+        scrollPane.setBorder(BorderFactory.createEmptyBorder());
+        scrollPane.setPreferredSize(new Dimension(400, 50)); // Ajusta la altura del scroll
+
+        responsePanel.add(scrollPane);
     }
+
 
     private void mostrarPreguntaTexto() {
         userInputField = new JTextField();
@@ -159,7 +169,7 @@ public class CourseExecutionWindow extends JFrame {
                     optionButtons[respuestaUsuarioIndex].setFont(new Font("Arial", Font.BOLD, 14));
                 }
 
-                // **Esperar 3 segundos antes de avanzar a la siguiente pregunta**
+                // *Esperar 3 segundos antes de avanzar a la siguiente pregunta*
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
@@ -172,7 +182,7 @@ public class CourseExecutionWindow extends JFrame {
             String respuestaUsuario = userInputField.getText().trim();
             esCorrecto = question.checkAnswer(respuestaUsuario);
 
-            // **Aquí agrego la ventana de confirmación para rellenar/ordenar**
+            // *Aquí agrego la ventana de confirmación para rellenar/ordenar*
             if (esCorrecto) {
                 JOptionPane.showMessageDialog(this, "¡Respuesta correcta!", "Correcto", JOptionPane.INFORMATION_MESSAGE);
             } else {

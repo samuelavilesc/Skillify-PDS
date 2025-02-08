@@ -1,0 +1,59 @@
+{
+    "name": "Curso Básico de Inglés",
+    "description": "Un curso básico con preguntas de gramática y vocabulario en inglés.",
+    "questions": [
+      {
+        "type": "multiple_choice",
+        "statement": "Rellene el hueco de la frase con la forma verbal correcta 'Mike ____ my friend':",
+        "options": ["Is", "Am", "Are"],
+        "correctAnswer": 0
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "Indique cuál es el significado de 'Ugly':",
+        "options": ["Feo", "Horrible", "Bonito"],
+        "correctAnswer": 0
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "Traduzca la siguiente oración 'Me miré en el espejo':",
+        "options": [
+          "I looked at himself in the mirror.",
+          "I looked at myself in the mirror.",
+          "I looked at herself in the mirror."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "type": "multiple_choice",
+        "statement": "Traduzca la siguiente oración 'Es un bonito caballo':",
+        "options": [
+          "It are a beautiful horse.",
+          "It is a beautiful horse.",
+          "There is a beautiful horse."
+        ],
+        "correctAnswer": 1
+      },
+      {
+        "type": "fill_in_blank",
+        "statement": "Rellene el espacio de la frase con la forma verbal correcta 'I ____ today because of the strike':",
+        "correctAnswer": "am working"
+      },
+      {
+        "type": "reorder_letters",
+        "statement": "Ordena las siguientes letras para formar una palabra: KITECHN",
+        "correctAnswer": "Kitchen"
+      },
+      {
+        "type": "fill_in_blank",
+        "statement": "Indique cuál es el plural de la palabra 'foot':",
+        "correctAnswer": "feet"
+      },
+      {
+        "type": "fill_in_blank",
+        "statement": "Rellene el hueco de la frase traducida al inglés '¿Tienes algo para el dolor de cabeza?' Have you got ____ headache pills?:",
+        "correctAnswer": "any"
+      }
+    ]
+  }
+  

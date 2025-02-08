@@ -4,6 +4,8 @@ import com.pds.skillify.model.Course;
 import com.pds.skillify.model.Question;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
+import jakarta.transaction.Transactional;
+
 import java.util.List;
 
 public class AdapterCourse implements CourseDAO {
@@ -14,6 +16,7 @@ public class AdapterCourse implements CourseDAO {
     }
 
     @Override
+    @Transactional
     public void registerCourse(Course course) {
         EntityManager em = emf.createEntityManager();
         for (Question question : course.getQuestions()) {
@@ -55,6 +58,7 @@ public class AdapterCourse implements CourseDAO {
     }
 
     @Override
+    @Transactional
     public Course getCourseById(Long id) {
         EntityManager em = emf.createEntityManager();
         Course course = em.createQuery(
