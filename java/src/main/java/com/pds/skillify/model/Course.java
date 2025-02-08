@@ -1,65 +1,81 @@
 package com.pds.skillify.model;
 
+import jakarta.persistence.*;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
-public class Course {
+@Entity
+@Table(name = "courses")
+public class Course implements Serializable {
 
-	private String name;
-	private String description;
-	private List<Question> questions;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	// Constructor por defecto necesario para JSON deserialization
-	public Course() {
-		this.questions = new ArrayList<>();
-	}
+    @Column(unique = true, nullable = false)
+    private String name;
 
-	public Course(String name, String desc) {
-		this.name = name;
-		this.description = desc;
-		this.questions = new ArrayList<>();
-	}
+    @Lob
+    private String description;
 
-	public Course(String name, String desc, List<Question> questions) {
-		this.name = name;
-		this.description = desc;
-		this.questions = new ArrayList<>(questions);
-	}
+    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+    private List<Question> questions;
 
-	public void addQuestion(Question question) {
-		questions.add(question);
-	}
 
-	public void shuffleQuestions() {
-		Collections.shuffle(questions);
-	}
+    // Constructor vacío requerido por JPA
+    public Course() {}
 
-	public String getName() {
-		return name;
-	}
+    public Course(String name, String desc) {
+        this.name = name;
+        this.description = desc;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public Course(String name, String desc, List<Question> questions) {
+        this.name = name;
+        this.description = desc;
+        this.questions = new ArrayList<>(questions);
+    }
 
-	public String getDescription() {
-		return description;
-	}
+    public void addQuestion(Question question) {
+        questions.add(question);
+        question.setCourse(this); // Establece la relación en la pregunta
+    }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+    public void shuffleQuestions() {
+        Collections.shuffle(questions);
+    }
 
-	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public List<Question> getQuestions() {
-		return new ArrayList<>(questions);
-	}
-	
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
+    }
+
+    public List<Question> getQuestions() {
+        return new ArrayList<>(questions);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -74,5 +90,4 @@ public class Course {
     public int hashCode() {
         return Objects.hash(name, description, questions);
     }
-
 }

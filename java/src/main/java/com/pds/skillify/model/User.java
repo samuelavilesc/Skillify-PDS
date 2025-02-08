@@ -1,96 +1,141 @@
 package com.pds.skillify.model;
 
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Map;
-import java.util.Set;
+import jakarta.persistence.*;
+import java.io.Serializable;
+import java.util.*;
 
 import javax.swing.ImageIcon;
+import com.pds.skillify.utils.ImageUtils;
 
-public class User {
+@SuppressWarnings("serial")
+@Entity
+@Table(name = "users")
+public class User implements Serializable {
 
-	private ImageIcon profilePic;
-	private String username;
-	private String password;
-	private String email;
-	private int codigo;
-	private Map<Course, Integer> coursesToProgress;
-	
-	private final static int PROGRESS_FOR_NON_EXISTANT_COURSE = -1;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-	// Constructor para registro
-	public User(String username, String password, String email, ImageIcon profilePic) {
-		this.username = username;
-		this.password = password;
-		this.email = email;
-		this.profilePic = profilePic;
-		this.codigo = 0;
-		this.coursesToProgress = new HashMap<Course, Integer>();
-	}
+    @Lob // Guardamos la imagen como bytes en la BD
+    private byte[] profilePic;
 
-	public void addCourse(Course course) {
-		if (!alreadyHasCourse(course)) {
-			coursesToProgress.put(course, 0);
-		}
-	}
+    @Column(unique = true, nullable = false)
+    private String username;
 
-	public boolean alreadyHasCourse(Course course) {
-		return coursesToProgress.containsKey(course);
-	}
+    @Column(nullable = false)
+    private String password;
 
-	public void updateCourseProgress(Course course, int progress) {
-		if (progress < 0 || progress > 100) {
-			throw new IllegalArgumentException("El progreso debe estar entre 0 y 100.");
-		}
-		coursesToProgress.put(course, progress);
-	}
+    @Column(unique = true, nullable = false)
+    private String email;
 
-	public int getCourseProgress(Course course) {
-		return coursesToProgress.getOrDefault(course, PROGRESS_FOR_NON_EXISTANT_COURSE);
-	}
+    /**
+     * Mapa que almacena el conjunto de preguntas respondidas por curso.
+     */
+    @ElementCollection
+    @CollectionTable(name = "user_answered_questions", joinColumns = @JoinColumn(name = "user_id"))
+    @MapKeyJoinColumn(name = "course_id")
+    @Column(name = "question_id")
+    private Map<Course, Set<Long>> answeredQuestions = new HashMap<>();
 
-	public Set<Course> getAllCourses() {
-		return new HashSet<>(coursesToProgress.keySet());
-	}
+    // Constructor vacío requerido por JPA
+    public User() {}
 
-	public ImageIcon getProfilePic() {
-		return profilePic;
-	}
+    // Constructor para registro
+    public User(String username, String password, String email, ImageIcon profilePic) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+        setProfilePic(profilePic); // Convierte la imagen a bytes
+    }
 
-	public void setProfilePic(ImageIcon profilePic) {
-		this.profilePic = profilePic;
-	}
+    // 🔹 Métodos para la gestión de cursos y progreso
 
-	public String getUsername() {
-		return username;
-	}
+    /**
+     * Añade un curso al usuario si aún no está registrado.
+     * @param course Curso a agregar.
+     */
+    public void addCourse(Course course) {
+        answeredQuestions.putIfAbsent(course, new HashSet<>());
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    /**
+     * Verifica si el usuario ya tiene un curso registrado.
+     * @param course Curso a verificar.
+     * @return true si el usuario ya tiene el curso, false en caso contrario.
+     */
+    public boolean alreadyHasCourse(Course course) {
+        return answeredQuestions.containsKey(course);
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    /**
+     * Calcula el progreso del usuario en un curso basado en las preguntas respondidas.
+     * @param course Curso en el que se quiere conocer el progreso.
+     * @return Progreso en porcentaje (0-100).
+     */
+    public int getCourseProgress(Course course) {
+        if (!answeredQuestions.containsKey(course) || course.getQuestions().isEmpty()) {
+            return 0;
+        }
+        int answeredCount = answeredQuestions.get(course).size();
+        int totalQuestions = course.getQuestions().size();
+        return (int) ((answeredCount / (double) totalQuestions) * 100);
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    /**
+     * Obtiene todos los cursos en los que el usuario ha respondido preguntas.
+     * @return Set de cursos.
+     */
+    public Set<Course> getAllCourses() {
+        return answeredQuestions.keySet();
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    /**
+     * Registra una pregunta como respondida en un curso.
+     * @param course Curso en el que se respondió la pregunta.
+     * @param question Pregunta respondida.
+     */
+    public void addAnsweredQuestion(Course course, Question question) {
+        answeredQuestions.computeIfAbsent(course, k -> new HashSet<>()).add(question.getId());
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    /**
+     * Verifica si el usuario ha respondido una pregunta en un curso.
+     * @param course Curso en el que se encuentra la pregunta.
+     * @param question Pregunta a verificar.
+     * @return true si la pregunta fue respondida, false en caso contrario.
+     */
+    public boolean hasAnsweredQuestion(Course course, Question question) {
+        return answeredQuestions.getOrDefault(course, Collections.emptySet()).contains(question.getId());
+    }
 
-	public int getCodigo() {
-		return codigo;
-	}
+    /**
+     * Obtiene todas las preguntas respondidas en un curso específico.
+     * @param course Curso en el que se buscan las preguntas respondidas.
+     * @return Set de preguntas respondidas.
+     */
+    public Set<Long> getAnsweredQuestionsInCourse(Course course) {
+        return answeredQuestions.getOrDefault(course, Collections.emptySet());
+    }
 
-	public void setCodigo(int codigo) {
-		this.codigo = codigo;
-	}
+    // 🔹 Métodos para la gestión de la imagen de perfil
+    public ImageIcon getProfilePic() {
+        return ImageUtils.bytesToImageIcon(profilePic);
+    }
 
+    public void setProfilePic(ImageIcon profilePic) {
+        this.profilePic = ImageUtils.imageIconToBytes(profilePic);
+    }
+
+    // 🔹 Getters y Setters
+    public String getUsername() { return username; }
+    public void setUsername(String username) { this.username = username; }
+
+    public String getPassword() { return password; }
+    public void setPassword(String password) { this.password = password; }
+
+    public String getEmail() { return email; }
+    public void setEmail(String email) { this.email = email; }
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
 }

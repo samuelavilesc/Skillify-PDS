@@ -72,10 +72,10 @@ public class AchievementsWindow extends JFrame {
 		panelEstadisticas = new JPanel(new GridLayout(2, 3, 20, 5)); // 2 filas, 3 columnas, espacio horizontal y vertical
 		panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadísticas del Usuario"));
 
-		// **Obtener datos del usuario**
-		int horasEstudio = controller.getActualUser().getCodigo();
-		int rachaActual = controller.getActualUser().getCodigo();
-		int mejorRacha = controller.getActualUser().getCodigo();
+		// 	TODO **Obtener datos del usuario**
+		int horasEstudio = 0;
+		int rachaActual = 0;
+		int mejorRacha = 0;
 
 		/*
         int horasEstudio = controller.getActualUser().getStudyHours();

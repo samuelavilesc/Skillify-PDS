@@ -94,7 +94,7 @@ public class ConfigureUserController {
 
         // Actualizar foto de perfil si se seleccionó una nueva
         if (newProfilePic != null) {
-            actualUser.setProfilePic(newProfilePic);
+            Controller.getInstance().setNewPfP(newProfilePic);
         }
 
         // Confirmar cambios

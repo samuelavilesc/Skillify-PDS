@@ -1,54 +1,62 @@
 package com.pds.skillify.model;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.OneToOne;
+
 import java.util.Arrays;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
+@Entity
+@DiscriminatorValue("reorder_letters")
 public class ReorderLettersQuestion extends Question {
-	private String correctAnswer;
 
-	// Constructor por defecto para JSON deserialization.
-	public ReorderLettersQuestion() {
-	}
+    @Column(nullable = false)
+    private String correctAnswer;
 
-	public ReorderLettersQuestion(String statement, String correctAnswer) {
-		super(statement);
-		this.correctAnswer = correctAnswer;
-	}
+   
+    // Constructor por defecto requerido por JPA
+    public ReorderLettersQuestion() {}
 
-	public String getCorrectAnswer() {
-		return correctAnswer;
-	}
+    public ReorderLettersQuestion(String statement, String correctAnswer, Course course) {
+        super(statement, course);
+        this.correctAnswer = correctAnswer;
+    }
 
-	public void setCorrectAnswer(String correctAnswer) {
-		this.correctAnswer = correctAnswer;
-	}
+    public String getCorrectAnswer() {
+        return correctAnswer;
+    }
 
-	@Override
-	public boolean checkAnswer(String answer) {
-		char[] answerArray = answer.trim().toCharArray();
-		char[] correctArray = correctAnswer.toCharArray();
+    public void setCorrectAnswer(String correctAnswer) {
+        this.correctAnswer = correctAnswer;
+    }
 
-		Arrays.sort(answerArray);
-		Arrays.sort(correctArray);
+    @Override
+    public boolean checkAnswer(String answer) {
+        char[] answerArray = answer.trim().toCharArray();
+        char[] correctArray = correctAnswer.toCharArray();
 
-		return Arrays.equals(answerArray, correctArray);
-	}
+        Arrays.sort(answerArray);
+        Arrays.sort(correctArray);
 
-	@Override
-	public boolean equals(Object o) {
-		if (this == o)
-			return true;
-		if (o == null || getClass() != o.getClass())
-			return false;
-		if (!super.equals(o))
-			return false; // Llama a equals de la superclase
+        return Arrays.equals(answerArray, correctArray);
+    }
 
-		ReorderLettersQuestion that = (ReorderLettersQuestion) o;
-		return Objects.equals(correctAnswer, that.correctAnswer);
-	}
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false; // Llama a equals de la superclase
 
-	@Override
-	public int hashCode() {
-		return Objects.hash(super.hashCode(), correctAnswer);
-	}
+        ReorderLettersQuestion that = (ReorderLettersQuestion) o;
+        return Objects.equals(correctAnswer, that.correctAnswer);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), correctAnswer);
+    }
 }

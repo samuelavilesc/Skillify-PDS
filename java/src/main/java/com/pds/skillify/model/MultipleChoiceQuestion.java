@@ -1,18 +1,29 @@
 package com.pds.skillify.model;
 
+import jakarta.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
+@Entity
+@DiscriminatorValue("multiple_choice")
 public class MultipleChoiceQuestion extends Question {
+
+
+	@ElementCollection(fetch = FetchType.EAGER)
+	@CollectionTable(name = "multiple_choice_options", joinColumns = @JoinColumn(name = "question_id"))
+	@Column(name = "option_text", nullable = false)
 	private List<String> options;
+
+	@Column(nullable = false)
 	private int correctAnswer;
 
-	// Constructor por defecto para JSON deserialization.
+	// Constructor por defecto requerido por JPA
 	public MultipleChoiceQuestion() {
 	}
 
-	public MultipleChoiceQuestion(String statement, List<String> options, int correctAnswer) {
-		super(statement);
+	public MultipleChoiceQuestion(String statement, List<String> options, int correctAnswer, Course course) {
+		super(statement, course);
 		this.options = options;
 		this.correctAnswer = correctAnswer;
 	}
