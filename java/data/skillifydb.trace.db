@@ -5492,3 +5492,46 @@ The object is already closed [90007-214]
 org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "QUESTION_ID BINARY VARYING(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149... (7713)"
 Value too long for column "QUESTION_ID BINARY VARYING(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149... (7713)"; SQL statement:
 update user_answered_questions set question_id=? where user_id=? and course_id=? [22001-214]
+2025-02-08 12:22:00 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:22:07 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:23:10 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLNonTransientException: El objeto ya está cerrado
+The object is already closed [90007-214]
+2025-02-08 12:25:34 jdbc[3]: exception
+org.h2.jdbc.JdbcSQLDataException: Valor demasiado largo para la columna "QUESTION_ID BINARY VARYING(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149... (276)"
+Value too long for column "QUESTION_ID BINARY VARYING(255)": "X'aced0005737200136a6176612e7574696c2e41727261794c6973747881d21d99c7619d03000149... (276)"; SQL statement:
+update user_answered_questions set question_id=? where user_id=? and course_id=? [22001-214]

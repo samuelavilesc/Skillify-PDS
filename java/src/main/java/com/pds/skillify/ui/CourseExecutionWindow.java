@@ -36,7 +36,7 @@ public class CourseExecutionWindow extends JFrame {
 
         setTitle("Skillify");
         setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
-        setSize(500, 180);
+        setSize(500, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
         setResizable(false);
@@ -97,30 +97,33 @@ public class CourseExecutionWindow extends JFrame {
             dispose();
         }
     }
-
     private void mostrarPreguntaMultipleChoice(MultipleChoiceQuestion question) {
         optionsGroup = new ButtonGroup();
         optionButtons = new JRadioButton[question.getOptions().size()];
 
-        JPanel optionsPanel = new JPanel();
-        optionsPanel.setLayout(new GridLayout(1, 0, 10, 5)); // Distribuye en una fila horizontal
-        optionsPanel.setOpaque(true);
+        JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
+        optionsPanel.setOpaque(false); // Evita la barra gris
+        optionsPanel.setBackground(Color.WHITE);
 
         for (int i = 0; i < question.getOptions().size(); i++) {
             JRadioButton option = new JRadioButton(question.getOptions().get(i));
             option.setFont(new Font("Arial", Font.PLAIN, 14));
             option.setActionCommand(String.valueOf(i));
-            option.setBackground(Color.WHITE);
+            option.setBackground(Color.WHITE); // Fondo blanco para evitar diferencias de color
             option.setForeground(DEFAULT_TEXT_COLOR);
+            
             optionsGroup.add(option);
             optionButtons[i] = option;
             optionsPanel.add(option);
         }
 
-        // *Agregar scroll horizontal si las respuestas son muy largas*
+        // **Eliminar completamente la barra gris**
         JScrollPane scrollPane = new JScrollPane(optionsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.setBorder(BorderFactory.createEmptyBorder());
-        scrollPane.setPreferredSize(new Dimension(400, 50)); // Ajusta la altura del scroll
+        scrollPane.getViewport().setOpaque(false); // ✅ Evita que el viewport tenga fondo gris
+        scrollPane.setOpaque(false); // ✅ Hace que el JScrollPane no tenga fondo
+        scrollPane.setBackground(Color.WHITE); // ✅ Asegura un fondo blanco uniforme
+        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // ✅ Quita cualquier borde visible
+        scrollPane.setPreferredSize(new Dimension(450, 50)); // Ajusta el tamaño
 
         responsePanel.add(scrollPane);
     }
