@@ -35,7 +35,7 @@ public class User implements Serializable {
     @CollectionTable(name = "user_answered_questions", joinColumns = @JoinColumn(name = "user_id"))
     @MapKeyJoinColumn(name = "course_id")
     @Column(name = "question_id")
-    private Map<Course, Set<Question>> answeredQuestions = new HashMap<>();
+    private Map<Course, Set<Long>> answeredQuestions = new HashMap<>();
 
     // Constructor vacío requerido por JPA
     public User() {}
@@ -95,7 +95,7 @@ public class User implements Serializable {
      * @param question Pregunta respondida.
      */
     public void addAnsweredQuestion(Course course, Question question) {
-        answeredQuestions.computeIfAbsent(course, k -> new HashSet<>()).add(question);
+        answeredQuestions.computeIfAbsent(course, k -> new HashSet<>()).add(question.getId());
     }
 
     /**
@@ -105,7 +105,7 @@ public class User implements Serializable {
      * @return true si la pregunta fue respondida, false en caso contrario.
      */
     public boolean hasAnsweredQuestion(Course course, Question question) {
-        return answeredQuestions.getOrDefault(course, Collections.emptySet()).contains(question);
+        return answeredQuestions.getOrDefault(course, Collections.emptySet()).contains(question.getId());
     }
 
     /**
@@ -113,7 +113,7 @@ public class User implements Serializable {
      * @param course Curso en el que se buscan las preguntas respondidas.
      * @return Set de preguntas respondidas.
      */
-    public Set<Question> getAnsweredQuestionsInCourse(Course course) {
+    public Set<Long> getAnsweredQuestionsInCourse(Course course) {
         return answeredQuestions.getOrDefault(course, Collections.emptySet());
     }
 

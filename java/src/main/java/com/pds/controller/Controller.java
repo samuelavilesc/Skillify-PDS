@@ -183,4 +183,14 @@ public class Controller {
         this.actualUser.setProfilePic(image);
         userCatalog.updateUser(actualUser);
     }
+    
+    public void setAsAnswered(Course course, Question question) {
+    	actualUser.addAnsweredQuestion(course, question);
+    }
+    public int getProgress(Course course) {
+    	return actualUser.getCourseProgress(course);
+    }
+    public void updateCurrentUser() {
+    	userCatalog.updateUser(actualUser);
+    }
 }

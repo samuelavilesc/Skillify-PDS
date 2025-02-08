@@ -1,6 +1,7 @@
 package com.pds.skillify.ui;
 
 import com.pds.skillify.model.*;
+import com.pds.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;
@@ -27,11 +28,14 @@ public class CourseExecutionWindow extends JFrame {
     private JRadioButton[] optionButtons;
     private List<Question> questions;
     private int currentQuestionIndex = 0;
+    private Course course;
 
-    public CourseExecutionWindow(String courseName, String courseDescription, List<Question> questions) {
-        this.questions = questions;
+    public CourseExecutionWindow(Course course) {
+        this.questions = course.getQuestions();
+        this.course=course;
 
         setTitle("Skillify");
+        setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
         setSize(500, 180);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -140,6 +144,7 @@ public class CourseExecutionWindow extends JFrame {
         Question question = questions.get(currentQuestionIndex);
         boolean esCorrecto = false;
         int respuestaCorrectaIndex = -1;
+        Controller.getInstance().setAsAnswered(course, question);
 
         if (question instanceof MultipleChoiceQuestion) {
             MultipleChoiceQuestion mcq = (MultipleChoiceQuestion) question;
