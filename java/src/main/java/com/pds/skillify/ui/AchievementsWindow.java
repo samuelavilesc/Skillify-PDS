@@ -2,6 +2,8 @@ package com.pds.skillify.ui;
 
 import javax.swing.*;
 import com.pds.controller.Controller;
+import com.pds.skillify.ui.controller.AchievementsWindowController;
+
 import java.awt.*;
 import java.util.List;
 
@@ -18,8 +20,9 @@ public class AchievementsWindow extends JFrame {
 	private Controller controller;
 
 	public AchievementsWindow(List<String> logrosUsuario) {
-		controller = Controller.getInstance(); // Obtener el controlador
+		controller = Controller.getInstance();
 		initialize();
+		new AchievementsWindowController(this);
 		actualizarLogros(logrosUsuario);
 		setVisible(true);
 	}
@@ -51,11 +54,17 @@ public class AchievementsWindow extends JFrame {
 		lblAvatar = new JLabel(avatarIcon);
 
 		// **Panel para alinear título y avatar**
-		JPanel tituloPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 15, 5));
-		tituloPanel.add(lblTitulo);
-		tituloPanel.add(lblAvatar);
+		JPanel tituloPanel = new JPanel(new GridBagLayout());
+		GridBagConstraints gbc = new GridBagConstraints();
+		gbc.gridx = 0;
+		gbc.gridy = 0;
+		gbc.insets = new Insets(0, 10, 0, 10);
+		tituloPanel.add(lblTitulo, gbc);
 
-		topPanel.add(tituloPanel, BorderLayout.WEST);
+		gbc.gridx = 1;
+		tituloPanel.add(lblAvatar, gbc);
+
+		topPanel.add(tituloPanel, BorderLayout.CENTER);
 		add(topPanel, BorderLayout.NORTH);
 
 		// **Panel central con logros**
