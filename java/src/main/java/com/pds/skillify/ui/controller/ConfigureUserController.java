@@ -90,6 +90,7 @@ public class ConfigureUserController {
         // Actualizar la contraseña si se ingresó una nueva
         if (!nuevaContrasena.isEmpty()) {
             actualUser.setPassword(nuevaContrasena);
+            Controller.getInstance().updateCurrentUser();
         }
 
         // Actualizar foto de perfil si se seleccionó una nueva
