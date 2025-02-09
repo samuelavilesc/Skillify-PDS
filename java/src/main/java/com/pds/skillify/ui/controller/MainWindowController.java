@@ -39,6 +39,7 @@ public class MainWindowController {
 		handleClickOnProfile(view.getProfileButton());
 		handleClickOnImportCourse(view.getImportButton());
 		handleClickOnCourse(view.getCourseList());
+		handleClosingWindow();
 	}
 
 	/**
@@ -112,6 +113,19 @@ public class MainWindowController {
 				if (selectedCourse != null) {
 					openCourseExecution(selectedCourse);
 				}
+			}
+		});
+	}
+
+	private void handleClosingWindow() {
+		view.addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosed(WindowEvent e) {
+				// Ejecutar en el hilo de eventos de Swing para evitar bloqueos
+				SwingUtilities.invokeLater(() -> {
+					Controller.getInstance().endCurrentUserSession();
+					Controller.getInstance().updateCurrentUser();
+				});
 			}
 		});
 	}
