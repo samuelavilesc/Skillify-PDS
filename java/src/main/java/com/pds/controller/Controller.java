@@ -8,189 +8,217 @@ import com.pds.skillify.model.*;
 import com.pds.skillify.utils.CourseJSONUtils;
 
 public class Controller {
-    // Catálogos que gestionan usuarios, cursos y preguntas
-    private UserCatalog userCatalog;
-    private CourseCatalog courseCatalog;
-   
+	// Catálogos que gestionan usuarios, cursos y preguntas
+	private UserCatalog userCatalog;
+	private CourseCatalog courseCatalog;
 
-    // Instancia única del controlador (Singleton).
-    private static Controller uniqueInstance = null;
-    
-    // Usuario actualmente autenticado en el sistema.
-    private User actualUser;
+	// Instancia única del controlador (Singleton).
+	private static Controller uniqueInstance = null;
 
-    /**
-     * Constructor privado del controlador. Inicializa los catálogos de datos.
-     */
-    private Controller() {
-        initializeCatalogs();
-    }
+	// Usuario actualmente autenticado en el sistema.
+	private User actualUser;
 
-    /**
-     * Obtiene la instancia única del controlador (Singleton).
-     *
-     * @return Instancia única de `Controller`.
-     */
-    public static Controller getInstance() {
-        if (uniqueInstance == null) {
-            uniqueInstance = new Controller();
-        }
-        return uniqueInstance;
-    }
+	/**
+	 * Constructor privado del controlador. Inicializa los catálogos de datos.
+	 */
+	private Controller() {
+		initializeCatalogs();
+	}
 
-    /**
-     * Inicializa los catálogos de usuarios, cursos y preguntas cargando datos desde la base de datos.
-     */
-    private void initializeCatalogs() {
-        this.userCatalog = UserCatalog.getInstance();
-        this.courseCatalog = CourseCatalog.getInstance();
-        
-    }
+	/**
+	 * Obtiene la instancia única del controlador (Singleton).
+	 *
+	 * @return Instancia única de `Controller`.
+	 */
+	public static Controller getInstance() {
+		if (uniqueInstance == null) {
+			uniqueInstance = new Controller();
+		}
+		return uniqueInstance;
+	}
 
-    /**
-     * Obtiene los cursos finalizados del usuario actual.
-     *
-     * @return Lista de cursos completados.
-     */
-    public List<Course> getFinishedCourses() {
-        List<Course> finishedCourses = new ArrayList<>();
-        for (Course course : actualUser.getAllCourses()) {
-            if (actualUser.getCourseProgress(course) == 100) {
-                finishedCourses.add(course);
-            }
-        }
-        return finishedCourses;
-    }
+	/**
+	 * Inicializa los catálogos de usuarios, cursos y preguntas cargando datos desde
+	 * la base de datos.
+	 */
+	private void initializeCatalogs() {
+		this.userCatalog = UserCatalog.getInstance();
+		this.courseCatalog = CourseCatalog.getInstance();
 
-    public User getActualUser() {
-        return actualUser;
-    }
+	}
 
-    public void setActualUser(User actualUser) {
-        this.actualUser = actualUser;
-    }
+	/**
+	 * Obtiene los cursos finalizados del usuario actual.
+	 *
+	 * @return Lista de cursos completados.
+	 */
+	public List<Course> getFinishedCourses() {
+		List<Course> finishedCourses = new ArrayList<>();
+		for (Course course : actualUser.getAllCourses()) {
+			if (actualUser.getCourseProgress(course) == 100) {
+				finishedCourses.add(course);
+			}
+		}
+		return finishedCourses;
+	}
 
-    /**
-     * Añade un curso al usuario actual cargándolo desde un archivo JSON.
-     *
-     * @param filePath Ruta del archivo JSON con el curso.
-     */
-    public void addCourseToCurrentUser(String filePath) {
-        Course newCourse = CourseJSONUtils.loadCourseFromJson(filePath);
-        
-        if (actualUser == null) {
-            throw new IllegalStateException("No hay usuario autenticado.");
-        }
+	public User getActualUser() {
+		return actualUser;
+	}
 
-        // Buscar si el curso ya existe en la base de datos
-        Course existingCourse = courseCatalog.getCourse(newCourse.getName());
+	public void setActualUser(User actualUser) {
+		this.actualUser = actualUser;
+	}
 
-        if (existingCourse == null) {
-            // Si el curso no existe, guardarlo en la BD antes de asignarlo
-            courseCatalog.addCourse(newCourse);
-            existingCourse = newCourse;
-        }
+	/**
+	 * Añade un curso al usuario actual cargándolo desde un archivo JSON.
+	 *
+	 * @param filePath Ruta del archivo JSON con el curso.
+	 */
+	public void addCourseToCurrentUser(String filePath) {
+		Course newCourse = CourseJSONUtils.loadCourseFromJson(filePath);
 
-        // Verificar que el usuario no tenga ya este curso
-        if (!actualUser.alreadyHasCourse(existingCourse)) {
-            actualUser.addCourse(existingCourse);
-            userCatalog.updateUser(actualUser);
-        }
-    }
+		if (actualUser == null) {
+			throw new IllegalStateException("No hay usuario autenticado.");
+		}
 
+		// Buscar si el curso ya existe en la base de datos
+		Course existingCourse = courseCatalog.getCourse(newCourse.getName());
 
-    /**
-     * Obtiene todos los cursos del usuario actual.
-     *
-     * @return Un conjunto con los cursos del usuario actual.
-     */
-    public Set<Course> getAllCurrentUserCourses() {
-        return actualUser.getAllCourses();
-    }
+		if (existingCourse == null) {
+			// Si el curso no existe, guardarlo en la BD antes de asignarlo
+			courseCatalog.addCourse(newCourse);
+			existingCourse = newCourse;
+		}
 
-    /**
-     * Obtiene el progreso del usuario actual en un curso específico.
-     *
-     * @param course Curso a consultar.
-     * @return Progreso del usuario en el curso (0-100).
-     */
-    public int getCurrentUsersProgressInCourse(Course course) {
-        return actualUser.getCourseProgress(course);
-    }
+		// Verificar que el usuario no tenga ya este curso
+		if (!actualUser.alreadyHasCourse(existingCourse)) {
+			actualUser.addCourse(existingCourse);
+			userCatalog.updateUser(actualUser);
+		}
+	}
 
-    /**
-     * Verifica si el usuario actual ya tiene un curso específico.
-     *
-     * @param filePath Ruta del archivo JSON con el curso.
-     * @return `true` si el usuario ya tiene el curso, `false` en caso contrario.
-     */
-    public boolean currentUserAlreadyHasCourse(String filePath) {
-        Course course = CourseJSONUtils.loadCourseFromJson(filePath);
-        return actualUser.alreadyHasCourse(course);
-    }
+	/**
+	 * Obtiene todos los cursos del usuario actual.
+	 *
+	 * @return Un conjunto con los cursos del usuario actual.
+	 */
+	public Set<Course> getAllCurrentUserCourses() {
+		return actualUser.getAllCourses();
+	}
 
-    /**
-     * Inicia sesión verificando las credenciales del usuario.
-     *
-     * @param username Nombre de usuario.
-     * @param password Contraseña.
-     * @return `true` si el inicio de sesión es exitoso, `false` si falla.
-     */
-    public boolean login(String username, String password) {
-        if (username.isEmpty() || password.isEmpty()) {
-            return false;
-        }
+	/**
+	 * Obtiene el progreso del usuario actual en un curso específico.
+	 *
+	 * @param course Curso a consultar.
+	 * @return Progreso del usuario en el curso (0-100).
+	 */
+	public int getCurrentUsersProgressInCourse(Course course) {
+		return actualUser.getCourseProgress(course);
+	}
 
-        User user = userCatalog.getUser(username);
-        if (user == null || !user.getPassword().equals(password)) {
-            return false;
-        }
+	/**
+	 * Verifica si el usuario actual ya tiene un curso específico.
+	 *
+	 * @param filePath Ruta del archivo JSON con el curso.
+	 * @return `true` si el usuario ya tiene el curso, `false` en caso contrario.
+	 */
+	public boolean currentUserAlreadyHasCourse(String filePath) {
+		Course course = CourseJSONUtils.loadCourseFromJson(filePath);
+		return actualUser.alreadyHasCourse(course);
+	}
 
-        this.actualUser = user;
-        return true;
-    }
+	/**
+	 * Inicia sesión verificando las credenciales del usuario.
+	 *
+	 * @param username Nombre de usuario.
+	 * @param password Contraseña.
+	 * @return `true` si el inicio de sesión es exitoso, `false` si falla.
+	 */
+	public boolean login(String username, String password) {
+		if (username.isEmpty() || password.isEmpty()) {
+			return false;
+		}
 
-    /**
-     * Registra un nuevo usuario en el sistema y lo autentica automáticamente.
-     *
-     * @param username Nombre de usuario.
-     * @param pfp Imagen de perfil del usuario.
-     * @param email Correo electrónico.
-     * @param password Contraseña.
-     * @return `true` si el registro es exitoso e inicia sesión, `false` si el usuario ya existe.
-     */
-    public boolean registerUser(String username, ImageIcon pfp, String email, String password) {
-        if (userCatalog.getUser(username) != null) {
-            return false;
-        }
+		User user = userCatalog.getUser(username);
+		if (user == null || !user.getPassword().equals(password)) {
+			return false;
+		}
 
-        User newUser = new User(username, password, email, pfp);
-        this.actualUser = newUser;
+		this.actualUser = user;
 
-        if (!userCatalog.existsUser(newUser)) {
-            userCatalog.addUser(newUser);
-            return login(newUser.getUsername(), newUser.getPassword()); // Auto-login después del registro
-        }
-        return false;
-    }
+		actualUser.startSession();
+		actualUser.updateLoginStreak();
 
-    /**
-     * Actualiza la imagen de perfil del usuario actual.
-     *
-     * @param image Nueva imagen de perfil.
-     */
-    public void setNewPfP(ImageIcon image) {
-        this.actualUser.setProfilePic(image);
-        userCatalog.updateUser(actualUser);
-    }
-    
-    public void setAsAnswered(Course course, Question question) {
-    	actualUser.addAnsweredQuestion(course, question);
-    }
-    public int getProgress(Course course) {
-    	return actualUser.getCourseProgress(course);
-    }
-    public void updateCurrentUser() {
-    	userCatalog.updateUser(actualUser);
-    }
+		return true;
+	}
+
+	// Métodos relacionados al tiempo de uso.
+
+	public long getCurrentUsersActiveTimeInHours() {
+		return actualUser.getActiveTimeInHours();
+	}
+	
+	public long getCurrentUsersActiveTimeInSeconds() {
+		return actualUser.getActiveTimeInSeconds();
+	}
+
+	public int getCurrentUsersCurrentLoginStreak() {
+		return actualUser.getCurrentLoginStreak();
+	}
+
+	public int getCurrentUsersBestLoginStreak() {
+		return actualUser.getBestLoginStreak();
+	}
+
+	public void endCurrentUserSession() {
+		actualUser.endSession();
+	}
+
+	/**
+	 * Registra un nuevo usuario en el sistema y lo autentica automáticamente.
+	 *
+	 * @param username Nombre de usuario.
+	 * @param pfp      Imagen de perfil del usuario.
+	 * @param email    Correo electrónico.
+	 * @param password Contraseña.
+	 * @return `true` si el registro es exitoso e inicia sesión, `false` si el
+	 *         usuario ya existe.
+	 */
+	public boolean registerUser(String username, ImageIcon pfp, String email, String password) {
+		if (userCatalog.getUser(username) != null) {
+			return false;
+		}
+
+		User newUser = new User(username, password, email, pfp);
+		this.actualUser = newUser;
+
+		if (!userCatalog.existsUser(newUser)) {
+			userCatalog.addUser(newUser);
+			return login(newUser.getUsername(), newUser.getPassword()); // Auto-login después del registro
+		}
+		return false;
+	}
+
+	/**
+	 * Actualiza la imagen de perfil del usuario actual.
+	 *
+	 * @param image Nueva imagen de perfil.
+	 */
+	public void setNewPfP(ImageIcon image) {
+		this.actualUser.setProfilePic(image);
+		userCatalog.updateUser(actualUser);
+	}
+
+	public void setAsAnswered(Course course, Question question) {
+		actualUser.addAnsweredQuestion(course, question);
+	}
+
+	public int getProgress(Course course) {
+		return actualUser.getCourseProgress(course);
+	}
+
+	public void updateCurrentUser() {
+		userCatalog.updateUser(actualUser);
+	}
 }

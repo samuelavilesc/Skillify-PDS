@@ -81,18 +81,10 @@ public class AchievementsWindow extends JFrame {
 		panelEstadisticas = new JPanel(new GridLayout(2, 3, 20, 5)); // 2 filas, 3 columnas, espacio horizontal y vertical
 		panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadísticas del Usuario"));
 
-		// 	TODO **Obtener datos del usuario**
-		int horasEstudio = 0;
-		int rachaActual = 0;
-		int mejorRacha = 0;
-
-		/*
-        int horasEstudio = controller.getActualUser().getStudyHours();
-        int rachaActual = controller.getActualUser().getCurrentStreak();
-        int mejorRacha = controller.getActualUser().getBestStreak();
-
-		 */
-
+		long horasEstudio = controller.getCurrentUsersActiveTimeInHours();
+		int rachaActual = controller.getCurrentUsersCurrentLoginStreak();
+		int mejorRacha = controller.getCurrentUsersBestLoginStreak();
+		
 		// **Primera fila: nombres de las estadísticas**
 		lblHorasEstudio = new JLabel("Horas de estudio", SwingConstants.CENTER);
 		lblRachaActual = new JLabel("Racha actual", SwingConstants.CENTER);
