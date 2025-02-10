@@ -22,10 +22,12 @@
 
       <!-- Configuración de Hibernate -->
       <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="validate"/>
-      <property name="hibernate.show_sql" value="true"/>
-      <property name="hibernate.format_sql" value="true"/>
+      <property name="hibernate.hbm2ddl.auto" value="update"/>
       <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
+      <property name="hibernate.show_sql" value="false"/> <!-- Apaga logs de SQL -->
+    <property name="hibernate.format_sql" value="false"/> <!-- Apaga formato de logs -->
+    <property name="hibernate.generate_statistics" value="false"/> <!-- Evita logs de estadísticas -->
+    <property name="hibernate.use_sql_comments" value="false"/> <!-- Evita logs de comentarios SQL -->
     </properties>
 
   </persistence-unit>

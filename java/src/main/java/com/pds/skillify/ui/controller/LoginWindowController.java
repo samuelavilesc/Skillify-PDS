@@ -35,6 +35,7 @@ public class LoginWindowController {
 	}
 
 	private void initializeControllers() {
+		Controller.getInstance(); //inciar adaptadores
 		handleClickOnRegister(view.getRegisterLabel());
 		handleClickOnForgotPassword(view.getForgotPasswordLabel());
 		handleClickOnLogin(view.getLoginButton());
