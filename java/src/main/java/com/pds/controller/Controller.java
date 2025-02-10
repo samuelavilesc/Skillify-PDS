@@ -127,6 +127,15 @@ public class Controller {
 		Course course = CourseJSONUtils.loadCourseFromJson(filePath);
 		return actualUser.alreadyHasCourse(course);
 	}
+	
+	// Métodos relacionados a la búsqueda de usuarios en la ventana Comunidad
+	
+	public Set<User> getUsersStartingWith(String prefix){
+		Set<User> matchingUsers = userCatalog.getUsersStartingWith(prefix);
+		matchingUsers.remove(actualUser);
+		
+		return matchingUsers;
+	}
 
 	/**
 	 * Inicia sesión verificando las credenciales del usuario.

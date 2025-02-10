@@ -14,12 +14,12 @@ import java.util.stream.Collectors;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
-    private static final int WIDTH = 550;
+    private static final int WIDTH = 650;
     private static final int HEIGHT = 650;
 
     private JList<Course> courseList;
     private DefaultListModel<Course> courseListModel;
-    private JButton settingsButton, profileButton, importButton;
+    private JButton settingsButton, profileButton, communityButton, importButton;
     private JLabel welcomeLabel;
     private User actualUser;
 
@@ -67,13 +67,17 @@ public class MainWindow extends JFrame {
         JPanel iconsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
         profileButton = new JButton(avatarIcon);
         settingsButton = new JButton(new ImageIcon(getClass().getResource("/settings.png")));
+        communityButton = new JButton(new ImageIcon(getClass().getResource("/community-icon.png")));
 
         profileButton.setBorder(null);
         settingsButton.setBorder(null);
+        communityButton.setBorder(null);
         profileButton.setContentAreaFilled(false);
         settingsButton.setContentAreaFilled(false);
+        communityButton.setContentAreaFilled(false);
 
         iconsPanel.add(profileButton);
+        iconsPanel.add(communityButton);
         iconsPanel.add(settingsButton);
 
         // **Agregar elementos al panel superior**
@@ -127,6 +131,10 @@ public class MainWindow extends JFrame {
 
     public JButton getImportButton() {
         return importButton;
+    }
+    
+    public JButton getCommunityButton() {
+        return communityButton;
     }
 
     public JList<Course> getCourseList() {

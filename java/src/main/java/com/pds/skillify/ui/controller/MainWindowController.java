@@ -17,6 +17,7 @@ import javax.swing.SwingUtilities;
 import com.pds.controller.Controller;
 import com.pds.skillify.model.Course;
 import com.pds.skillify.ui.AchievementsWindow;
+import com.pds.skillify.ui.CommunityWindow;
 import com.pds.skillify.ui.ConfigureUserWindow;
 import com.pds.skillify.ui.CourseExecutionWindow;
 import com.pds.skillify.ui.MainWindow;
@@ -39,6 +40,7 @@ public class MainWindowController {
 		handleClickOnProfile(view.getProfileButton());
 		handleClickOnImportCourse(view.getImportButton());
 		handleClickOnCourse(view.getCourseList());
+		handleClickOnCommunity(view.getCommunityButton());
 		handleClosingWindow();
 	}
 
@@ -62,7 +64,7 @@ public class MainWindowController {
 
 			// List<String> completedCourses =
 			// Controller.getInstance().getCompletedCourses();
-			new AchievementsWindow(courses); // Abre la ventana de logros con la lista de cursos
+			new AchievementsWindow(courses, Controller.getInstance().getActualUser()); // Abre la ventana de logros con la lista de cursos
 			view.dispose();
 		});
 	}
@@ -116,6 +118,10 @@ public class MainWindowController {
 			}
 		});
 	}
+	
+	private void handleClickOnCommunity(JButton communityButon) {
+		communityButon.addActionListener(e -> openCommunityWindow());
+	}
 
 	private void handleClosingWindow() {
 		view.addWindowListener(new WindowAdapter() {
@@ -136,6 +142,11 @@ public class MainWindowController {
 	private void openUserConfiguration() {
 		new ConfigureUserWindow();
 		view.dispose(); // Cierra la ventana principal
+	}
+	
+	private void openCommunityWindow() {
+		new CommunityWindow();
+		view.dispose();
 	}
 
 	/**
