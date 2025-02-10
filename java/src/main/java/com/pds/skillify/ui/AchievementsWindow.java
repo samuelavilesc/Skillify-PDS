@@ -125,7 +125,7 @@ public class AchievementsWindow extends JFrame {
 		panelLogros.removeAll(); // Limpiar panel antes de actualizar
 
 		if (logrosUsuario.isEmpty()) {
-			JLabel noLogros = new JLabel("Aún no tienes logros. ¡Sigue aprendiendo!");
+			JLabel noLogros = new JLabel("Aún no hay logros desbloqueados.");
 			noLogros.setFont(new Font("Arial", Font.ITALIC, 14));
 			noLogros.setForeground(Color.GRAY);
 			noLogros.setHorizontalAlignment(SwingConstants.CENTER);
