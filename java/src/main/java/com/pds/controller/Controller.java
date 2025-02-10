@@ -230,4 +230,16 @@ public class Controller {
 	public void updateCurrentUser() {
 		userCatalog.updateUser(actualUser);
 	}
+	public User findUserByEmailAndUsername(String email, String username) {
+        for (User user : userCatalog.getUsers()) {
+            if (user.getEmail().equalsIgnoreCase(email) && user.getUsername().equalsIgnoreCase(username)) {
+                return user;
+            }
+        }
+        return null; // No encontrado
+    }
+	 public void updateUserPassword(User user, String newPassword) {
+	        user.setPassword(newPassword);
+	        // Aquí puedes guardar los cambios en base de datos o en un archivo si es necesario
+	    }
 }
