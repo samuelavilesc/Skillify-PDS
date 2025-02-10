@@ -1,3 +1,5 @@
+package com.pds.skillify.ui.controller;
+
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
@@ -21,7 +23,15 @@ import com.pds.skillify.ui.MainWindow;
 
 public class CommunityWindowController {
 
-@@ -29,6 +35,8 @@ public CommunityWindowController(CommunityWindow view) {
+	private CommunityWindow view;
+	private Controller controller;
+
+	public CommunityWindowController(CommunityWindow view) {
+		this.view = view;
+		this.controller = Controller.getInstance();
+		initializeControllers();
+	}
+
 	private void initializeControllers() {
 		handleTypingUsernameField(view.getUsernameField());
 		handleClickOnUser(view.getUsersList());
@@ -30,7 +40,17 @@ public class CommunityWindowController {
 	}
 
 	private void handleTypingUsernameField(JTextField usernameField) {
-@@ -46,10 +54,49 @@ private void handleClickOnUser(JList<User> usersList) {
+		usernameField.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				Set<User> matchingUsers = controller.getUsersStartingWith(usernameField.getText());
+				view.updateUserList(matchingUsers);
+			}
+		});
+	}
+
+	private void handleClickOnUser(JList<User> usersList) {
+		usersList.addListSelectionListener(new ListSelectionListener() {
 			@Override
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
@@ -44,6 +64,7 @@ public class CommunityWindowController {
 	private void handleHoverOverUser(JList<User> usersList) {
 		usersList.addMouseMotionListener(new MouseAdapter() {
 			int hoveredIndex = -1;
+
 			@Override
 			public void mouseMoved(MouseEvent e) {
 				int index = usersList.locationToIndex(e.getPoint()); // Get index of hovered cell
@@ -53,6 +74,7 @@ public class CommunityWindowController {
 				}
 			}
 		});
+
 		// Add mouse listener to reset hover when mouse exits the list
 		usersList.addMouseListener(new MouseAdapter() {
 			@Override
@@ -61,6 +83,7 @@ public class CommunityWindowController {
 			}
 		});
 	}
+
 	private void handleClosingWindow() {
 		view.addWindowListener(new WindowAdapter() {
 			// Botón X
@@ -71,6 +94,9 @@ public class CommunityWindowController {
 				});
 			}
 			
+
 		});
+
 	}
+
 }
