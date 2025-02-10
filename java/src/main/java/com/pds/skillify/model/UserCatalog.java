@@ -1,6 +1,8 @@
 package com.pds.skillify.model;
 
 import java.util.*;
+import java.util.stream.Collectors;
+
 import javax.swing.ImageIcon;
 import com.pds.persistence.DAOException;
 import com.pds.persistence.FactoryDAO;
@@ -60,6 +62,12 @@ public class UserCatalog {
                     .filter(u -> u.getUsername().equals(username))
                     .findAny()
                     .orElse(null);
+    }
+    
+    public Set<User> getUsersStartingWith(String prefix) {
+        return users.values().stream()
+                    .filter(u -> u.getUsername().startsWith(prefix))
+                    .collect(Collectors.toSet());
     }
 
     /**

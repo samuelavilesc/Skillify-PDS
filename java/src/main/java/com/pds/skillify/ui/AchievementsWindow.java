@@ -1,7 +1,7 @@
 package com.pds.skillify.ui;
 
 import javax.swing.*;
-import com.pds.controller.Controller;
+import com.pds.skillify.model.User;
 import com.pds.skillify.ui.controller.AchievementsWindowController;
 
 import java.awt.*;
@@ -17,10 +17,11 @@ public class AchievementsWindow extends JFrame {
 	private JPanel panelLogros, panelEstadisticas;
 	private JLabel lblHorasEstudio, lblRachaActual, lblMejorRacha;
 	private JLabel lblHorasValor, lblRachaActualValor, lblMejorRachaValor;
-	private Controller controller;
+	
+	private User user;
 
-	public AchievementsWindow(List<String> logrosUsuario) {
-		controller = Controller.getInstance();
+	public AchievementsWindow(List<String> logrosUsuario, User user) {
+		this.user = user;
 		initialize();
 		new AchievementsWindowController(this);
 		actualizarLogros(logrosUsuario);
@@ -40,13 +41,13 @@ public class AchievementsWindow extends JFrame {
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
 
 		// **Título "Tus logros"**
-		lblTitulo = new JLabel("Tus logros");
+		lblTitulo = new JLabel("Logros de " + user.getUsername());
 		lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
 
 		// **Cargar imagen del avatar del usuario**
 		ImageIcon avatarIcon;
-		if (controller.getActualUser() != null && controller.getActualUser().getProfilePic() != null) {
-			avatarIcon = new ImageIcon(controller.getActualUser().getProfilePic().getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
+		if (user != null && user.getProfilePic() != null) {
+			avatarIcon = new ImageIcon(user.getProfilePic().getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
 		} else {
 			avatarIcon = new ImageIcon(getClass().getResource("/user.png"));
 		}
@@ -81,9 +82,9 @@ public class AchievementsWindow extends JFrame {
 		panelEstadisticas = new JPanel(new GridLayout(2, 3, 20, 5)); // 2 filas, 3 columnas, espacio horizontal y vertical
 		panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadísticas del Usuario"));
 
-		long horasEstudio = controller.getCurrentUsersActiveTimeInHours();
-		int rachaActual = controller.getCurrentUsersCurrentLoginStreak();
-		int mejorRacha = controller.getCurrentUsersBestLoginStreak();
+		long horasEstudio = user.getActiveTimeInHours();
+		int rachaActual = user.getCurrentLoginStreak();
+		int mejorRacha = user.getBestLoginStreak();
 		
 		// **Primera fila: nombres de las estadísticas**
 		lblHorasEstudio = new JLabel("Horas de estudio", SwingConstants.CENTER);
