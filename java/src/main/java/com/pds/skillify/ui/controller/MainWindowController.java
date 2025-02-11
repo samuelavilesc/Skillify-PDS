@@ -20,6 +20,7 @@ import com.pds.skillify.ui.AchievementsWindow;
 import com.pds.skillify.ui.CommunityWindow;
 import com.pds.skillify.ui.ConfigureUserWindow;
 import com.pds.skillify.ui.CourseExecutionWindow;
+import com.pds.skillify.ui.LoginWindow;
 import com.pds.skillify.ui.MainWindow;
 import com.pds.skillify.utils.CourseJSONUtils;
 
@@ -42,6 +43,7 @@ public class MainWindowController {
 		handleClickOnCourse(view.getCourseList());
 		handleClickOnCommunity(view.getCommunityButton());
 		handleClosingWindow();
+		handleClickOnLogout(view.getLogoutButton());
 	}
 
 	/**
@@ -122,11 +124,13 @@ public class MainWindowController {
 	private void handleClickOnCommunity(JButton communityButon) {
 		communityButon.addActionListener(e -> openCommunityWindow());
 	}
-
+	private void handleClickOnLogout(JButton logoutButton) {
+		logoutButton.addActionListener(e -> logout());
+	}
 	private void handleClosingWindow() {
 		view.addWindowListener(new WindowAdapter() {
 			@Override
-			public void windowClosed(WindowEvent e) {
+			public void windowClosing(WindowEvent e) {
 				// Ejecutar en el hilo de eventos de Swing para evitar bloqueos
 				SwingUtilities.invokeLater(() -> {
 					Controller.getInstance().endCurrentUserSession();
@@ -146,6 +150,14 @@ public class MainWindowController {
 	
 	private void openCommunityWindow() {
 		new CommunityWindow();
+		view.dispose();
+	}
+
+	private void logout() {
+		Controller.getInstance().endCurrentUserSession();
+		Controller.getInstance().updateCurrentUser();
+		Controller.getInstance().logout();
+		new LoginWindow();
 		view.dispose();
 	}
 

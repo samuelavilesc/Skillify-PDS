@@ -15,7 +15,7 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+	private int id;
 
 	@Lob // Guardamos la imagen como bytes en la BD
 	private byte[] profilePic;
@@ -56,7 +56,7 @@ public class User implements Serializable {
 	@CollectionTable(name = "user_answered_questions", joinColumns = @JoinColumn(name = "user_id"))
 	@MapKeyJoinColumn(name = "course_id")
 	@Column(name = "question_id")
-	private Map<Course, Set<Long>> answeredQuestions = new HashMap<>();
+	private Map<Course, Set<Integer>> answeredQuestions = new HashMap<>();
 
 	// Constructor vacío requerido por JPA
 	public User() {
@@ -186,7 +186,7 @@ public class User implements Serializable {
 	 * @param course Curso en el que se buscan las preguntas respondidas.
 	 * @return Set de preguntas respondidas.
 	 */
-	public Set<Long> getAnsweredQuestionsInCourse(Course course) {
+	public Set<Integer> getAnsweredQuestionsInCourse(Course course) {
 		return answeredQuestions.getOrDefault(course, Collections.emptySet());
 	}
 
@@ -224,11 +224,11 @@ public class User implements Serializable {
 		this.email = email;
 	}
 
-	public Long getId() {
+	public int getId() {
 		return id;
 	}
 
-	public void setId(Long id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 

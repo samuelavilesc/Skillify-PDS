@@ -127,13 +127,13 @@ public class Controller {
 		Course course = CourseJSONUtils.loadCourseFromJson(filePath);
 		return actualUser.alreadyHasCourse(course);
 	}
-	
+
 	// Métodos relacionados a la búsqueda de usuarios en la ventana Comunidad
-	
-	public Set<User> getUsersStartingWith(String prefix){
+
+	public Set<User> getUsersStartingWith(String prefix) {
 		Set<User> matchingUsers = userCatalog.getUsersStartingWith(prefix);
 		matchingUsers.remove(actualUser);
-		
+
 		return matchingUsers;
 	}
 
@@ -167,7 +167,7 @@ public class Controller {
 	public long getCurrentUsersActiveTimeInHours() {
 		return actualUser.getActiveTimeInHours();
 	}
-	
+
 	public long getCurrentUsersActiveTimeInSeconds() {
 		return actualUser.getActiveTimeInSeconds();
 	}
@@ -230,16 +230,23 @@ public class Controller {
 	public void updateCurrentUser() {
 		userCatalog.updateUser(actualUser);
 	}
+
 	public User findUserByEmailAndUsername(String email, String username) {
-        for (User user : userCatalog.getUsers()) {
-            if (user.getEmail().equalsIgnoreCase(email) && user.getUsername().equalsIgnoreCase(username)) {
-                return user;
-            }
-        }
-        return null; // No encontrado
-    }
-	 public void updateUserPassword(User user, String newPassword) {
-	        user.setPassword(newPassword);
-	        // Aquí puedes guardar los cambios en base de datos o en un archivo si es necesario
-	    }
+		for (User user : userCatalog.getUsers()) {
+			if (user.getEmail().equalsIgnoreCase(email) && user.getUsername().equalsIgnoreCase(username)) {
+				return user;
+			}
+		}
+		return null; // No encontrado
+	}
+
+	public void updateUserPassword(User user, String newPassword) {
+		user.setPassword(newPassword);
+		// Aquí puedes guardar los cambios en base de datos o en un archivo si es
+		// necesario
+	}
+
+	public void logout() {
+		this.actualUser = null;
+	}
 }

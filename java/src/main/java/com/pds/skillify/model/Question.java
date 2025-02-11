@@ -22,7 +22,7 @@ public abstract class Question implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private int id;
 
     protected String statement;
 
@@ -37,7 +37,7 @@ public abstract class Question implements Serializable {
         this.course = course;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
