@@ -249,4 +249,8 @@ public class Controller {
 	public void logout() {
 		this.actualUser = null;
 	}
+	
+	public int getAnsweredQuestions(Course course) {
+		return actualUser.getAnsweredQuestionsInCourse(course).size();
+	}
 }

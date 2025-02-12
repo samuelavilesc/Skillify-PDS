@@ -34,7 +34,7 @@ public class CourseExecutionWindow extends JFrame {
         this.questions = course.getQuestions();
         this.course=course;
 
-        setTitle("Skillify");
+        setTitle(course.getName());
         setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
         setSize(500, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
