@@ -66,7 +66,7 @@ public class CourseCatalog {
      */
     public Course getCourse(Long id) {
         return courses.values().stream()
-                .filter(c -> c.getId() == id)
+                .filter(c -> c.getId().equals(id))
                 .findAny()
                 .orElse(null);
     }
@@ -118,4 +118,5 @@ public class CourseCatalog {
 		    courses.put(course.getName(), course);
 		}
     }
+    
 }

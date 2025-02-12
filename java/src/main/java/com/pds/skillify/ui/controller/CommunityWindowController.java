@@ -55,11 +55,22 @@ public class CommunityWindowController {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					view.dispose();
-					new AchievementsWindow(new ArrayList<>(), usersList.getSelectedValue());
+					AchievementsWindow window = new AchievementsWindow( usersList.getSelectedValue());
+					window.addWindowListener(new WindowAdapter() {
+						// Botón X
+						@Override
+						public void windowClosing(WindowEvent e) {
+							SwingUtilities.invokeLater(() -> {
+								view.setVisible(true);	
+							});
+						}
+					});
 				}
 			}
 		});
 	}
+
+	
 
 	private void handleHoverOverUser(JList<User> usersList) {
 		usersList.addMouseMotionListener(new MouseAdapter() {
@@ -91,6 +102,7 @@ public class CommunityWindowController {
 			public void windowClosing(WindowEvent e) {
 				SwingUtilities.invokeLater(() -> {
 					new MainWindow();
+					
 				});
 			}
 			

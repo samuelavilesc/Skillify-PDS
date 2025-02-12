@@ -36,6 +36,9 @@ public class Controller {
 		}
 		return uniqueInstance;
 	}
+	private boolean isCompletedCourse(Course course) {
+		return getAnsweredQuestions(course) == course.getQuestions().size();
+	}
 
 	/**
 	 * Inicializa los catálogos de usuarios, cursos y preguntas cargando datos desde
@@ -221,7 +224,11 @@ public class Controller {
 
 	public void setAsAnswered(Course course, Question question) {
 		actualUser.addAnsweredQuestion(course, question);
+		if(isCompletedCourse(course)) {
+			actualUser.addCompletedCourse(course);
+		}
 	}
+	
 
 	public int getProgress(Course course) {
 		return actualUser.getCourseProgress(course);
@@ -260,4 +267,15 @@ public class Controller {
 		this.actualUser.resetCourseProgress(course);
 		userCatalog.updateUser(actualUser);
 	}
+	/**
+	 * Obtiene el nombre de un curso dado su ID.
+	 *
+	 * @param courseId ID del curso.
+	 * @return Nombre del curso si existe, de lo contrario "Curso Desconocido".
+	 */
+	public String getCourseNameById(Long courseId) {
+	    Course course = courseCatalog.getCourse(courseId);
+	    return (course != null) ? course.getName() : "Curso Desconocido";
+	}
+
 }

@@ -57,7 +57,16 @@ public class User implements Serializable {
 	@MapKeyJoinColumn(name = "course_id")
 	@Column(name = "question_id")
 	private Map<Course, Set<Integer>> answeredQuestions = new HashMap<>();
+	// fundamentos de java , lista de preguntas q ha respondido
+	// si la longitud de la lista de preguntas == longitud del curso
+	private Set<Long> completedCourses = new HashSet<Long>();
 
+	
+	
+	public void addCompletedCourse(Course course) {
+		completedCourses.add(course.getId());
+	}
+	
 	// Constructor vacío requerido por JPA
 	public User() {
 	}
@@ -266,6 +275,9 @@ public class User implements Serializable {
 
 	public void setLastLoginDate(LocalDate lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
+	}
+	public Set<Long> getCompletedCourses(){
+		return Collections.unmodifiableSet(completedCourses);
 	}
 	public void resetCourseProgress(Course course) {
 	    if (answeredQuestions.containsKey(course)) {

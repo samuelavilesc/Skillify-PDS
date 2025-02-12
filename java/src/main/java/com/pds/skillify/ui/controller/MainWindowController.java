@@ -65,7 +65,7 @@ public class MainWindowController {
 
 			// List<String> completedCourses =
 			// Controller.getInstance().getCompletedCourses();
-			new AchievementsWindow(courses, Controller.getInstance().getActualUser()); // Abre la ventana de logros con la lista de cursos
+			new AchievementsWindow(Controller.getInstance().getActualUser()); // Abre la ventana de logros con la lista de cursos
 			view.dispose();
 		});
 	}
