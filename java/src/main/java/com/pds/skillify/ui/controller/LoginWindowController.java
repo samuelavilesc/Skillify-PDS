@@ -3,6 +3,8 @@ package com.pds.skillify.ui.controller;
 import java.awt.Color;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
@@ -41,6 +43,12 @@ public class LoginWindowController {
         handleClickOnForgotPassword(view.getForgotPasswordLabel());
         handleClickOnLogin(view.getLoginButton());
         handleEnterKeyLogin(view.getPasswordField());
+        view.addWindowListener(new WindowAdapter() {
+            @Override
+            public void windowClosing(WindowEvent e) {
+                System.exit(0); // Apagar el programa al cerrar la ventana
+            }
+        });
     }
 
     private void handleClickOnRegister(JLabel registerLabel) {
