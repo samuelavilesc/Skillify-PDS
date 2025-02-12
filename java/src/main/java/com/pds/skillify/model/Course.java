@@ -7,6 +7,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 
+@SuppressWarnings("serial")
 @Entity
 @Table(name = "courses")
 public class Course implements Serializable {
@@ -23,8 +24,8 @@ public class Course implements Serializable {
 
     @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Question> questions;
-
-
+    @Transient
+    private CourseMode mode = CourseMode.SEQUENTIAL;
     // Constructor vacío requerido por JPA
     public Course() {}
 
@@ -73,9 +74,14 @@ public class Course implements Serializable {
     }
 
     public List<Question> getQuestions() {
-        return new ArrayList<>(questions);
-    }
+        List<Question> questionList = new ArrayList<>(questions);
 
+        if (mode == CourseMode.RANDOM) {
+            Collections.shuffle(questionList);
+        }
+
+        return questionList;
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -90,4 +96,12 @@ public class Course implements Serializable {
     public int hashCode() {
         return Objects.hash(name, description, questions);
     }
+
+	public CourseMode getMode() {
+		return mode;
+	}
+
+	public void setMode(CourseMode mode) {
+		this.mode = mode;
+	}
 }

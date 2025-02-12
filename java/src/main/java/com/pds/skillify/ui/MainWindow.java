@@ -2,7 +2,6 @@ package com.pds.skillify.ui;
 
 import com.pds.controller.Controller;
 import com.pds.skillify.model.Course;
-
 import com.pds.skillify.model.User;
 import com.pds.skillify.ui.controller.MainWindowController;
 
@@ -12,29 +11,23 @@ import java.awt.*;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
-	private static final int WIDTH = 650;
+	private static final int WIDTH = 500;
 	private static final int HEIGHT = 650;
-
+	private static final int MAX_LENGTH_DESCRIPTION = 65;
+	
 	private JList<Course> courseList;
 	private DefaultListModel<Course> courseListModel;
 	private JButton settingsButton, profileButton, communityButton, importButton, logoutButton;
-
 	private JLabel welcomeLabel;
 	private User actualUser;
 
-	/**
-	 * Constructor de la ventana principal
-	 */
 	public MainWindow() {
-		actualUser = Controller.getInstance().getActualUser(); // Obtener el usuario actual
+		actualUser = Controller.getInstance().getActualUser();
 		initialize();
 		new MainWindowController(this);
 		setVisible(true);
 	}
 
-	/**
-	 * Inicializa la ventana principal.
-	 */
 	private void initialize() {
 		setTitle("Skillify");
 		setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
@@ -44,83 +37,69 @@ public class MainWindow extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(new BorderLayout());
 
-		// **Panel superior con el saludo y botones de perfil/configuración**
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-		// **Mensaje de bienvenida con el nombre del usuario**
 		String welcomeMessage = (actualUser != null) ? "Bienvenido, " + actualUser.getUsername() + "!" : "Bienvenido!";
 		welcomeLabel = new JLabel(welcomeMessage);
 		welcomeLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
-		// **Usar la imagen de perfil del usuario si la tiene, si no, usar la
-		// predeterminada**
 		ImageIcon avatarIcon;
 		if (actualUser != null && actualUser.getProfilePic() != null) {
-			Image img = actualUser.getProfilePic().getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+			Image img = actualUser.getProfilePic().getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 			avatarIcon = new ImageIcon(img);
 		} else {
 			avatarIcon = new ImageIcon(getClass().getResource("/user.png"));
 		}
 
-		// **Botones de perfil y configuración**
-		JPanel iconsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 15, 0));
-		profileButton = new JButton(avatarIcon);
-		settingsButton = new JButton(new ImageIcon(getClass().getResource("/settings.png")));
-		communityButton = new JButton(new ImageIcon(getClass().getResource("/community_icon.png")));
-		logoutButton = new JButton(new ImageIcon(getClass().getResource("/logout.png")));
-		profileButton.setBorder(null);
-		settingsButton.setBorder(null);
-		communityButton.setBorder(null);
-		profileButton.setContentAreaFilled(false);
-		settingsButton.setContentAreaFilled(false);
-		communityButton.setContentAreaFilled(false);
-		logoutButton.setContentAreaFilled(false);
+		JPanel iconsPanel = new JPanel(new FlowLayout(FlowLayout.RIGHT, 10, 0));
+		profileButton = createIconButton(avatarIcon);
+		settingsButton = createIconButton(new ImageIcon(getClass().getResource("/settings.png")));
+		communityButton = createIconButton(new ImageIcon(getClass().getResource("/community_icon.png")));
+		logoutButton = createIconButton(new ImageIcon(getClass().getResource("/logout.png")));
 
 		iconsPanel.add(profileButton);
 		iconsPanel.add(communityButton);
 		iconsPanel.add(settingsButton);
 		iconsPanel.add(logoutButton);
 
-		// **Agregar elementos al panel superior**
 		topPanel.add(welcomeLabel, BorderLayout.WEST);
 		topPanel.add(iconsPanel, BorderLayout.EAST);
 		getContentPane().add(topPanel, BorderLayout.NORTH);
 
-		// **Lista de cursos con modelo y render personalizado**
 		courseListModel = new DefaultListModel<>();
 		updateCoursesList();
 
 		courseList = new JList<>(courseListModel);
 		courseList.setCellRenderer(new CourseRenderer());
-		courseList.setFixedCellHeight(100);
+		courseList.setFixedCellHeight(90);
 
 		JScrollPane scrollPane = new JScrollPane(courseList);
 		scrollPane.setBorder(null);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setSize(397, 365);
 
-		// **Botón de importar curso**
 		importButton = new JButton("Importar curso");
 
-		// **Panel inferior con botón de importación**
 		JPanel bottomPanel = new JPanel();
 		bottomPanel.add(importButton);
 
-		// **Agregar los paneles a la ventana**
 		getContentPane().add(scrollPane, BorderLayout.CENTER);
 		getContentPane().add(bottomPanel, BorderLayout.SOUTH);
 	}
 
-	/**
-	 * Actualiza la lista de cursos del usuario.
-	 */
+	private JButton createIconButton(ImageIcon icon) {
+		Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		JButton button = new JButton(new ImageIcon(img));
+		button.setBorder(null);
+		button.setContentAreaFilled(false);
+		return button;
+	}
+
 	public void updateCoursesList() {
 		courseListModel.clear();
 		Controller.getInstance().getAllCurrentUserCourses().forEach(courseListModel::addElement);
 	}
 
-	// **Getters para que el controlador pueda acceder a los componentes**
 	public JButton getSettingsButton() {
 		return settingsButton;
 	}
@@ -145,27 +124,18 @@ public class MainWindow extends JFrame {
 		return logoutButton;
 	}
 
-	public void setLogoutButton(JButton logoutButton) {
-		this.logoutButton = logoutButton;
-	}
-
-	/**
-	 * Renderizador de la lista de cursos dentro de la ventana
-	 */
 	private class CourseRenderer extends JPanel implements ListCellRenderer<Course> {
 		private JLabel courseIcon, courseTitle, courseDescription;
 		private JProgressBar progressBar;
 
 		public CourseRenderer() {
 			setLayout(new BorderLayout());
-			setBorder(new EmptyBorder(10, 10, 10, 10));
+			setBorder(new EmptyBorder(5, 10, 5, 10));
 
-			// **Cargar la imagen y escalarla**
 			ImageIcon icon = new ImageIcon(getClass().getResource("/curso.png"));
-			Image img = icon.getImage().getScaledInstance(48, 48, Image.SCALE_SMOOTH);
+			Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
 			courseIcon = new JLabel(new ImageIcon(img));
 
-			// **Etiquetas de texto**
 			courseTitle = new JLabel();
 			courseTitle.setFont(new Font("Arial", Font.BOLD, 14));
 
@@ -173,10 +143,9 @@ public class MainWindow extends JFrame {
 			courseDescription.setFont(new Font("Arial", Font.PLAIN, 12));
 			courseDescription.setForeground(Color.DARK_GRAY);
 
-			// **Barra de progreso**
 			progressBar = new JProgressBar();
-			progressBar.setForeground(new Color(50, 205, 50)); // Verde
-			progressBar.setPreferredSize(new Dimension(100, 15));
+			progressBar.setForeground(new Color(50, 205, 50));
+			progressBar.setPreferredSize(new Dimension(100, 12));
 
 			JPanel textPanel = new JPanel(new BorderLayout());
 			textPanel.add(courseTitle, BorderLayout.NORTH);
@@ -193,16 +162,15 @@ public class MainWindow extends JFrame {
 
 			courseTitle.setText(course.getName());
 
-			// Obtener progreso del usuario en este curso
-			progressBar.setValue(Controller.getInstance().getCurrentUsersProgressInCourse(course));
-			courseDescription.setText(course.getDescription());
-
-			if (isSelected) {
-				setBackground(new Color(220, 220, 220));
-			} else {
-				setBackground(Color.WHITE);
+			String description = course.getDescription();
+			if (description.length() > MAX_LENGTH_DESCRIPTION) {
+				description = description.substring(0, MAX_LENGTH_DESCRIPTION) + "...";
 			}
+			courseDescription.setText(description);
 
+			progressBar.setValue(Controller.getInstance().getCurrentUsersProgressInCourse(course));
+
+			setBackground(isSelected ? new Color(220, 220, 220) : Color.WHITE);
 			return this;
 		}
 	}

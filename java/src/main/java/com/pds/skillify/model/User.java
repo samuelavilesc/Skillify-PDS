@@ -267,4 +267,10 @@ public class User implements Serializable {
 	public void setLastLoginDate(LocalDate lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
+	public void resetCourseProgress(Course course) {
+	    if (answeredQuestions.containsKey(course)) {
+	        answeredQuestions.get(course).clear();
+	    }
+	}
+
 }

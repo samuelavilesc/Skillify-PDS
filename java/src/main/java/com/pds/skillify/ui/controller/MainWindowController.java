@@ -1,7 +1,6 @@
 package com.pds.skillify.ui.controller;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
@@ -19,7 +18,7 @@ import com.pds.skillify.model.Course;
 import com.pds.skillify.ui.AchievementsWindow;
 import com.pds.skillify.ui.CommunityWindow;
 import com.pds.skillify.ui.ConfigureUserWindow;
-import com.pds.skillify.ui.CourseExecutionWindow;
+import com.pds.skillify.ui.CourseStartWindow;
 import com.pds.skillify.ui.LoginWindow;
 import com.pds.skillify.ui.MainWindow;
 import com.pds.skillify.utils.CourseJSONUtils;
@@ -115,7 +114,7 @@ public class MainWindowController {
 			if (!e.getValueIsAdjusting()) {
 				Course selectedCourse = courseList.getSelectedValue();
 				if (selectedCourse != null) {
-					openCourseExecution(selectedCourse);
+					new CourseStartWindow(selectedCourse);
 				}
 			}
 		});
@@ -161,22 +160,6 @@ public class MainWindowController {
 		view.dispose();
 	}
 
-	/**
-	 * Abre la ventana de ejecución del curso y actualiza el usuario al cerrarse.
-	 */
-	private void openCourseExecution(Course course) {
-		CourseExecutionWindow window = new CourseExecutionWindow(course);
-
-		// Agrega un WindowListener para detectar el cierre de la ventana
-		window.addWindowListener(new WindowAdapter() {
-			@Override
-			public void windowClosed(WindowEvent e) {
-				// Ejecutar en el hilo de eventos de Swing para evitar bloqueos
-				SwingUtilities.invokeLater(() -> {
-					Controller.getInstance().updateCurrentUser();
-				});
-			}
-		});
-	}
+	
 
 }

@@ -12,11 +12,8 @@ import java.util.TimerTask;
 
 public class CourseExecutionWindow extends JFrame {
 
-    /**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
-	private static final Color GREEN_COLOR = new Color(0x80D855);
+    private static final long serialVersionUID = 1L;
+    private static final Color GREEN_COLOR = new Color(0x80D855);
     private static final Color ERROR_COLOR = new Color(0xFF4C4C);
     private static final Color DEFAULT_TEXT_COLOR = Color.BLACK;
 
@@ -32,9 +29,9 @@ public class CourseExecutionWindow extends JFrame {
 
     public CourseExecutionWindow(Course course) {
         this.questions = course.getQuestions();
-        this.course=course;
+        this.course = course;
 
-        setTitle("Skillify");
+        setTitle(course.getName());
         setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
         setSize(500, 200);
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -78,56 +75,56 @@ public class CourseExecutionWindow extends JFrame {
     }
 
     private void mostrarPregunta() {
-        if (currentQuestionIndex < questions.size()) {
+        while (currentQuestionIndex < questions.size()) {
             Question question = questions.get(currentQuestionIndex);
-            lblQuestion.setText("<html><div style='text-align: center;'>" + question.getStatement() + "</div></html>");
 
+            // **Verificar si la pregunta ya ha sido respondida por el usuario**
+            if (Controller.getInstance().isAnsweredByActualUser(course, question)) {
+                currentQuestionIndex++; // **Saltar a la siguiente pregunta**
+                continue;
+            }
+
+            lblQuestion.setText("<html><div style='text-align: center;'>" + question.getStatement() + "</div></html>");
             responsePanel.removeAll();
 
             if (question instanceof MultipleChoiceQuestion) {
                 mostrarPreguntaMultipleChoice((MultipleChoiceQuestion) question);
             } else {
-                mostrarPreguntaTexto(); // Para rellenar o para ordenar
+                mostrarPreguntaTexto();
             }
 
             responsePanel.revalidate();
             responsePanel.repaint();
-        } else {
-            JOptionPane.showMessageDialog(this, "Has completado todas las preguntas.", "Curso Finalizado", JOptionPane.INFORMATION_MESSAGE);
-            dispose();
+            return; // **Salir del bucle después de encontrar una pregunta sin responder**
         }
+
+        SwingUtilities.invokeLater(() -> {
+            JOptionPane.showMessageDialog(this, "Has completado todas las preguntas.", "Curso Finalizado", JOptionPane.INFORMATION_MESSAGE);
+            dispose(); // Cierra la ventana actual
+        });
     }
+
     private void mostrarPreguntaMultipleChoice(MultipleChoiceQuestion question) {
         optionsGroup = new ButtonGroup();
         optionButtons = new JRadioButton[question.getOptions().size()];
 
         JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-        optionsPanel.setOpaque(false); // Evita la barra gris
+        optionsPanel.setOpaque(false);
         optionsPanel.setBackground(Color.WHITE);
 
         for (int i = 0; i < question.getOptions().size(); i++) {
             JRadioButton option = new JRadioButton(question.getOptions().get(i));
             option.setFont(new Font("Arial", Font.PLAIN, 14));
             option.setActionCommand(String.valueOf(i));
-            option.setBackground(Color.WHITE); // Fondo blanco para evitar diferencias de color
+            option.setBackground(Color.WHITE);
             option.setForeground(DEFAULT_TEXT_COLOR);
-            
             optionsGroup.add(option);
             optionButtons[i] = option;
             optionsPanel.add(option);
         }
 
-        // **Eliminar completamente la barra gris**
-        JScrollPane scrollPane = new JScrollPane(optionsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scrollPane.getViewport().setOpaque(false); // ✅ Evita que el viewport tenga fondo gris
-        scrollPane.setOpaque(false); // ✅ Hace que el JScrollPane no tenga fondo
-        scrollPane.setBackground(Color.WHITE); // ✅ Asegura un fondo blanco uniforme
-        scrollPane.setBorder(BorderFactory.createEmptyBorder()); // ✅ Quita cualquier borde visible
-        scrollPane.setPreferredSize(new Dimension(450, 50)); // Ajusta el tamaño
-
-        responsePanel.add(scrollPane);
+        responsePanel.add(optionsPanel);
     }
-
 
     private void mostrarPreguntaTexto() {
         userInputField = new JTextField();
@@ -139,66 +136,69 @@ public class CourseExecutionWindow extends JFrame {
         JPanel inputWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
         inputWrapper.setBackground(Color.WHITE);
         inputWrapper.add(userInputField);
-
         responsePanel.add(inputWrapper);
     }
 
     private void procesarRespuesta(ActionEvent e) {
         Question question = questions.get(currentQuestionIndex);
         boolean esCorrecto = false;
-        int respuestaCorrectaIndex = -1;
         Controller.getInstance().setAsAnswered(course, question);
 
         if (question instanceof MultipleChoiceQuestion) {
             MultipleChoiceQuestion mcq = (MultipleChoiceQuestion) question;
-            respuestaCorrectaIndex = mcq.getCorrectAnswer();
+            int respuestaCorrectaIndex = mcq.getCorrectAnswer();
 
             if (optionsGroup.getSelection() != null) {
                 int respuestaUsuarioIndex = Integer.parseInt(optionsGroup.getSelection().getActionCommand());
                 esCorrecto = mcq.checkAnswer(String.valueOf(respuestaUsuarioIndex));
 
-                // Restaurar los colores por defecto antes de resaltar
                 for (JRadioButton option : optionButtons) {
                     option.setForeground(DEFAULT_TEXT_COLOR);
                     option.setFont(new Font("Arial", Font.PLAIN, 14));
                 }
 
                 if (!esCorrecto) {
-                    // ❌ Poner en ROJO la opción seleccionada incorrectamente
                     optionButtons[respuestaUsuarioIndex].setForeground(ERROR_COLOR);
 
-                    // ✅ Poner en VERDE y NEGRITA la opción correcta
+                    if (course.getMode() == CourseMode.REPETITION) {
+                        JOptionPane.showMessageDialog(this, "Respuesta incorrecta. Inténtalo de nuevo.",
+                            "Incorrecto", JOptionPane.ERROR_MESSAGE);
+                        return;
+                    }
+
                     optionButtons[respuestaCorrectaIndex].setForeground(GREEN_COLOR);
                     optionButtons[respuestaCorrectaIndex].setFont(new Font("Arial", Font.BOLD, 14));
-
                 } else {
-                    // ✅ Poner en VERDE y NEGRITA la opción correcta seleccionada
                     optionButtons[respuestaUsuarioIndex].setForeground(GREEN_COLOR);
                     optionButtons[respuestaUsuarioIndex].setFont(new Font("Arial", Font.BOLD, 14));
                 }
 
-                // *Esperar 3 segundos antes de avanzar a la siguiente pregunta*
                 new Timer().schedule(new TimerTask() {
                     @Override
                     public void run() {
                         currentQuestionIndex++;
                         SwingUtilities.invokeLater(() -> mostrarPregunta());
                     }
-                }, 3000); // 3000 ms = 3 segundos
+                }, 3000);
             }
         } else {
             String respuestaUsuario = userInputField.getText().trim();
             esCorrecto = question.checkAnswer(respuestaUsuario);
 
-            // *Aquí agrego la ventana de confirmación para rellenar/ordenar*
             if (esCorrecto) {
                 JOptionPane.showMessageDialog(this, "¡Respuesta correcta!", "Correcto", JOptionPane.INFORMATION_MESSAGE);
+                currentQuestionIndex++;
+                mostrarPregunta();
             } else {
+                if (course.getMode() == CourseMode.REPETITION) {
+                    JOptionPane.showMessageDialog(this, "Respuesta incorrecta. Inténtalo de nuevo.",
+                        "Incorrecto", JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
                 JOptionPane.showMessageDialog(this, "Respuesta incorrecta.", "Incorrecto", JOptionPane.ERROR_MESSAGE);
+                currentQuestionIndex++;
+                mostrarPregunta();
             }
-
-            currentQuestionIndex++;
-            mostrarPregunta();
         }
     }
 }
