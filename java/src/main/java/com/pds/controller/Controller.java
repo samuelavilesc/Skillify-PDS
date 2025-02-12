@@ -253,4 +253,11 @@ public class Controller {
 	public int getAnsweredQuestions(Course course) {
 		return actualUser.getAnsweredQuestionsInCourse(course).size();
 	}
+	public boolean isAnsweredByActualUser(Course course, Question quest) {
+		return this.actualUser.getAnsweredQuestionsInCourse(course).contains(quest.getId());
+	}
+	public void resetCourseProgress(Course course) {
+		this.actualUser.resetCourseProgress(course);
+		userCatalog.updateUser(actualUser);
+	}
 }
