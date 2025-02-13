@@ -1,20 +1,26 @@
 package com.pds.skillify.ui;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.Course;
 import com.pds.skillify.model.User;
+import com.pds.skillify.ui.components.CourseRenderer;
 import com.pds.skillify.ui.controller.MainWindowController;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.plaf.basic.BasicScrollBarUI;
+
 import java.awt.*;
 
 @SuppressWarnings("serial")
 public class MainWindow extends JFrame {
 	private static final int WIDTH = 500;
 	private static final int HEIGHT = 650;
-	private static final int MAX_LENGTH_DESCRIPTION = 65;
-	
+	private static final int SCROLLBAR_ROUNDNESS = 15;
+	private static final int ICON_SIZE = 40;
+	private static final int COURSE_CELL_HEIGHT = 90;
+	private static final int SCROLLING_SPEED = 8;
+
 	private JList<Course> courseList;
 	private DefaultListModel<Course> courseListModel;
 	private JButton settingsButton, profileButton, communityButton, importButton, logoutButton;
@@ -42,11 +48,11 @@ public class MainWindow extends JFrame {
 
 		String welcomeMessage = (actualUser != null) ? "Bienvenido, " + actualUser.getUsername() + "!" : "Bienvenido!";
 		welcomeLabel = new JLabel(welcomeMessage);
-		welcomeLabel.setFont(new Font("Arial", Font.BOLD, 18));
+		welcomeLabel.setFont(new Font("Arial", Font.BOLD, 16));
 
 		ImageIcon avatarIcon;
 		if (actualUser != null && actualUser.getProfilePic() != null) {
-			Image img = actualUser.getProfilePic().getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+			Image img = actualUser.getProfilePic().getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH);
 			avatarIcon = new ImageIcon(img);
 		} else {
 			avatarIcon = new ImageIcon(getClass().getResource("/user.png"));
@@ -72,11 +78,60 @@ public class MainWindow extends JFrame {
 
 		courseList = new JList<>(courseListModel);
 		courseList.setCellRenderer(new CourseRenderer());
-		courseList.setFixedCellHeight(90);
+		courseList.setFixedCellHeight(COURSE_CELL_HEIGHT);
 
 		JScrollPane scrollPane = new JScrollPane(courseList);
 		scrollPane.setBorder(null);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+
+		// Customize the scrollbar
+		JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
+		verticalScrollBar.setUnitIncrement(SCROLLING_SPEED);
+		verticalScrollBar.setBackground(Color.WHITE);
+		verticalScrollBar.setUI(new BasicScrollBarUI() {
+			@Override
+			protected void configureScrollBarColors() {
+				this.trackColor = Color.WHITE; 				// Fondo del scrollBar
+				this.thumbColor = new Color(220, 220, 220); // Color del scrollBar en sí
+			}
+
+			@Override
+			protected JButton createDecreaseButton(int orientation) {
+				return new JButton() {
+					@Override
+					public Dimension getPreferredSize() {
+						return new Dimension(0, 0);
+					}
+				};
+			}
+
+			@Override
+			protected JButton createIncreaseButton(int orientation) {
+				return new JButton() {
+					@Override
+					public Dimension getPreferredSize() {
+						return new Dimension(0, 0);
+					}
+				};
+			}
+
+			// Para hacer el scrollBar con bordes redondos
+			@Override
+			protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g2.setColor(thumbColor);
+				g2.fillRoundRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height, SCROLLBAR_ROUNDNESS, SCROLLBAR_ROUNDNESS);
+			}
+
+			@Override
+			protected void paintTrack(Graphics g, JComponent c, Rectangle trackBounds) {
+				Graphics2D g2 = (Graphics2D) g;
+				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+				g2.setColor(trackColor);
+				g2.fillRect(trackBounds.x, trackBounds.y, trackBounds.width, trackBounds.height);
+			}
+		});
 
 		importButton = new JButton("Importar curso");
 
@@ -88,7 +143,7 @@ public class MainWindow extends JFrame {
 	}
 
 	private JButton createIconButton(ImageIcon icon) {
-		Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
+		Image img = icon.getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH);
 		JButton button = new JButton(new ImageIcon(img));
 		button.setBorder(null);
 		button.setContentAreaFilled(false);
@@ -124,54 +179,4 @@ public class MainWindow extends JFrame {
 		return logoutButton;
 	}
 
-	private class CourseRenderer extends JPanel implements ListCellRenderer<Course> {
-		private JLabel courseIcon, courseTitle, courseDescription;
-		private JProgressBar progressBar;
-
-		public CourseRenderer() {
-			setLayout(new BorderLayout());
-			setBorder(new EmptyBorder(5, 10, 5, 10));
-
-			ImageIcon icon = new ImageIcon(getClass().getResource("/curso.png"));
-			Image img = icon.getImage().getScaledInstance(40, 40, Image.SCALE_SMOOTH);
-			courseIcon = new JLabel(new ImageIcon(img));
-
-			courseTitle = new JLabel();
-			courseTitle.setFont(new Font("Arial", Font.BOLD, 14));
-
-			courseDescription = new JLabel();
-			courseDescription.setFont(new Font("Arial", Font.PLAIN, 12));
-			courseDescription.setForeground(Color.DARK_GRAY);
-
-			progressBar = new JProgressBar();
-			progressBar.setForeground(new Color(50, 205, 50));
-			progressBar.setPreferredSize(new Dimension(100, 12));
-
-			JPanel textPanel = new JPanel(new BorderLayout());
-			textPanel.add(courseTitle, BorderLayout.NORTH);
-			textPanel.add(courseDescription, BorderLayout.CENTER);
-			textPanel.add(progressBar, BorderLayout.SOUTH);
-
-			add(courseIcon, BorderLayout.WEST);
-			add(textPanel, BorderLayout.CENTER);
-		}
-
-		@Override
-		public Component getListCellRendererComponent(JList<? extends Course> list, Course course, int index,
-				boolean isSelected, boolean cellHasFocus) {
-
-			courseTitle.setText(course.getName());
-
-			String description = course.getDescription();
-			if (description.length() > MAX_LENGTH_DESCRIPTION) {
-				description = description.substring(0, MAX_LENGTH_DESCRIPTION) + "...";
-			}
-			courseDescription.setText(description);
-
-			progressBar.setValue(Controller.getInstance().getCurrentUsersProgressInCourse(course));
-
-			setBackground(isSelected ? new Color(220, 220, 220) : Color.WHITE);
-			return this;
-		}
-	}
 }
