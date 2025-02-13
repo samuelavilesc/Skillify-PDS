@@ -7,8 +7,6 @@ import com.pds.skillify.model.Course;
 import com.pds.skillify.ui.controller.CourseStartWindowController;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 @SuppressWarnings("serial")
 public class CourseStartWindow extends JFrame {

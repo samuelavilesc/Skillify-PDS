@@ -1,12 +1,9 @@
 package com.pds.skillify.ui.controller;
 
-
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.IOException;
-import java.util.Arrays;
-import java.util.List;
 import javax.swing.JButton;
 import javax.swing.JFileChooser;
 import javax.swing.JList;
@@ -58,14 +55,7 @@ public class MainWindowController {
 
 	private void handleClickOnProfile(JButton profileButton) {
 		profileButton.addActionListener(e -> {
-			List<String> courses = Arrays.asList("Introducción a la Programación", "Java desde Cero",
-					"Python para Principiantes", "Desarrollo Web con HTML y CSS", "JavaScript Interactivo",
-					"SQL y Bases de Datos", "Estructuras de Datos y Algoritmos", "Programación Orientada a Objetos",
-					"Desarrollo de APIs con Spring Boot");
-
-			// List<String> completedCourses =
-			// Controller.getInstance().getCompletedCourses();
-			new AchievementsWindow(Controller.getInstance().getCurrentUser()); // Abre la ventana de logros con la lista de cursos
+			new AchievementsWindow(Controller.getInstance().getCurrentUser());
 			view.dispose();
 		});
 	}
@@ -144,7 +134,7 @@ public class MainWindowController {
 	 */
 	private void openUserConfiguration() {
 		new ConfigureUserWindow();
-		view.dispose(); // Cierra la ventana principal
+		view.dispose();
 	}
 	
 	private void openCommunityWindow() {

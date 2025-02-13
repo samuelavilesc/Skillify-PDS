@@ -13,12 +13,12 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 
-public class ConfigureUserController {
+public class ConfigureUserWindowController {
     private ConfigureUserWindow view;
     private User actualUser;
     private ImageIcon newProfilePic = null; // Nueva imagen seleccionada
 
-    public ConfigureUserController(ConfigureUserWindow view) {
+    public ConfigureUserWindowController(ConfigureUserWindow view) {
         this.view = view;
         this.actualUser = Controller.getInstance().getCurrentUser();
         initializeView();

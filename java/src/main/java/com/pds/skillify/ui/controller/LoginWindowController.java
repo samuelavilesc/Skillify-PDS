@@ -27,11 +27,6 @@ public class LoginWindowController {
      */
     private static final Color ERROR_BORDER_COLOR = Color.RED;
 
-    /**
-     * Color del borde predeterminado para los campos de entrada.
-     */
-    private static final Color DEFAULT_BORDER_COLOR = Color.GRAY;
-
     public LoginWindowController(LoginWindow view) {
         this.view = view;
         initializeControllers();

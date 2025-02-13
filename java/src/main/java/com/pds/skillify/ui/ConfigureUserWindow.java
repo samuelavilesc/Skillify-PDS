@@ -2,12 +2,10 @@ package com.pds.skillify.ui;
 
 import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.User;
-import com.pds.skillify.ui.controller.ConfigureUserController;
+import com.pds.skillify.ui.controller.ConfigureUserWindowController;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
 
 public class ConfigureUserWindow extends JFrame {
     private static final long serialVersionUID = 5433790596127130763L;
@@ -16,11 +14,10 @@ public class ConfigureUserWindow extends JFrame {
     private JButton btnGuardar;
     private static final int WIDTH = 370;
     private static final int HEIGHT = 480;
-    private ConfigureUserController controller;
 
     public ConfigureUserWindow() {
         initialize();
-        controller = new ConfigureUserController(this);
+        new ConfigureUserWindowController(this);
         setVisible(true);
     }
 
@@ -37,12 +34,12 @@ public class ConfigureUserWindow extends JFrame {
         gbc.insets = new Insets(5, 10, 5, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL; // Para expandir el botón
 
-        User actualUser = Controller.getInstance().getCurrentUser();
+        User currentUser = Controller.getInstance().getCurrentUser();
 
         // Imagen de perfil
         ImageIcon avatarIcon;
-        if (actualUser != null && actualUser.getProfilePic() != null) {
-            avatarIcon = new ImageIcon(actualUser.getProfilePic().getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
+        if (currentUser != null && currentUser.getProfilePic() != null) {
+            avatarIcon = new ImageIcon(currentUser.getProfilePic().getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
         } else {
             avatarIcon = new ImageIcon(getClass().getResource("/user.png"));
         }
@@ -59,7 +56,7 @@ public class ConfigureUserWindow extends JFrame {
 
         // Nombre del usuario
         gbc.gridy = 1;
-        lblUsuario = new JLabel(actualUser != null ? actualUser.getUsername() : "Usuario", SwingConstants.CENTER);
+        lblUsuario = new JLabel(currentUser != null ? currentUser.getUsername() : "Usuario", SwingConstants.CENTER);
         lblUsuario.setFont(new Font("Arial", Font.BOLD, 18));
         add(lblUsuario, gbc);
 
@@ -71,7 +68,7 @@ public class ConfigureUserWindow extends JFrame {
 
         // Email - Valor
         gbc.gridy = 3;
-        lblEmailValor = new JLabel(actualUser != null ? actualUser.getEmail() : "email@dominio.com");
+        lblEmailValor = new JLabel(currentUser != null ? currentUser.getEmail() : "email@dominio.com");
         lblEmailValor.setFont(new Font("Arial", Font.PLAIN, 14));
         add(lblEmailValor, gbc);
 

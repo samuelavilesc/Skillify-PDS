@@ -5,7 +5,6 @@ import javax.swing.*;
 import com.pds.skillify.model.User;
 import com.pds.skillify.ui.controller.AchievementsWindowController;
 import com.pds.skillify.controller.Controller;
-import com.pds.skillify.model.Course;
 
 import java.awt.*;
 import java.util.List;

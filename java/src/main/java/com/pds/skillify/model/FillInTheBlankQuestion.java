@@ -3,11 +3,10 @@ package com.pds.skillify.model;
 import jakarta.persistence.Column;
 import jakarta.persistence.DiscriminatorValue;
 import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.OneToOne;
 
 import java.util.Objects;
 
+@SuppressWarnings("serial")
 @Entity
 @DiscriminatorValue("fill_in_blank")
 public class FillInTheBlankQuestion extends Question {

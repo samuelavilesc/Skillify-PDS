@@ -3,8 +3,6 @@ package com.pds.skillify.model;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import javax.swing.ImageIcon;
-
 import com.pds.skillify.persistence.DAOException;
 import com.pds.skillify.persistence.FactoryDAO;
 import com.pds.skillify.persistence.UserDAO;
