@@ -11,15 +11,15 @@ public class Skillify {
 
     private final static int BORDER_ROUNDNESS = 30;
     private final static Color GREEN_COLOR = new Color(0x80D855);
-    private final static Color ERROR_BORDER_COLOR = new Color(0xFF4C4C); // Rojo error
-    private final static Color DEFAULT_BORDER_COLOR = new Color(0xDDDDDD); // Gris claro
-    private final static String FONT_RESOURCE_PATH = "/Roboto-Regular.ttf"; // Ruta en resources
+    private final static String FONT_RESOURCE_PATH = "/Roboto-Regular.ttf";
 
+    /*
+     * Lanzador de la aplicación.
+     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
                 try {
-                    // Cargar la fuente desde resources
                     Font robotoFont = loadRobotoFromResources();
 
                     // Aplicar la fuente globalmente en UIManager
@@ -53,17 +53,15 @@ public class Skillify {
     }
 
     /**
-     * Carga la fuente Roboto desde los recursos internos (resources/)
+     * Carga la fuente Roboto desde los recursos interno
      */
     private static Font loadRobotoFromResources() {
         try {
-            // Obtener la fuente como un stream desde los recursos
             InputStream fontStream = Skillify.class.getResourceAsStream(FONT_RESOURCE_PATH);
             if (fontStream == null) {
                 throw new IOException("No se pudo encontrar la fuente en resources.");
             }
 
-            // Crear la fuente desde el InputStream y establecer tamaño 14
             Font roboto = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(Font.PLAIN, 14);
 
             // Registrar la fuente en el sistema para que la reconozca Java
@@ -73,7 +71,7 @@ public class Skillify {
             return roboto;
         } catch (IOException | FontFormatException e) {
             e.printStackTrace();
-            return new Font("SansSerif", Font.PLAIN, 14); // Fallback en caso de error
+            return new Font("SansSerif", Font.PLAIN, 14);
         }
     }
 }

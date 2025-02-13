@@ -85,7 +85,7 @@ public class MainWindowController {
 				File selectedFile = fileChooser.getSelectedFile();
 
 				try {
-					if (!CourseJSONUtils.validateQuizJSON(selectedFile.getAbsolutePath())) {
+					if (!CourseJSONUtils.validateCourseJSON(selectedFile.getAbsolutePath())) {
 						JOptionPane.showMessageDialog(view, "El archivo seleccionado no tiene el formato correcto.",
 								"Error", JOptionPane.ERROR_MESSAGE);
 						return;
