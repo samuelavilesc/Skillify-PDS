@@ -8,7 +8,7 @@ public abstract class FactoryDAO {
     private static FactoryDAO unicaInstancia = null;
 
     /** Nombre del tipo de fábrica para la implementación. */
-    public static final String DAO_TDS = "com.pds.persistence.FactoryDAOImp";
+    public static final String DAO_TDS = "com.pds.skillify.persistence.FactoryDAOImp";
 
     /**
      * Crea una instancia de la fábrica DAO del tipo especificado.
