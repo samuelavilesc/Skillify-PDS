@@ -3,6 +3,7 @@ package com.pds.skillify.ui;
 import javax.swing.*;
 
 import com.pds.skillify.model.User;
+import com.pds.skillify.ui.controller.AchievementsWindowController;
 import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.Course;
 
@@ -27,10 +28,10 @@ public class AchievementsWindow extends JFrame {
 
     public AchievementsWindow(User user) {
         this.user = user;
-        this.controller = Controller.getInstance(); // Obtener la instancia del controlador
-        
+        this.controller = Controller.getInstance();
         initialize();
-        actualizarLogros(); // Ahora obtiene los logros directamente desde el controlador
+        actualizarLogros();
+        new AchievementsWindowController(this);
         setVisible(true);
     }
 
