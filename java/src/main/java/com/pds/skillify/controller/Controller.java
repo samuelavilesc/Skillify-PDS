@@ -8,15 +8,12 @@ import com.pds.skillify.model.*;
 import com.pds.skillify.utils.CourseJSONUtils;
 
 public class Controller {
-	// Catálogos que gestionan usuarios, cursos y preguntas
 	private UserCatalog userCatalog;
 	private CourseCatalog courseCatalog;
 
-	// Instancia única del controlador (Singleton).
 	private static Controller uniqueInstance = null;
 
-	// Usuario actualmente autenticado en el sistema.
-	private User actualUser;
+	private User currentUser;
 
 	/**
 	 * Constructor privado del controlador. Inicializa los catálogos de datos.
@@ -57,20 +54,20 @@ public class Controller {
 	 */
 	public List<Course> getFinishedCourses() {
 		List<Course> finishedCourses = new ArrayList<>();
-		for (Course course : actualUser.getAllCourses()) {
-			if (actualUser.getCourseProgress(course) == 100) {
+		for (Course course : currentUser.getAllCourses()) {
+			if (currentUser.getCourseProgress(course) == 100) {
 				finishedCourses.add(course);
 			}
 		}
 		return finishedCourses;
 	}
 
-	public User getActualUser() {
-		return actualUser;
+	public User getCurrentUser() {
+		return currentUser;
 	}
 
-	public void setActualUser(User actualUser) {
-		this.actualUser = actualUser;
+	public void setCurrentUser(User user) {
+		this.currentUser = user;
 	}
 
 	/**
@@ -81,7 +78,7 @@ public class Controller {
 	public void addCourseToCurrentUser(String filePath) {
 		Course newCourse = CourseJSONUtils.loadCourseFromJson(filePath);
 
-		if (actualUser == null) {
+		if (currentUser == null) {
 			throw new IllegalStateException("No hay usuario autenticado.");
 		}
 
@@ -95,9 +92,9 @@ public class Controller {
 		}
 
 		// Verificar que el usuario no tenga ya este curso
-		if (!actualUser.alreadyHasCourse(existingCourse)) {
-			actualUser.addCourse(existingCourse);
-			userCatalog.updateUser(actualUser);
+		if (!currentUser.alreadyHasCourse(existingCourse)) {
+			currentUser.addCourse(existingCourse);
+			userCatalog.updateUser(currentUser);
 		}
 	}
 
@@ -107,7 +104,7 @@ public class Controller {
 	 * @return Un conjunto con los cursos del usuario actual.
 	 */
 	public Set<Course> getAllCurrentUserCourses() {
-		return actualUser.getAllCourses();
+		return currentUser.getAllCourses();
 	}
 
 	/**
@@ -117,7 +114,7 @@ public class Controller {
 	 * @return Progreso del usuario en el curso (0-100).
 	 */
 	public int getCurrentUsersProgressInCourse(Course course) {
-		return actualUser.getCourseProgress(course);
+		return currentUser.getCourseProgress(course);
 	}
 
 	/**
@@ -128,14 +125,14 @@ public class Controller {
 	 */
 	public boolean currentUserAlreadyHasCourse(String filePath) {
 		Course course = CourseJSONUtils.loadCourseFromJson(filePath);
-		return actualUser.alreadyHasCourse(course);
+		return currentUser.alreadyHasCourse(course);
 	}
 
 	// Métodos relacionados a la búsqueda de usuarios en la ventana Comunidad
 
 	public Set<User> getUsersStartingWith(String prefix) {
 		Set<User> matchingUsers = userCatalog.getUsersStartingWith(prefix);
-		matchingUsers.remove(actualUser);
+		matchingUsers.remove(currentUser);
 
 		return matchingUsers;
 	}
@@ -157,10 +154,10 @@ public class Controller {
 			return false;
 		}
 
-		this.actualUser = user;
+		this.currentUser = user;
 
-		actualUser.startSession();
-		actualUser.updateLoginStreak();
+		currentUser.startSession();
+		currentUser.updateLoginStreak();
 
 		return true;
 	}
@@ -168,23 +165,23 @@ public class Controller {
 	// Métodos relacionados al tiempo de uso.
 
 	public long getCurrentUsersActiveTimeInHours() {
-		return actualUser.getActiveTimeInHours();
+		return currentUser.getActiveTimeInHours();
 	}
 
 	public long getCurrentUsersActiveTimeInSeconds() {
-		return actualUser.getActiveTimeInSeconds();
+		return currentUser.getActiveTimeInSeconds();
 	}
 
 	public int getCurrentUsersCurrentLoginStreak() {
-		return actualUser.getCurrentLoginStreak();
+		return currentUser.getCurrentLoginStreak();
 	}
 
 	public int getCurrentUsersBestLoginStreak() {
-		return actualUser.getBestLoginStreak();
+		return currentUser.getBestLoginStreak();
 	}
 
 	public void endCurrentUserSession() {
-		actualUser.endSession();
+		currentUser.endSession();
 	}
 
 	/**
@@ -203,7 +200,7 @@ public class Controller {
 		}
 
 		User newUser = new User(username, password, email, pfp);
-		this.actualUser = newUser;
+		this.currentUser = newUser;
 
 		if (!userCatalog.existsUser(newUser)) {
 			userCatalog.addUser(newUser);
@@ -218,24 +215,24 @@ public class Controller {
 	 * @param image Nueva imagen de perfil.
 	 */
 	public void setNewPfP(ImageIcon image) {
-		this.actualUser.setProfilePic(image);
-		userCatalog.updateUser(actualUser);
+		this.currentUser.setProfilePic(image);
+		userCatalog.updateUser(currentUser);
 	}
 
 	public void setAsAnswered(Course course, Question question) {
-		actualUser.addAnsweredQuestion(course, question);
+		currentUser.addAnsweredQuestion(course, question);
 		if(isCompletedCourse(course)) {
-			actualUser.addCompletedCourse(course);
+			currentUser.addCompletedCourse(course);
 		}
 	}
 	
 
 	public int getProgress(Course course) {
-		return actualUser.getCourseProgress(course);
+		return currentUser.getCourseProgress(course);
 	}
 
 	public void updateCurrentUser() {
-		userCatalog.updateUser(actualUser);
+		userCatalog.updateUser(currentUser);
 	}
 
 	public User findUserByEmailAndUsername(String email, String username) {
@@ -254,18 +251,18 @@ public class Controller {
 	}
 
 	public void logout() {
-		this.actualUser = null;
+		this.currentUser = null;
 	}
 	
 	public int getAnsweredQuestions(Course course) {
-		return actualUser.getAnsweredQuestionsInCourse(course).size();
+		return currentUser.getAnsweredQuestionsInCourse(course).size();
 	}
 	public boolean isAnsweredByActualUser(Course course, Question quest) {
-		return this.actualUser.getAnsweredQuestionsInCourse(course).contains(quest.getId());
+		return this.currentUser.getAnsweredQuestionsInCourse(course).contains(quest.getId());
 	}
 	public void resetCourseProgress(Course course) {
-		this.actualUser.resetCourseProgress(course);
-		userCatalog.updateUser(actualUser);
+		this.currentUser.resetCourseProgress(course);
+		userCatalog.updateUser(currentUser);
 	}
 	/**
 	 * Obtiene el nombre de un curso dado su ID.

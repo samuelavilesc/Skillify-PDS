@@ -37,7 +37,7 @@ public class ConfigureUserWindow extends JFrame {
         gbc.insets = new Insets(5, 10, 5, 10);
         gbc.fill = GridBagConstraints.HORIZONTAL; // Para expandir el botón
 
-        User actualUser = Controller.getInstance().getActualUser();
+        User actualUser = Controller.getInstance().getCurrentUser();
 
         // Imagen de perfil
         ImageIcon avatarIcon;

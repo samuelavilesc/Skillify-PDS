@@ -28,7 +28,7 @@ public class MainWindow extends JFrame {
 	private User actualUser;
 
 	public MainWindow() {
-		actualUser = Controller.getInstance().getActualUser();
+		actualUser = Controller.getInstance().getCurrentUser();
 		initialize();
 		new MainWindowController(this);
 		setVisible(true);

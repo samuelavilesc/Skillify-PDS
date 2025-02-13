@@ -20,7 +20,7 @@ public class ConfigureUserController {
 
     public ConfigureUserController(ConfigureUserWindow view) {
         this.view = view;
-        this.actualUser = Controller.getInstance().getActualUser();
+        this.actualUser = Controller.getInstance().getCurrentUser();
         initializeView();
         initializeHandlers();
     }
