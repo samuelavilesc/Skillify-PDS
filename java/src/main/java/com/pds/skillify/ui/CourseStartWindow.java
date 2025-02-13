@@ -23,8 +23,6 @@ public class CourseStartWindow extends JFrame {
 
 	private JLabel answeredQuestionsLabel;
 
-	
-
 	public CourseStartWindow(Course cours) {
 		this.course = cours;
 		this.answeredQuestions = Controller.getInstance().getAnsweredQuestions(cours);
@@ -35,8 +33,8 @@ public class CourseStartWindow extends JFrame {
 	}
 
 	private void initialize() {
-		setTitle("Iniciar Curso - " + course.getName());
-		setIconImage(new ImageIcon(getClass().getResource("/curso.png")).getImage());
+		setTitle("Skillify");
+		setIconImage(new ImageIcon(getClass().getResource("/icon.png")).getImage());
 		setSize(WIDTH, HEIGHT);
 		setLocationRelativeTo(null);
 		setResizable(false);
@@ -102,7 +100,7 @@ public class CourseStartWindow extends JFrame {
 		startButton = new JButton("Empezar");
 		startButton.setPreferredSize(new Dimension(120, 30));
 
-		resetButton = new JButton("Resetear Curso");
+		resetButton = new JButton("Resetear");
 		resetButton.setPreferredSize(new Dimension(120, 30));
 		resetButton.setBackground(Color.RED);
 		resetButton.setForeground(Color.WHITE);
@@ -131,6 +129,7 @@ public class CourseStartWindow extends JFrame {
 	public JButton getStartButton() {
 		return startButton;
 	}
+
 	public JLabel getAnsweredQuestionsLabel() {
 		return answeredQuestionsLabel;
 	}
