@@ -1,9 +1,10 @@
 package com.pds.skillify.model;
 
 import java.util.*;
-import com.pds.persistence.CourseDAO;
-import com.pds.persistence.DAOException;
-import com.pds.persistence.FactoryDAO;
+
+import com.pds.skillify.persistence.CourseDAO;
+import com.pds.skillify.persistence.DAOException;
+import com.pds.skillify.persistence.FactoryDAO;
 
 public class CourseCatalog {
 

@@ -4,9 +4,10 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.swing.ImageIcon;
-import com.pds.persistence.DAOException;
-import com.pds.persistence.FactoryDAO;
-import com.pds.persistence.UserDAO;
+
+import com.pds.skillify.persistence.DAOException;
+import com.pds.skillify.persistence.FactoryDAO;
+import com.pds.skillify.persistence.UserDAO;
 
 public class UserCatalog {
 

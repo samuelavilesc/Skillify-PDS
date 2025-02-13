@@ -1,6 +1,6 @@
 package com.pds.skillify.ui.controller;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.User;
 import com.pds.skillify.ui.ConfigureUserWindow;
 import com.pds.skillify.ui.MainWindow;

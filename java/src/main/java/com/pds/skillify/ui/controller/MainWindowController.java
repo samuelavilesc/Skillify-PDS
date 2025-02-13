@@ -13,7 +13,7 @@ import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.SwingUtilities;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.Course;
 import com.pds.skillify.ui.AchievementsWindow;
 import com.pds.skillify.ui.CommunityWindow;

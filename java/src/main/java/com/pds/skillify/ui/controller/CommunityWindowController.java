@@ -15,7 +15,7 @@ import javax.swing.SwingUtilities;
 import javax.swing.event.ListSelectionEvent;
 import javax.swing.event.ListSelectionListener;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.User;
 import com.pds.skillify.ui.AchievementsWindow;
 import com.pds.skillify.ui.CommunityWindow;

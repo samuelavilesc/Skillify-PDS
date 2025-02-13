@@ -1,4 +1,4 @@
-package com.pds.persistence;
+package com.pds.skillify.persistence;
 
 import java.util.List;
 

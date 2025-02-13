@@ -1,7 +1,7 @@
 package com.pds.skillify.ui;
 
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.*;
-import com.pds.controller.Controller;
 
 import javax.swing.*;
 import java.awt.*;

@@ -1,4 +1,4 @@
-package com.pds.persistence;
+package com.pds.skillify.persistence;
 
 /**
  * Excepción personalizada para manejar errores relacionados con las operaciones

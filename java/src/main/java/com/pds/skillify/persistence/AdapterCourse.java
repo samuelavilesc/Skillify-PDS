@@ -1,4 +1,4 @@
-package com.pds.persistence;
+package com.pds.skillify.persistence;
 
 import com.pds.skillify.model.Course;
 import com.pds.skillify.model.Question;

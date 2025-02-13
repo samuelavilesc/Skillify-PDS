@@ -1,4 +1,4 @@
-package com.pds.controller;
+package com.pds.skillify.controller;
 
 import java.util.ArrayList;
 import java.util.List;

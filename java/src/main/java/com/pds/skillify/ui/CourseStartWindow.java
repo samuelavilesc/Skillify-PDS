@@ -2,7 +2,7 @@ package com.pds.skillify.ui;
 
 import javax.swing.*;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.Course;
 import com.pds.skillify.ui.controller.CourseStartWindowController;
 

@@ -4,7 +4,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.*;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.ui.LoginWindow;
 import com.pds.skillify.ui.MainWindow;
 import com.pds.skillify.ui.RegisterWindow;

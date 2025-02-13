@@ -1,4 +1,4 @@
-package com.pds.persistence;
+package com.pds.skillify.persistence;
 
 /**
  * Clase abstracta que implementa el patrón Factory para proporcionar instancias

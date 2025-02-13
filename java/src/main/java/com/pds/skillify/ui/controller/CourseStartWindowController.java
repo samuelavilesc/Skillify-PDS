@@ -1,7 +1,7 @@
 package com.pds.skillify.ui.controller;
 
 import com.pds.skillify.ui.CourseStartWindow;
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.Course;
 import com.pds.skillify.model.CourseMode;
 import com.pds.skillify.ui.CourseExecutionWindow;

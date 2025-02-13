@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPasswordField;
 
-import com.pds.controller.Controller;
+import com.pds.skillify.controller.Controller;
 import com.pds.skillify.ui.ForgotPasswordWindow;
 import com.pds.skillify.ui.LoginWindow;
 import com.pds.skillify.ui.MainWindow;
