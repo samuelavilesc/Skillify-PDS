@@ -1,0 +1,62 @@
+{
+    "name": "Programación en Python",
+    "description": "Aprende los fundamentos de Python, incluyendo variables, estructuras de control y funciones.",
+    "questions": [
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Cuál es la función en Python para mostrar texto en pantalla?",
+            "correctAnswer": "print"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué estructura de datos en Python permite almacenar elementos únicos sin repetir?",
+            "options": ["Lista", "Diccionario", "Conjunto"],
+            "correctAnswer": 2
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es la forma correcta de definir una función en Python?",
+            "options": ["def miFuncion():", "function miFuncion():", "define miFuncion():"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Qué palabra clave se usa en Python para crear un bucle?",
+            "correctAnswer": "for"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué operador se usa para comparar si dos valores son iguales?",
+            "options": ["=", "==", "!="],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cómo se declara una lista en Python?",
+            "options": ["lista = {1, 2, 3}", "lista = [1, 2, 3]", "lista = (1, 2, 3)"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué estructura se usa para manejar errores en Python?",
+            "options": ["try-except", "if-else", "for-while"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar un tipo de dato en Python: RSITL",
+            "correctAnswer": "LISTR"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál de estas opciones representa un comentario en Python?",
+            "options": ["// Esto es un comentario", "/* Esto es un comentario */", "# Esto es un comentario"],
+            "correctAnswer": 2
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar una estructura de control: ELFI",
+            "correctAnswer": "IFEL"
+        }
+    ]
+}

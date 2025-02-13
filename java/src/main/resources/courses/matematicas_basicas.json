@@ -1,0 +1,62 @@
+{
+    "name": "Matemáticas Básicas",
+    "description": "Explora los conceptos fundamentales de matemáticas, incluyendo operaciones básicas y geometría.",
+    "questions": [
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Cuánto es 7 + 8?",
+            "correctAnswer": "15"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es el resultado de 12 × 5?",
+            "options": ["50", "60", "70"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es el número primo más pequeño?",
+            "options": ["2", "3", "5"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Cuántos lados tiene un hexágono?",
+            "correctAnswer": "6"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es el resultado de dividir 36 entre 6?",
+            "options": ["5", "6", "7"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál de estas figuras tiene solo tres lados?",
+            "options": ["Cuadrado", "Triángulo", "Pentágono"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es el valor de π (pi) aproximado?",
+            "options": ["3.14", "2.72", "1.41"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar un número: ONCIE",
+            "correctAnswer": "ONCE"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuánto es 9²?",
+            "options": ["72", "81", "90"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar una figura geométrica: URCDAAO",
+            "correctAnswer": "CUADRADO"
+        }
+    ]
+}

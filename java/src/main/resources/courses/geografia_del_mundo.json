@@ -1,0 +1,62 @@
+{
+    "name": "Geografía del Mundo",
+    "description": "Aprende sobre los países, continentes, ríos y montañas más importantes del planeta.",
+    "questions": [
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Cuál es el continente más grande del mundo?",
+            "correctAnswer": "Asia"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es el país con mayor población?",
+            "options": ["India", "Estados Unidos", "China"],
+            "correctAnswer": 2
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es la montaña más alta del mundo?",
+            "options": ["Mont Blanc", "Everest", "Aconcagua"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "fill_in_blank",
+            "statement": "¿En qué continente se encuentra el desierto del Sahara?",
+            "correctAnswer": "África"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es el océano más grande?",
+            "options": ["Atlántico", "Índico", "Pacífico"],
+            "correctAnswer": 2
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál de estos ríos es el más largo?",
+            "options": ["Amazonas", "Nilo", "Misisipi"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es la capital de Japón?",
+            "options": ["Beijing", "Tokio", "Seúl"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar un país de América: SAIRGBL",
+            "correctAnswer": "BRASIL"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿En qué continente está Egipto?",
+            "options": ["Asia", "África", "Europa"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar un país de Europa: AICSNRAF",
+            "correctAnswer": "FRANCIA"
+        }
+    ]
+}

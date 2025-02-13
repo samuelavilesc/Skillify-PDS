@@ -1,0 +1,62 @@
+{
+    "name": "Física Básica",
+    "description": "Aprende los principios fundamentales de la física, incluyendo movimiento, energía y fuerzas.",
+    "questions": [
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Cuál es la unidad de medida de la fuerza en el Sistema Internacional?",
+            "correctAnswer": "Newton"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué estudia la cinemática?",
+            "options": ["El movimiento de los cuerpos", "Las fuerzas en equilibrio", "La electricidad"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es la velocidad de la luz en el vacío?",
+            "options": ["300,000 km/s", "150,000 km/s", "450,000 km/s"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Qué científico formuló la ley de la gravitación universal?",
+            "correctAnswer": "Isaac Newton"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué mide un amperímetro?",
+            "options": ["La tensión eléctrica", "La corriente eléctrica", "La resistencia eléctrica"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cómo se llama la propiedad de un cuerpo de resistirse a un cambio en su estado de movimiento?",
+            "options": ["Fuerza", "Inercia", "Aceleración"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál es la ecuación de la energía en la teoría de la relatividad?",
+            "options": ["E=mc²", "F=ma", "V=IR"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar una magnitud física: RACELEICDIDA",
+            "correctAnswer": "ELECTRICIDAD"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál de estos es un tipo de energía?",
+            "options": ["Cinética", "Termodinámica", "Electrostática"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar el nombre de un científico famoso: SELAINTEN",
+            "correctAnswer": "EINSTEIN"
+        }
+    ]
+}
