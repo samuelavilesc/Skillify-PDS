@@ -25,7 +25,7 @@ public class CourseStartWindow extends JFrame {
 
 	public CourseStartWindow(Course cours) {
 		this.course = cours;
-		this.answeredQuestions = Controller.getInstance().getAnsweredQuestions(cours);
+		this.answeredQuestions = Controller.getInstance().getCurrentUsersAnsweredQuestionsInCourse(cours);
 
 		initialize();
 		new CourseStartWindowController(this);

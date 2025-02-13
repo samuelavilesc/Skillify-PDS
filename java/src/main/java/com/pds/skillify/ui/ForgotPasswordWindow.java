@@ -96,7 +96,7 @@ public class ForgotPasswordWindow extends JFrame {
         }
 
         // Buscar usuario
-        User user = Controller.getInstance().findUserByEmailAndUsername(email, username);
+        User user = Controller.getInstance().getUserByEmailAndUsername(email, username);
         if (user == null) {
             statusLabel.setText("Usuario o email incorrecto.");
             return;

@@ -78,7 +78,7 @@ public class CourseStartWindowController {
             "Confirmar Reset", JOptionPane.YES_NO_OPTION);
 
         if (confirm == JOptionPane.YES_OPTION) {
-            Controller.getInstance().resetCourseProgress(course);
+            Controller.getInstance().resetCurrentUsersCourseProgress(course);
            int answeredQuestions = 0;
             view.getAnsweredQuestionsLabel().setText("Preguntas respondidas: " + answeredQuestions);
             JOptionPane.showMessageDialog(view, "El progreso del curso ha sido reseteado.", 

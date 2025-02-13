@@ -79,7 +79,7 @@ public class CourseExecutionWindow extends JFrame {
             Question question = questions.get(currentQuestionIndex);
 
             // **Verificar si la pregunta ya ha sido respondida por el usuario**
-            if (Controller.getInstance().isAnsweredByActualUser(course, question)) {
+            if (Controller.getInstance().wasAnsweredByCurrentUser(course, question)) {
                 currentQuestionIndex++; // **Saltar a la siguiente pregunta**
                 continue;
             }
@@ -142,7 +142,7 @@ public class CourseExecutionWindow extends JFrame {
     private void procesarRespuesta(ActionEvent e) {
         Question question = questions.get(currentQuestionIndex);
         boolean esCorrecto = false;
-        Controller.getInstance().setAsAnswered(course, question);
+        Controller.getInstance().setQuestionAsAnswered(course, question);
 
         if (question instanceof MultipleChoiceQuestion) {
             MultipleChoiceQuestion mcq = (MultipleChoiceQuestion) question;
