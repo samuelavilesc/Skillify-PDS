@@ -53,30 +53,30 @@ public class UserCellRenderer extends JPanel implements ListCellRenderer<User> {
 
 	@Override
 	public Component getListCellRendererComponent(JList<? extends User> list, User user, int index, boolean isSelected,
-	                                              boolean cellHasFocus) {
-	    if (user != null) {
-	        ImageIcon profilePic = user.getProfilePic();
-	        Image img = profilePic.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
-	        picLabel.setIcon(new ImageIcon(img));
-	        usernameLabel.setText(user.getUsername());
-	    }
+			boolean cellHasFocus) {
+		if (user != null) {
+			ImageIcon profilePic = user.getProfilePic();
+			Image img = profilePic.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH);
+			picLabel.setIcon(new ImageIcon(img));
+			usernameLabel.setText(user.getUsername());
+		}
 
-	    // Get the hovered index
-	    int hoveredIndex = list.getMousePosition() != null ? list.locationToIndex(list.getMousePosition()) : -1;
+		// Get the hovered index
+		int hoveredIndex = list.getMousePosition() != null ? list.locationToIndex(list.getMousePosition()) : -1;
 
-	    if (index == hoveredIndex) {
-	        setBackground(new Color(200, 230, 255));
-	        textPanel.setBackground(new Color(200, 230, 255)); // Only this cell's textPanel should change
-	    } else if (isSelected) {
-	        setBackground(new Color(173, 216, 230));
-	        textPanel.setBackground(new Color(173, 216, 230)); // Keep text panel consistent with selection
-	    } else {
-	        setBackground(Color.WHITE);
-	        textPanel.setBackground(Color.WHITE); // Reset background for non-hovered, non-selected cells
-	    }
+		if (index == hoveredIndex) {
+			setBackground(new Color(200, 230, 255));
+			textPanel.setBackground(new Color(200, 230, 255)); // Only this cell's textPanel should change
+		} else if (isSelected) {
+			setBackground(new Color(173, 216, 230));
+			textPanel.setBackground(new Color(173, 216, 230)); // Keep text panel consistent with selection
+		} else {
+			setBackground(Color.WHITE);
+			textPanel.setBackground(Color.WHITE); // Reset background for non-hovered, non-selected cells
+		}
 
-	    setOpaque(true);
-	    return this;
+		setOpaque(true);
+		return this;
 	}
 
 }

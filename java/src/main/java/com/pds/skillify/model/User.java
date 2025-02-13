@@ -61,12 +61,10 @@ public class User implements Serializable {
 	// si la longitud de la lista de preguntas == longitud del curso
 	private Set<Long> completedCourses = new HashSet<Long>();
 
-	
-	
 	public void addCompletedCourse(Course course) {
 		completedCourses.add(course.getId());
 	}
-	
+
 	// Constructor vacío requerido por JPA
 	public User() {
 	}
@@ -105,7 +103,7 @@ public class User implements Serializable {
 			bestLoginStreak = 1;
 
 		} else if (!lastLoginDate.equals(today)) {
-			
+
 			// Inició sesión ayer.
 			if (lastLoginDate.equals(today.minusDays(1))) {
 				currentLoginStreak++;
@@ -117,7 +115,6 @@ public class User implements Serializable {
 				bestLoginStreak = currentLoginStreak;
 			}
 		}
-
 
 		lastLoginDate = today;
 	}
@@ -276,13 +273,15 @@ public class User implements Serializable {
 	public void setLastLoginDate(LocalDate lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
-	public Set<Long> getCompletedCourses(){
+
+	public Set<Long> getCompletedCourses() {
 		return Collections.unmodifiableSet(completedCourses);
 	}
+
 	public void resetCourseProgress(Course course) {
-	    if (answeredQuestions.containsKey(course)) {
-	        answeredQuestions.get(course).clear();
-	    }
+		if (answeredQuestions.containsKey(course)) {
+			answeredQuestions.get(course).clear();
+		}
 	}
 
 }

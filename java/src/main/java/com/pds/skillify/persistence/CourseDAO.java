@@ -10,39 +10,41 @@ import com.pds.skillify.model.Course;
  */
 public interface CourseDAO {
 
-    /**
-     * Registra un curso en el sistema.
-     *
-     * @param course El curso a registrar.
-     */
-    void registerCourse(Course course);
+	/**
+	 * Registra un curso en el sistema.
+	 *
+	 * @param course El curso a registrar.
+	 */
+	void registerCourse(Course course);
 
-    /**
-     * Elimina un curso del sistema.
-     *
-     * @param course El curso a eliminar.
-     */
-    void deleteCourse(Course course);
+	/**
+	 * Elimina un curso del sistema.
+	 *
+	 * @param course El curso a eliminar.
+	 */
+	void deleteCourse(Course course);
 
-    /**
-     * Modifica la información de un curso en el sistema.
-     *
-     * @param course El curso con la información actualizada.
-     */
-    void updateCourse(Course course);
+	/**
+	 * Modifica la información de un curso en el sistema.
+	 *
+	 * @param course El curso con la información actualizada.
+	 */
+	void updateCourse(Course course);
 
-    /**
-     * Recupera un curso del sistema a partir de su código único.
-     *
-     * @param id El código único del curso.
-     * @return El curso correspondiente al código proporcionado.
-     */
-    Course getCourseById(Long id);
-    Course getCourseByName(String name);
-    /**
-     * Recupera todos los cursos registrados en el sistema.
-     *
-     * @return Una lista de todos los cursos registrados.
-     */
-    List<Course> getAllCourses();
+	/**
+	 * Recupera un curso del sistema a partir de su código único.
+	 *
+	 * @param id El código único del curso.
+	 * @return El curso correspondiente al código proporcionado.
+	 */
+	Course getCourseById(Long id);
+
+	Course getCourseByName(String name);
+
+	/**
+	 * Recupera todos los cursos registrados en el sistema.
+	 *
+	 * @return Una lista de todos los cursos registrados.
+	 */
+	List<Course> getAllCourses();
 }

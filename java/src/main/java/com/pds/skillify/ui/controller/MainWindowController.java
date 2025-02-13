@@ -109,13 +109,15 @@ public class MainWindowController {
 			}
 		});
 	}
-	
+
 	private void handleClickOnCommunity(JButton communityButon) {
 		communityButon.addActionListener(e -> openCommunityWindow());
 	}
+
 	private void handleClickOnLogout(JButton logoutButton) {
 		logoutButton.addActionListener(e -> logout());
 	}
+
 	private void handleClosingWindow() {
 		view.addWindowListener(new WindowAdapter() {
 			@Override
@@ -136,7 +138,7 @@ public class MainWindowController {
 		new ConfigureUserWindow();
 		view.dispose();
 	}
-	
+
 	private void openCommunityWindow() {
 		new CommunityWindow();
 		view.dispose();
@@ -149,7 +151,5 @@ public class MainWindowController {
 		new LoginWindow();
 		view.dispose();
 	}
-
-	
 
 }

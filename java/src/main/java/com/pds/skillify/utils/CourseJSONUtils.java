@@ -19,11 +19,12 @@ public class CourseJSONUtils {
 	/**
 	 * Carga un curso desde un archivo JSON.
 	 * 
-	 * Este método lee un archivo JSON que contiene la información de un curso 
-	 * y lo deserializa en un objeto {@code Course} utilizando {@code objectMapper}.
+	 * Este método lee un archivo JSON que contiene la información de un curso y lo
+	 * deserializa en un objeto {@code Course} utilizando {@code objectMapper}.
 	 *
 	 * @param filePath Ruta del archivo JSON del curso.
-	 * @return Un objeto {@code Course} si la carga es exitosa, o {@code null} si ocurre un error.
+	 * @return Un objeto {@code Course} si la carga es exitosa, o {@code null} si
+	 *         ocurre un error.
 	 */
 	public static Course loadCourseFromJson(String filePath) {
 		try {
@@ -37,23 +38,32 @@ public class CourseJSONUtils {
 	/**
 	 * Valida la estructura de un archivo JSON de curso.
 	 * 
-	 * Este método verifica que el archivo JSON contenga los campos obligatorios 
-	 * para definir un curso correctamente, como el nombre, la descripción y al menos una pregunta válida.
+	 * Este método verifica que el archivo JSON contenga los campos obligatorios
+	 * para definir un curso correctamente, como el nombre, la descripción y al
+	 * menos una pregunta válida.
 	 * 
-	 * <p>Se realizan las siguientes validaciones:</p>
+	 * <p>
+	 * Se realizan las siguientes validaciones:
+	 * </p>
 	 * <ul>
-	 *   <li>Debe contener los campos "name" y "description" de tipo {@code String}.</li>
-	 *   <li>Debe contener un campo "questions" de tipo {@code JSONArray} con al menos un elemento.</li>
-	 *   <li>Cada pregunta debe tener los campos "type", "statement" y "correctAnswer".</li>
-	 *   <li>El tipo de pregunta determina validaciones adicionales:</li>
-	 *   <ul>
-	 *     <li>Para preguntas de opción múltiple, "options" debe ser un {@code JSONArray} no vacío y "correctAnswer" debe ser un índice válido.</li>
-	 *     <li>Para preguntas de completar huecos o reordenar letras, "correctAnswer" debe ser un {@code String}.</li>
-	 *   </ul>
+	 * <li>Debe contener los campos "name" y "description" de tipo
+	 * {@code String}.</li>
+	 * <li>Debe contener un campo "questions" de tipo {@code JSONArray} con al menos
+	 * un elemento.</li>
+	 * <li>Cada pregunta debe tener los campos "type", "statement" y
+	 * "correctAnswer".</li>
+	 * <li>El tipo de pregunta determina validaciones adicionales:</li>
+	 * <ul>
+	 * <li>Para preguntas de opción múltiple, "options" debe ser un
+	 * {@code JSONArray} no vacío y "correctAnswer" debe ser un índice válido.</li>
+	 * <li>Para preguntas de completar huecos o reordenar letras, "correctAnswer"
+	 * debe ser un {@code String}.</li>
+	 * </ul>
 	 * </ul>
 	 * 
 	 * @param filePath Ruta del archivo JSON a validar.
-	 * @return {@code true} si el JSON es válido, {@code false} si falta algún campo o hay inconsistencias.
+	 * @return {@code true} si el JSON es válido, {@code false} si falta algún campo
+	 *         o hay inconsistencias.
 	 * @throws IOException Si hay un error al leer el archivo.
 	 */
 	public static boolean validateCourseJSON(String filePath) throws IOException {

@@ -12,90 +12,94 @@ import java.util.Objects;
 @Table(name = "courses")
 public class Course implements Serializable {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
 
-    @Column(unique = true, nullable = false)
-    private String name;
+	@Column(unique = true, nullable = false)
+	private String name;
 
-    @Lob
-    private String description;
+	@Lob
+	private String description;
 
-    @OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    private List<Question> questions;
-    @Transient
-    private CourseMode mode = CourseMode.SEQUENTIAL;
-    // Constructor vacío requerido por JPA
-    public Course() {}
+	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	private List<Question> questions;
+	@Transient
+	private CourseMode mode = CourseMode.SEQUENTIAL;
 
-    public Course(String name, String desc) {
-        this.name = name;
-        this.description = desc;
-    }
+	// Constructor vacío requerido por JPA
+	public Course() {
+	}
 
-    public Course(String name, String desc, List<Question> questions) {
-        this.name = name;
-        this.description = desc;
-        this.questions = new ArrayList<>(questions);
-    }
+	public Course(String name, String desc) {
+		this.name = name;
+		this.description = desc;
+	}
 
-    public void addQuestion(Question question) {
-        questions.add(question);
-        question.setCourse(this); // Establece la relación en la pregunta
-    }
+	public Course(String name, String desc, List<Question> questions) {
+		this.name = name;
+		this.description = desc;
+		this.questions = new ArrayList<>(questions);
+	}
 
-    public void shuffleQuestions() {
-        Collections.shuffle(questions);
-    }
+	public void addQuestion(Question question) {
+		questions.add(question);
+		question.setCourse(this); // Establece la relación en la pregunta
+	}
 
-    public Long getId() {
-        return id;
-    }
+	public void shuffleQuestions() {
+		Collections.shuffle(questions);
+	}
 
-    public String getName() {
-        return name;
-    }
+	public Long getId() {
+		return id;
+	}
 
-    public void setName(String name) {
-        this.name = name;
-    }
+	public String getName() {
+		return name;
+	}
 
-    public String getDescription() {
-        return description;
-    }
+	public void setName(String name) {
+		this.name = name;
+	}
 
-    public void setDescription(String description) {
-        this.description = description;
-    }
+	public String getDescription() {
+		return description;
+	}
 
-    public void setQuestions(List<Question> questions) {
-        this.questions = questions;
-    }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-    public List<Question> getQuestions() {
-        List<Question> questionList = new ArrayList<>(questions);
+	public void setQuestions(List<Question> questions) {
+		this.questions = questions;
+	}
 
-        if (mode == CourseMode.RANDOM) {
-            Collections.shuffle(questionList);
-        }
+	public List<Question> getQuestions() {
+		List<Question> questionList = new ArrayList<>(questions);
 
-        return questionList;
-    }
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        Course course = (Course) o;
-        return Objects.equals(name, course.name) &&
-               Objects.equals(description, course.description) &&
-               Objects.equals(questions, course.questions);
-    }
+		if (mode == CourseMode.RANDOM) {
+			Collections.shuffle(questionList);
+		}
 
-    @Override
-    public int hashCode() {
-        return Objects.hash(name, description, questions);
-    }
+		return questionList;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		if (this == o)
+			return true;
+		if (o == null || getClass() != o.getClass())
+			return false;
+		Course course = (Course) o;
+		return Objects.equals(name, course.name) && Objects.equals(description, course.description)
+				&& Objects.equals(questions, course.questions);
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(name, description, questions);
+	}
 
 	public CourseMode getMode() {
 		return mode;

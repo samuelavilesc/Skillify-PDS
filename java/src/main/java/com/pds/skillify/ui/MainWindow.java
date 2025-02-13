@@ -52,7 +52,8 @@ public class MainWindow extends JFrame {
 
 		ImageIcon avatarIcon;
 		if (actualUser != null && actualUser.getProfilePic() != null) {
-			Image img = actualUser.getProfilePic().getImage().getScaledInstance(ICON_SIZE, ICON_SIZE, Image.SCALE_SMOOTH);
+			Image img = actualUser.getProfilePic().getImage().getScaledInstance(ICON_SIZE, ICON_SIZE,
+					Image.SCALE_SMOOTH);
 			avatarIcon = new ImageIcon(img);
 		} else {
 			avatarIcon = new ImageIcon(getClass().getResource("/user.png"));
@@ -91,7 +92,7 @@ public class MainWindow extends JFrame {
 		verticalScrollBar.setUI(new BasicScrollBarUI() {
 			@Override
 			protected void configureScrollBarColors() {
-				this.trackColor = Color.WHITE; 				// Fondo del scrollBar
+				this.trackColor = Color.WHITE; // Fondo del scrollBar
 				this.thumbColor = new Color(220, 220, 220); // Color del scrollBar en sí
 			}
 
@@ -121,7 +122,8 @@ public class MainWindow extends JFrame {
 				Graphics2D g2 = (Graphics2D) g;
 				g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 				g2.setColor(thumbColor);
-				g2.fillRoundRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height, SCROLLBAR_ROUNDNESS, SCROLLBAR_ROUNDNESS);
+				g2.fillRoundRect(thumbBounds.x, thumbBounds.y, thumbBounds.width, thumbBounds.height,
+						SCROLLBAR_ROUNDNESS, SCROLLBAR_ROUNDNESS);
 			}
 
 			@Override

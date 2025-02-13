@@ -9,7 +9,6 @@ import java.util.Objects;
 @DiscriminatorValue("multiple_choice")
 public class MultipleChoiceQuestion extends Question {
 
-
 	@ElementCollection(fetch = FetchType.EAGER)
 	@CollectionTable(name = "multiple_choice_options", joinColumns = @JoinColumn(name = "question_id"))
 	@Column(name = "option_text", nullable = false)

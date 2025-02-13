@@ -30,7 +30,7 @@ public interface UserDAO {
 	 * 
 	 * @param user El usuario con los datos actualizados.
 	 */
-	public void modifyUser (User user);
+	public void modifyUser(User user);
 
 	/**
 	 * Recupera un usuario de la base de datos a partir de su código.
