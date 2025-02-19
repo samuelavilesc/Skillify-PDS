@@ -130,8 +130,16 @@ public class AchievementsWindow extends JFrame {
 	}
 
 	/**
-	 * Obtiene y muestra los logros (cursos completados) del usuario desde el
-	 * controlador.
+	 * Actualiza y muestra los logros del usuario en la interfaz gráfica.
+	 * Obtiene los cursos completados por el usuario desde el objeto {@link User} y los muestra en el panel de logros.
+	 * Si el usuario no ha completado ningún curso, se muestra un mensaje indicando que no hay logros desbloqueados.
+	 * Para cada curso completado, se muestra un ícono de medalla junto con el nombre del curso.
+	 * 
+	 * Este método también se encarga de limpiar el panel de logros antes de agregar los nuevos elementos
+	 * para evitar duplicados.
+	 * 
+	 * @see User#getCompletedCourses()
+	 * @see Controller#getCourseNameById(Long)
 	 */
 	public void actualizarLogros() {
 		panelLogros.removeAll(); // Limpiar el panel antes de actualizar

@@ -10,7 +10,13 @@ import javax.swing.ImageIcon;
 public class ImageUtils {
 
 	/**
-	 * Convierte un ImageIcon a un array de bytes.
+	 * Convierte un objeto {@link ImageIcon} en un arreglo de bytes en formato PNG.
+	 * Si el {@link ImageIcon} proporcionado es {@code null}, la función retornará {@code null}.
+	 *
+	 * @param icon El objeto {@link ImageIcon} que se desea convertir a bytes.
+	 * @return Un arreglo de bytes que representa la imagen en formato PNG, o {@code null} si ocurre un error
+	 *         o si el parámetro {@code icon} es {@code null}.
+	 * @throws IOException Si ocurre un error durante la conversión de la imagen a bytes.
 	 */
 	public static byte[] imageIconToBytes(ImageIcon icon) {
 		if (icon == null)
@@ -36,7 +42,13 @@ public class ImageUtils {
 	}
 
 	/**
-	 * Convierte un array de bytes a ImageIcon.
+	 * Convierte un arreglo de bytes que representa una imagen en un objeto {@link ImageIcon}.
+	 * Si el arreglo de bytes proporcionado es {@code null} o está vacío, la función retornará {@code null}.
+	 *
+	 * @param imageData El arreglo de bytes que representa la imagen.
+	 * @return Un objeto {@link ImageIcon} creado a partir de los bytes proporcionados, o {@code null} si ocurre un error
+	 *         o si el parámetro {@code imageData} es {@code null} o está vacío.
+	 * @throws IOException Si ocurre un error durante la lectura de los bytes o la creación de la imagen.
 	 */
 	public static ImageIcon bytesToImageIcon(byte[] imageData) {
 		if (imageData == null || imageData.length == 0)

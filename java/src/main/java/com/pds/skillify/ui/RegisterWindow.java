@@ -14,8 +14,8 @@ public class RegisterWindow extends JFrame {
 	private JPasswordField passwordField;
 	private JButton createAccountButton;
 	private JButton selectAvatarButton;
-	private JLabel genericAvatarLabel; // Avatar del usuario
-	private ImageIcon selectedAvatar; // Imagen seleccionada
+	private JLabel genericAvatarLabel;
+	private ImageIcon selectedAvatar;
 
 	private static final int WIDTH = 360;
 	private static final int HEIGHT = 550;

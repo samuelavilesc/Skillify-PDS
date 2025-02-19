@@ -61,18 +61,17 @@ public class UserCellRenderer extends JPanel implements ListCellRenderer<User> {
 			usernameLabel.setText(user.getUsername());
 		}
 
-		// Get the hovered index
 		int hoveredIndex = list.getMousePosition() != null ? list.locationToIndex(list.getMousePosition()) : -1;
 
 		if (index == hoveredIndex) {
 			setBackground(new Color(200, 230, 255));
-			textPanel.setBackground(new Color(200, 230, 255)); // Only this cell's textPanel should change
+			textPanel.setBackground(new Color(200, 230, 255));
 		} else if (isSelected) {
 			setBackground(new Color(173, 216, 230));
-			textPanel.setBackground(new Color(173, 216, 230)); // Keep text panel consistent with selection
+			textPanel.setBackground(new Color(173, 216, 230));
 		} else {
 			setBackground(Color.WHITE);
-			textPanel.setBackground(Color.WHITE); // Reset background for non-hovered, non-selected cells
+			textPanel.setBackground(Color.WHITE);
 		}
 
 		setOpaque(true);
