@@ -54,16 +54,7 @@ public class CommunityWindowController {
 			public void valueChanged(ListSelectionEvent e) {
 				if (!e.getValueIsAdjusting()) {
 					view.dispose();
-					AchievementsWindow window = new AchievementsWindow(usersList.getSelectedValue());
-					window.addWindowListener(new WindowAdapter() {
-						// Botón X
-						@Override
-						public void windowClosing(WindowEvent e) {
-							SwingUtilities.invokeLater(() -> {
-								view.setVisible(true);
-							});
-						}
-					});
+					new AchievementsWindow(usersList.getSelectedValue());
 				}
 			}
 		});
