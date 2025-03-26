@@ -17,8 +17,9 @@ public class User implements Serializable {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int id;
 
-	@Lob // Guardamos la imagen como bytes en la BD
-	private byte[] profilePic;
+	@Column(name = "profile_pic_path")
+	private String profilePic;
+
 
 	@Column(unique = true, nullable = false)
 	private String username;
@@ -198,11 +199,11 @@ public class User implements Serializable {
 
 	// 🔹 Métodos para la gestión de la imagen de perfil
 	public ImageIcon getProfilePic() {
-		return ImageUtils.bytesToImageIcon(profilePic);
+		return ImageUtils.pathToImageIcon(profilePic);
 	}
 
 	public void setProfilePic(ImageIcon profilePic) {
-		this.profilePic = ImageUtils.imageIconToBytes(profilePic);
+		this.profilePic = ImageUtils.imageIconToPath(profilePic);
 	}
 
 	// 🔹 Getters y Setters

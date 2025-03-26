@@ -56,6 +56,7 @@ public class ConfigureUserWindowController {
 					File archivo = fileChooser.getSelectedFile();
 					if (archivo != null) {
 						newProfilePic = new ImageIcon(archivo.getAbsolutePath());
+						newProfilePic.setDescription(archivo.getAbsolutePath());
 						Image img = newProfilePic.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 						view.getLblImagenPerfil().setIcon(new ImageIcon(img));
 					}

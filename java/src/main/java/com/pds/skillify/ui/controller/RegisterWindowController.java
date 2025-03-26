@@ -35,6 +35,7 @@ public class RegisterWindowController {
 			if (seleccion == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fileChooser.getSelectedFile();
 				ImageIcon newAvatar = new ImageIcon(selectedFile.getAbsolutePath());
+				newAvatar.setDescription(selectedFile.getAbsolutePath());
 				view.setAvatar(newAvatar); // Actualiza la imagen en la interfaz
 			}
 		});

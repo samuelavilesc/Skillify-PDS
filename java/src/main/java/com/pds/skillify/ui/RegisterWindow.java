@@ -85,6 +85,7 @@ public class RegisterWindow extends JFrame {
 
 		JPanel avatarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 		selectedAvatar = new ImageIcon(getClass().getResource("/user.png"));
+		selectedAvatar.setDescription("/user.png"); //añadimos la ruta por defecto
 		genericAvatarLabel = new JLabel();
 		genericAvatarLabel
 				.setIcon(new ImageIcon(selectedAvatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))); // Imagen

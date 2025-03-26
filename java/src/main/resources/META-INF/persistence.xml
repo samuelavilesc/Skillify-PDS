@@ -14,20 +14,13 @@
     <class>com.pds.skillify.model.ReorderLettersQuestion</class>
 
     <properties>
-      <!-- Configuración de la base de datos en memoria H2 -->
-      <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-      <property name="javax.persistence.jdbc.url" value="jdbc:h2:./data/skillifydb"/>
-      <property name="javax.persistence.jdbc.user" value="sa"/>
-      <property name="javax.persistence.jdbc.password" value=""/>
-
-      <!-- Configuración de Hibernate -->
-      <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-      <property name="hibernate.hbm2ddl.auto" value="update"/>
-      <property name="hibernate.temp.use_jdbc_metadata_defaults" value="false"/>
-      <property name="hibernate.show_sql" value="false"/> <!-- Apaga logs de SQL -->
-    <property name="hibernate.format_sql" value="false"/> <!-- Apaga formato de logs -->
-    <property name="hibernate.generate_statistics" value="false"/> <!-- Evita logs de estadísticas -->
-    <property name="hibernate.use_sql_comments" value="false"/> <!-- Evita logs de comentarios SQL -->
+      <property name="jakarta.persistence.jdbc.driver"
+				value="org.sqlite.JDBC" />
+			<property name="jakarta.persistence.jdbc.url"
+				value="jdbc:sqlite:basedatos.db" />
+			<property name="dialect" value="org.hibernate.community.dialect.SQLiteDialect" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.show_sql" value="true" />
     </properties>
 
   </persistence-unit>
