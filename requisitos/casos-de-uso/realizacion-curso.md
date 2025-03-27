@@ -1,8 +1,8 @@
-## Realización de una Lección
+## Realización de un curso
 
-- **Identificador**: Realización de una Lección
+- **Identificador**: Realización de un curso
 - **Actores**: Estudiante
-- **Descripción**: Permite al estudiante realizar ejercicios dentro de una lección para practicar el contenido de aprendizaje.
+- **Descripción**: Permite al estudiante realizar ejercicios dentro de un curso para practicar el contenido de aprendizaje.
 
 ### Pasos:
 
