@@ -1,20 +1,15 @@
 ## Selección de Tema de Aprendizaje
 
-Como **usuario autenticado**, quiero poder **seleccionar un tema de aprendizaje de una lista disponible**, para estudiar el contenido que me interesa.
+- **Identificador**: Selección de Tema de Aprendizaje
+- **Actores**: Estudiante
+- **Descripción**: Permite al estudiante seleccionar un curso de una lista disponible para estudiar el contenido que le interesa.
 
-### Criterios de Aceptación:
+### Pasos:
 
-Dado que me encuentro en la ventana principal,  
-cuando presiono en un tema de la lista,  
-entonces podré acceder al contenido de la lección.
+1. El estudiante accede a la ventana principal de la aplicación.
+2. Se muestra una lista de cursos disponibles.
+3. El estudiante selecciona un curso de la lista.
+4. El estudiante accede a la lección correspondiente.
+### Flujo alternativo:
 
-### Checklist de ayuda al desarrollo
-
-- [ ] El usuario puede ver una lista de temas disponibles.
-- [ ] Puede seleccionar un tema y comenzar la lección.
-- [ ] Si no hay temas cargados, se muestra un mensaje indicando que debe añadir uno.
-- [ ] La lista se obtiene desde un archivo JSON.
-
-### Ejemplo ventana selección
-
-![Pantalla principal](imagenes/main-window.png)
+2a. Si no hay temas cargados, el sistema muestra un mensaje indicando que debe añadir uno.
