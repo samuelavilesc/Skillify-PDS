@@ -1,7 +1,8 @@
 ## Autenticación de Usuario
 
 - **Identificador**: Autenticación de Usuario
-- **Actores**: Usuario registrado
+- **Actores**: Usuario
+- **Precondición:** El usuario debe estar registrado
 - **Descripción**: Permite a los usuarios registrados iniciar sesión en la aplicación proporcionando su nombre de usuario y contraseña, accediendo así a su cuenta y continuando con su aprendizaje.
 
 ### Pasos:
