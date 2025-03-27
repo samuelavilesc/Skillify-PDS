@@ -5,11 +5,11 @@
 
 ---
 
-## 📄 Casos de uso
+## Casos de uso
 
-Todos los casos de uso están organizados en la carpeta [`casos_de_uso`](./casos-de-uso/). Aquí puedes acceder directamente a cada uno:
+Todos los casos de uso están organizados en la carpeta [`casos_de_uso`](.). Aquí puedes acceder directamente a cada uno:
 
-### 📘 Estudiante
+### Estudiante
 
 - [Registrarse en la plataforma](./registro-nuevo-estudiante.md)
 - [Iniciar sesión](./autenticacion-de-estudiante.md)
@@ -17,7 +17,7 @@ Todos los casos de uso están organizados en la carpeta [`casos_de_uso`](./casos
 - [Consultar estadísticas y logros](./gamificacion-logros.md)
 - [Selección curso](./seleccion-tema.md)
 
-### 📗Cursos
+### Cursos
 
 - [Importar un nuevo curso](./carga-cursos-archivo.md)
 - [Realizar un curso](./realizacion-curso.md)
