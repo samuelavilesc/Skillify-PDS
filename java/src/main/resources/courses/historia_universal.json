@@ -44,7 +44,7 @@
         },
         {
             "type": "reorder_letters",
-            "statement": "Ordena las letras para formar un país histórico: EROMA",
+            "statement": "Ordena las letras para formar un país histórico: AMOR",
             "correctAnswer": "ROMA"
         },
         {
@@ -55,7 +55,7 @@
         },
         {
             "type": "reorder_letters",
-            "statement": "Ordena las letras para formar una civilización antigua: ZATEC",
+            "statement": "Ordena las letras para formar una civilización antigua: CAETAZ",
             "correctAnswer": "AZTECA"
         }
     ]

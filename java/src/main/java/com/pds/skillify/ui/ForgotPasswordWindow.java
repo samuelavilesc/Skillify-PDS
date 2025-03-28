@@ -1,7 +1,6 @@
 package com.pds.skillify.ui;
 
-import com.pds.skillify.controller.Controller;
-import com.pds.skillify.model.User;
+import com.pds.skillify.ui.controller.ForgotPasswordWindowController;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,8 +18,11 @@ public class ForgotPasswordWindow extends JFrame {
 	private JButton confirmButton;
 	private JLabel statusLabel;
 
+	private ForgotPasswordWindowController controller;
+
 	public ForgotPasswordWindow() {
 		initialize();
+		controller = new ForgotPasswordWindowController(this);
 		setVisible(true);
 	}
 
@@ -32,8 +34,7 @@ public class ForgotPasswordWindow extends JFrame {
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 
-		JPanel panel = new JPanel();
-		panel.setLayout(new GridBagLayout());
+		JPanel panel = new JPanel(new GridBagLayout());
 		panel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -41,13 +42,11 @@ public class ForgotPasswordWindow extends JFrame {
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 
-		// Campo de Email
 		panel.add(new JLabel("Email"), gbc);
 		gbc.gridx = 1;
 		emailField = new JTextField(20);
 		panel.add(emailField, gbc);
 
-		// Campo de Usuario
 		gbc.gridx = 0;
 		gbc.gridy++;
 		panel.add(new JLabel("Usuario"), gbc);
@@ -55,7 +54,6 @@ public class ForgotPasswordWindow extends JFrame {
 		usernameField = new JTextField(20);
 		panel.add(usernameField, gbc);
 
-		// Campo de Nueva Contraseña
 		gbc.gridx = 0;
 		gbc.gridy++;
 		panel.add(new JLabel("Nueva Contraseña"), gbc);
@@ -63,7 +61,6 @@ public class ForgotPasswordWindow extends JFrame {
 		passwordField = new JPasswordField(20);
 		panel.add(passwordField, gbc);
 
-		// Botón Confirmar
 		gbc.gridx = 0;
 		gbc.gridy++;
 		gbc.gridwidth = 2;
@@ -74,7 +71,6 @@ public class ForgotPasswordWindow extends JFrame {
 		confirmButton.addActionListener(this::handlePasswordReset);
 		panel.add(confirmButton, gbc);
 
-		// Etiqueta de estado
 		gbc.gridy++;
 		statusLabel = new JLabel("", SwingConstants.CENTER);
 		statusLabel.setForeground(Color.RED);
@@ -84,26 +80,27 @@ public class ForgotPasswordWindow extends JFrame {
 	}
 
 	private void handlePasswordReset(ActionEvent e) {
-		String email = emailField.getText().trim();
-		String username = usernameField.getText().trim();
-		String newPassword = new String(passwordField.getPassword()).trim();
+		controller.handlePasswordReset();
+	}
 
-		// Validación de campos vacíos
-		if (email.isEmpty() || username.isEmpty() || newPassword.isEmpty()) {
-			statusLabel.setText("Todos los campos son obligatorios.");
-			return;
-		}
+	public String getEmail() {
+		return emailField.getText().trim();
+	}
 
-		// Buscar usuario
-		User user = Controller.getInstance().getUserByEmailAndUsername(email, username);
-		if (user == null) {
-			statusLabel.setText("Usuario o email incorrecto.");
-			return;
-		}
+	public String getUsername() {
+		return usernameField.getText().trim();
+	}
 
-		// Cambiar contraseña y confirmar
-		Controller.getInstance().updateUserPassword(user, newPassword);
-		JOptionPane.showMessageDialog(this, "Contraseña cambiada con éxito.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-		dispose(); // Cierra la ventana después de cambiar la contraseña
+	public String getNewPassword() {
+		return new String(passwordField.getPassword()).trim();
+	}
+
+	public void showStatusMessage(String message, boolean success) {
+		statusLabel.setText(message);
+		statusLabel.setForeground(success ? new Color(0x4CAF50) : Color.RED);
+	}
+
+	public void closeWindow() {
+		dispose();
 	}
 }
