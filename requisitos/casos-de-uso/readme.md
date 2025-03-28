@@ -23,3 +23,15 @@ Todos los casos de uso están organizados en la carpeta [`casos_de_uso`](.). Aqu
 - [Realizar un curso](./realizacion-curso.md)
 - [Consultar progreso en cursos](./progreso-estudiante.md)
 
+### Funcionalidades identificadas:
+- [Registrarse](./registro-nuevo-estudiante.md)
+- [Iniciar sesión](./autenticacion-de-estudiante.md)
+- [importar cursos](./carga-cursos-archivo.md)
+- [realizar curso](./realizacion-curso.md)
+- [responder preguntas](./realizacion-curso.md)
+- [Buscar logros de otros estudiantes](./buscar-logros-estudiantes.md)
+- [ver tus propios logros](./consultar-mis-logros.md)
+- [Cambiar tu perfil](./configuracion-estudiante.md)
+- [recuperar tu cuenta](./recuperar-contrasena.md)
+- [Ver progesos de los cursos importados](./progreso-estudiante.md)
+
