@@ -1,0 +1,62 @@
+{
+    "name": "Historia Universal",
+    "description": "Descubre los eventos más importantes que han marcado la historia del mundo.",
+    "questions": [
+        {
+            "type": "fill_in_blank",
+            "statement": "¿En qué año ocurrió la Revolución Francesa?",
+            "correctAnswer": "1789"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Quién fue el primer presidente de los Estados Unidos?",
+            "options": ["George Washington", "Abraham Lincoln", "Thomas Jefferson"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué imperio construyó la Gran Muralla China?",
+            "options": ["Imperio Romano", "Imperio Chino", "Imperio Persa"],
+            "correctAnswer": 1
+        },
+        {
+            "type": "fill_in_blank",
+            "statement": "¿Quién descubrió América en 1492?",
+            "correctAnswer": "Cristóbal Colón"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué guerra ocurrió entre 1939 y 1945?",
+            "options": ["Primera Guerra Mundial", "Guerra Civil Española", "Segunda Guerra Mundial"],
+            "correctAnswer": 2
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Cuál de estas civilizaciones construyó pirámides en Egipto?",
+            "options": ["Mayas", "Romanos", "Egipcios"],
+            "correctAnswer": 2
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Qué evento marcó el fin de la Edad Media?",
+            "options": ["Caída de Constantinopla", "Descubrimiento de América", "Revolución Industrial"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar un país histórico: AMOR",
+            "correctAnswer": "ROMA"
+        },
+        {
+            "type": "multiple_choice",
+            "statement": "¿Quién fue el líder del Imperio Napoleónico?",
+            "options": ["Napoleón Bonaparte", "Luis XIV", "Carlomagno"],
+            "correctAnswer": 0
+        },
+        {
+            "type": "reorder_letters",
+            "statement": "Ordena las letras para formar una civilización antigua: CAETAZ",
+            "correctAnswer": "AZTECA"
+        }
+    ]
+}

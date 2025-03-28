@@ -1,0 +1,70 @@
+{
+  "name": "Fundamentos de Java",
+  "description": "Una introducción a la programación en Java.",
+  "questions": [
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuál es la palabra clave para crear un objeto en Java?",
+      "options": ["new", "create", "init"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuál de las siguientes estructuras de control se usa para iterar un número específico de veces?",
+      "options": ["while", "do-while", "for"],
+      "correctAnswer": 2
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿Cuál de estas palabras clave se usa para heredar una clase en Java?",
+      "options": ["extends", "inherits", "implements"],
+      "correctAnswer": 0
+    },
+    {
+      "type": "multiple_choice",
+      "statement": "¿Qué modificador de acceso permite que un método solo sea accesible dentro de su propia clase?",
+      "options": ["public", "private", "protected"],
+      "correctAnswer": 1
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "El constructor por defecto tiene ______ parámetros.",
+      "correctAnswer": "cero"
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "Un entero se representa con ____.",
+      "correctAnswer": "int"
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "Para imprimir un mensaje en consola en Java usamos ______.",
+      "correctAnswer": "System.out.println"
+    },
+    {
+      "type": "fill_in_blank",
+      "statement": "El operador lógico AND en Java se representa con ______.",
+      "correctAnswer": "&&"
+    },
+    {
+      "type": "reorder_letters",
+      "statement": "Ordena las letras: AJAV",
+      "correctAnswer": "JAVA"
+    },
+    {
+      "type": "reorder_letters",
+      "statement": "Ordena las letras: LPOYMORIFSMO",
+      "correctAnswer": "POLIMORFISMO"
+    },
+    {
+      "type": "reorder_letters",
+      "statement": "Ordena las letras: ATSDRBAAC",
+      "correctAnswer": "ABSTRACT"
+    },
+    {
+      "type": "reorder_letters",
+      "statement": "Ordena las letras: ENATRFCEI",
+      "correctAnswer": "INTERFACE"
+    }
+  ]
+}
