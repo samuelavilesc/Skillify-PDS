@@ -1,0 +1,47 @@
+@startuml
+class Usuario {
+}
+
+class Curso {
+}
+
+abstract class Pregunta {
+}
+
+class PreguntaTest {
+}
+class PreguntaOrdenar {
+}
+class PreguntaRespuestaCorta {
+}
+
+class Logro {
+}
+
+interface Estrategia {
+}
+
+class EstrategiaSecuencial
+class EstrategiaAleatoria
+class EstrategiaRepeticion
+
+class CursoEnProgreso {
+    +progreso
+    +estadisticas
+}
+
+' Relaciones
+Usuario "1" -- "0.." CursoEnProgreso: realiza
+Curso "1" -- "1.." Pregunta : contiene
+CursoEnProgreso "0.." --> "1" Curso:corresponde a
+CursoEnProgreso "1" --> "1..." Estrategia : usa
+Usuario "1" -- "0.." Logro : consigue
+
+Estrategia <|-- EstrategiaSecuencial
+Estrategia <|-- EstrategiaAleatoria
+Estrategia <|-- EstrategiaRepeticion
+
+Pregunta <|-- PreguntaTest
+Pregunta <|-- PreguntaOrdenar
+Pregunta <|-- PreguntaRespuestaCorta
+@enduml

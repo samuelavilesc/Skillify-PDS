@@ -15,7 +15,7 @@ El objetivo de Skillify es proporcionar una plataforma interactiva que facilite 
 ## Tecnologías utilizadas
 - **Lenguaje**: Java
 - **Gestión de dependencias**: Maven
-- **Base de datos**: 
+- **Base de datos**: JPA (sqlite)
 - **Interfaz gráfica**: Swing
 
 ## Licencia
