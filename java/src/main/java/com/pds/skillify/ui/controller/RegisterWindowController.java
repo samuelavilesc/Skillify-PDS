@@ -29,17 +29,27 @@ public class RegisterWindowController {
 			JFileChooser fileChooser = new JFileChooser();
 			fileChooser.setDialogTitle("Seleccionar Avatar");
 			fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
-					"Archivos de imagen (*.jpg, *.png)", "jpg", "png"));
+				"Archivos de imagen (*.jpg, *.png)", "jpg", "png"));
 
 			int seleccion = fileChooser.showOpenDialog(null);
 			if (seleccion == JFileChooser.APPROVE_OPTION) {
 				File selectedFile = fileChooser.getSelectedFile();
-				ImageIcon newAvatar = new ImageIcon(selectedFile.getAbsolutePath());
-				newAvatar.setDescription(selectedFile.getAbsolutePath());
-				view.setAvatar(newAvatar); // Actualiza la imagen en la interfaz
+				String fileName = selectedFile.getName().toLowerCase();
+
+				if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
+					ImageIcon newAvatar = new ImageIcon(selectedFile.getAbsolutePath());
+					newAvatar.setDescription(selectedFile.getAbsolutePath());
+					view.setAvatar(newAvatar); // Actualiza la imagen en la interfaz
+				} else {
+					JOptionPane.showMessageDialog(null,
+						"Solo se permiten imágenes en formato PNG,JPEG o JPG.",
+						"Formato no válido",
+						JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 	}
+
 
 	private void handleClickOnCreateAccount(JButton createAccountButton) {
 		createAccountButton.addActionListener(e -> registerUser());

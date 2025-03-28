@@ -50,19 +50,27 @@ public class ConfigureUserWindowController {
 				JFileChooser fileChooser = new JFileChooser();
 				fileChooser.setDialogTitle("Seleccionar imagen de perfil");
 				fileChooser.setFileSelectionMode(JFileChooser.FILES_ONLY);
+				fileChooser.setFileFilter(new javax.swing.filechooser.FileNameExtensionFilter(
+					"Archivos de imagen (*.jpg, *.png)", "jpg", "png"));
 
 				int seleccion = fileChooser.showOpenDialog(null);
 				if (seleccion == JFileChooser.APPROVE_OPTION) {
 					File archivo = fileChooser.getSelectedFile();
-					if (archivo != null) {
+					String fileName = archivo.getName().toLowerCase();
+
+					if (fileName.endsWith(".png") || fileName.endsWith(".jpg") || fileName.endsWith(".jpeg")) {
 						newProfilePic = new ImageIcon(archivo.getAbsolutePath());
 						newProfilePic.setDescription(archivo.getAbsolutePath());
 						Image img = newProfilePic.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH);
 						view.getLblImagenPerfil().setIcon(new ImageIcon(img));
+					} else {
+						JOptionPane.showMessageDialog(null,
+							"Solo se permiten imágenes en formato PNG,JPEG o JPG.",
+							"Formato no válido",
+							JOptionPane.ERROR_MESSAGE);
 					}
 				}
 			}
-
 		});
 
 		// **Evento para actualizar los datos al hacer clic en Guardar**
