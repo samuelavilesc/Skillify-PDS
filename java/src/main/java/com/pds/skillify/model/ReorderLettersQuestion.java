@@ -9,13 +9,15 @@ import java.util.Objects;
 
 @SuppressWarnings("serial")
 @Entity
+
 @DiscriminatorValue("reorder_letters")
+
 public class ReorderLettersQuestion extends Question {
 
 	@Column(nullable = false)
 	private String correctAnswer;
 
-	// Constructor por defecto requerido por JPA
+	
 	public ReorderLettersQuestion() {
 	}
 
@@ -31,6 +33,7 @@ public class ReorderLettersQuestion extends Question {
 	public void setCorrectAnswer(String correctAnswer) {
 		this.correctAnswer = correctAnswer;
 	}
+	
 
 	@Override
 	public boolean checkAnswer(String answer) {
@@ -47,16 +50,19 @@ public class ReorderLettersQuestion extends Question {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
+		
 		if (o == null || getClass() != o.getClass())
 			return false;
 		if (!super.equals(o))
 			return false; // Llama a equals de la superclase
 
 		ReorderLettersQuestion that = (ReorderLettersQuestion) o;
+		
 		return Objects.equals(correctAnswer, that.correctAnswer);
 	}
 
 	@Override
+	
 	public int hashCode() {
 		return Objects.hash(super.hashCode(), correctAnswer);
 	}

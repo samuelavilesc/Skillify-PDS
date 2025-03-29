@@ -114,6 +114,7 @@ public class MainWindowController {
 		communityButon.addActionListener(e -> openCommunityWindow());
 	}
 
+	
 	private void handleClickOnLogout(JButton logoutButton) {
 		logoutButton.addActionListener(e -> logout());
 	}
@@ -122,7 +123,7 @@ public class MainWindowController {
 		view.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				// Ejecutar en el hilo de eventos de Swing para evitar bloqueos
+				
 				SwingUtilities.invokeLater(() -> {
 					Controller.getInstance().endCurrentUserSession();
 					Controller.getInstance().updateCurrentUser();
@@ -151,5 +152,6 @@ public class MainWindowController {
 		new LoginWindow();
 		view.dispose();
 	}
+	
 
 }

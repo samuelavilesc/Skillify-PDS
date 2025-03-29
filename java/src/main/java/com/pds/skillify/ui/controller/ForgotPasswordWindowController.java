@@ -15,11 +15,13 @@ public class ForgotPasswordWindowController {
 	public void handlePasswordReset() {
 		String email = window.getEmail();
 		String username = window.getUsername();
+		
 		String newPassword = window.getNewPassword();
 
 		if (email.isEmpty() || username.isEmpty() || newPassword.isEmpty()) {
 			window.showStatusMessage("Por favor, rellena todos los campos.", false);
 			return;
+			
 		}
 
 		User user = Controller.getInstance().getUserByEmailAndUsername(email, username);

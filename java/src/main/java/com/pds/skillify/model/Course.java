@@ -18,15 +18,18 @@ public class Course implements Serializable {
 
 	@Column(unique = true, nullable = false)
 	private String name;
+	
 
 	@Lob
 	private String description;
 
 	@OneToMany(mappedBy = "course", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	private List<Question> questions;
+	
 	@Transient
 	private CourseMode mode = CourseMode.SEQUENTIAL;
 
+	
 	// Constructor vacío requerido por JPA
 	public Course() {
 	}
@@ -36,16 +39,19 @@ public class Course implements Serializable {
 		this.description = desc;
 	}
 
+	
 	public Course(String name, String desc, List<Question> questions) {
 		this.name = name;
 		this.description = desc;
 		this.questions = new ArrayList<>(questions);
 	}
 
+	
 	public void addQuestion(Question question) {
 		questions.add(question);
 		question.setCourse(this); // Establece la relación en la pregunta
 	}
+	
 
 	public void shuffleQuestions() {
 		Collections.shuffle(questions);
@@ -54,11 +60,13 @@ public class Course implements Serializable {
 	public Long getId() {
 		return id;
 	}
+	
 
 	public String getName() {
 		return name;
 	}
 
+	
 	public void setName(String name) {
 		this.name = name;
 	}
@@ -71,6 +79,7 @@ public class Course implements Serializable {
 		this.description = description;
 	}
 
+	
 	public void setQuestions(List<Question> questions) {
 		this.questions = questions;
 	}
@@ -89,6 +98,7 @@ public class Course implements Serializable {
 	public boolean equals(Object o) {
 		if (this == o)
 			return true;
+		
 		if (o == null || getClass() != o.getClass())
 			return false;
 		Course course = (Course) o;
@@ -101,6 +111,7 @@ public class Course implements Serializable {
 		return Objects.hash(name, description, questions);
 	}
 
+	
 	public CourseMode getMode() {
 		return mode;
 	}

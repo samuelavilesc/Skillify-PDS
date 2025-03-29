@@ -54,6 +54,7 @@ public class RegisterWindowController {
 	private void handleClickOnCreateAccount(JButton createAccountButton) {
 		createAccountButton.addActionListener(e -> registerUser());
 	}
+	
 
 	private void handleClickOnLogin(JLabel loginLabel) {
 		loginLabel.addMouseListener(new MouseAdapter() {
@@ -64,6 +65,7 @@ public class RegisterWindowController {
 			}
 		});
 	}
+	
 
 	private void registerUser() {
 		String username = view.getUsernameField().getText().trim();
@@ -78,6 +80,7 @@ public class RegisterWindowController {
 			return;
 		}
 
+		
 		if (password.length() < 8) {
 			JOptionPane.showMessageDialog(view, "La contraseña debe tener al menos 8 caracteres.", "Error",
 					JOptionPane.ERROR_MESSAGE);

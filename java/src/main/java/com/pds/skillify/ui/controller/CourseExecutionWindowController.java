@@ -1,6 +1,4 @@
 package com.pds.skillify.ui.controller;
-
-
 import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.*;
 import com.pds.skillify.ui.CourseExecutionWindow;
@@ -10,6 +8,8 @@ import java.awt.*;
 import java.util.List;
 import java.util.Timer;
 import java.util.TimerTask;
+
+
 
 public class CourseExecutionWindowController {
 
@@ -23,6 +23,7 @@ public class CourseExecutionWindowController {
 	private JRadioButton[] optionButtons;
 	private JTextField userInputField;
 
+	
 	private static final Color GREEN_COLOR = new Color(0x80D855);
 	private static final Color ERROR_COLOR = new Color(0xFF4C4C);
 	private static final Color DEFAULT_TEXT_COLOR = Color.BLACK;
@@ -36,19 +37,23 @@ public class CourseExecutionWindowController {
 		return course;
 	}
 
+	
 	public Color getGreenColor() {
 		return GREEN_COLOR;
 	}
 
+	
 	public void procesarRespuesta() {
 		Question question = questions.get(currentQuestionIndex);
 		boolean esCorrecto = false;
 		Controller.getInstance().setQuestionAsAnswered(course, question);
 
 		if (question instanceof MultipleChoiceQuestion) {
+			
 			MultipleChoiceQuestion mcq = (MultipleChoiceQuestion) question;
 			int respuestaCorrectaIndex = mcq.getCorrectAnswer();
 
+			
 			if (optionsGroup.getSelection() != null) {
 				int respuestaUsuarioIndex = Integer.parseInt(optionsGroup.getSelection().getActionCommand());
 				esCorrecto = mcq.checkAnswer(String.valueOf(respuestaUsuarioIndex));
@@ -72,6 +77,7 @@ public class CourseExecutionWindowController {
 					optionButtons[respuestaUsuarioIndex].setForeground(GREEN_COLOR);
 					optionButtons[respuestaUsuarioIndex].setFont(new Font("Arial", Font.BOLD, 14));
 				}
+				
 
 				new Timer().schedule(new TimerTask() {
 					@Override
@@ -81,6 +87,8 @@ public class CourseExecutionWindowController {
 					}
 				}, 3000);
 			}
+			
+			
 		} else {
 			String respuestaUsuario = userInputField.getText().trim();
 			esCorrecto = question.checkAnswer(respuestaUsuario);
@@ -94,12 +102,14 @@ public class CourseExecutionWindowController {
 					JOptionPane.showMessageDialog(window, "Respuesta incorrecta. Inténtalo de nuevo.", "Incorrecto", JOptionPane.ERROR_MESSAGE);
 					return;
 				}
+				
 				JOptionPane.showMessageDialog(window, "Respuesta incorrecta.", "Incorrecto", JOptionPane.ERROR_MESSAGE);
 				currentQuestionIndex++;
 				mostrarPregunta();
 			}
 		}
 	}
+	
 	public void mostrarPregunta() {
 		while (currentQuestionIndex < questions.size()) {
 			Question question = questions.get(currentQuestionIndex);
@@ -108,17 +118,20 @@ public class CourseExecutionWindowController {
 				currentQuestionIndex++;
 				continue;
 			}
+			
 			window.getLblQuestion().setText("<html><div style='text-align: center;'>" + question.getStatement() + "</div></html>");
 			window.getResponsePanel().removeAll();
 			if (question instanceof MultipleChoiceQuestion) {
 				mostrarPreguntaMultipleChoice((MultipleChoiceQuestion) question);
-			} else {
+			}
+			else {
 				mostrarPreguntaTexto();
 			}
 			window.getResponsePanel().revalidate();
 			window.getResponsePanel().repaint();
 			return;
 		}
+		
 		SwingUtilities.invokeLater(() -> {
 			JOptionPane.showMessageDialog(window, "Has completado todas las preguntas.", "Curso Finalizado", JOptionPane.INFORMATION_MESSAGE);
 			window.dispose();
@@ -131,15 +144,15 @@ public class CourseExecutionWindowController {
 	    optionsGroup = new ButtonGroup();
 	    optionButtons = new JRadioButton[question.getOptions().size()];
 
-	    JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+	    // FlowLayout centrado para mejor estética
+	    JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 	    optionsPanel.setOpaque(false);
 	    optionsPanel.setBackground(Color.WHITE);
-
-	    int totalWidth = 0;
 
 	    for (int i = 0; i < question.getOptions().size(); i++) {
 	        String optionText = question.getOptions().get(i);
 	        JRadioButton option = new JRadioButton(optionText);
+
 	        option.setFont(new Font("Arial", Font.PLAIN, 14));
 	        option.setActionCommand(String.valueOf(i));
 	        option.setContentAreaFilled(false);
@@ -147,27 +160,25 @@ public class CourseExecutionWindowController {
 	        option.setFocusPainted(false);
 	        option.setForeground(DEFAULT_TEXT_COLOR);
 	        option.setBackground(Color.WHITE);
-	        int optionWidth = optionText.length() * 7 + 40;
-	        totalWidth += optionWidth;
-	        
+
 	        optionsGroup.add(option);
 	        optionButtons[i] = option;
 	        optionsPanel.add(option);
 	    }
-	    
-	
-	    optionsPanel.setPreferredSize(new Dimension(totalWidth, 40));
 
+	    // Ajustar dinámicamente al ancho disponible (sin ancho fijo)
 	    JScrollPane scrollPane = new JScrollPane(optionsPanel,
 	            JScrollPane.VERTICAL_SCROLLBAR_NEVER,
 	            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-	    scrollPane.setPreferredSize(new Dimension(400, 50));
+	    
+	    scrollPane.setPreferredSize(new Dimension(400, 60));
 	    scrollPane.setBorder(BorderFactory.createEmptyBorder());
 	    scrollPane.setOpaque(false);
 	    scrollPane.getViewport().setOpaque(false);
 
 	    window.getResponsePanel().add(scrollPane);
 	}
+
 
 
 	private void mostrarPreguntaTexto() {
@@ -183,6 +194,8 @@ public class CourseExecutionWindowController {
 		window.getResponsePanel().add(inputWrapper);
 	}
 
+	
+	
 
 	
 
