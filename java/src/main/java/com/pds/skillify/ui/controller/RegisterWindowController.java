@@ -23,7 +23,13 @@ public class RegisterWindowController {
 		handleClickOnCreateAccount(view.getCreateAccountButton());
 		handleClickOnLogin(view.getLoginLabel());
 	}
-
+	/**
+	 * Añade un ActionListener al botón de selección de avatar.
+	 * Al hacer clic, se abre un selector de archivos para elegir una imagen PNG o JPG,
+	 * y si es válida, se actualiza el avatar en la interfaz.
+	 *
+	 * @param selectAvatarButton Botón que permite seleccionar una nueva imagen de avatar.
+	 */
 	private void handleClickOnSelectAvatar(JButton selectAvatarButton) {
 		selectAvatarButton.addActionListener(e -> {
 			JFileChooser fileChooser = new JFileChooser();
@@ -50,12 +56,22 @@ public class RegisterWindowController {
 		});
 	}
 
-
+	/**
+	 * Añade un ActionListener al botón de creación de cuenta.
+	 * Al hacer clic, se ejecuta el método {@code registerUser()} para registrar un nuevo usuario.
+	 *
+	 * @param createAccountButton Botón que inicia el proceso de registro de una nueva cuenta.
+	 */
 	private void handleClickOnCreateAccount(JButton createAccountButton) {
 		createAccountButton.addActionListener(e -> registerUser());
 	}
 	
-
+	/**
+	 * Añade un MouseListener a la etiqueta de inicio de sesión.
+	 * Al hacer clic sobre la etiqueta, se cierra la vista actual y se abre la ventana de inicio de sesión.
+	 *
+	 * @param loginLabel Etiqueta que permite al usuario acceder a la ventana de login.
+	 */
 	private void handleClickOnLogin(JLabel loginLabel) {
 		loginLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -104,7 +120,10 @@ public class RegisterWindowController {
 	}
 
 	/**
-	 * Valida que el email tenga el formato correcto.
+	 * Valida si una cadena de texto tiene un formato de correo electrónico válido.
+	 *
+	 * @param email Dirección de correo electrónico a validar.
+	 * @return {@code true} si el formato del correo es válido; {@code false} en caso contrario.
 	 */
 	private boolean isValidEmail(String email) {
 		String emailRegex = "^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,6}$";

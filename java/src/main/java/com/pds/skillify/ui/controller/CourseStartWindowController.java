@@ -60,6 +60,13 @@ public class CourseStartWindowController {
 
 	}
 
+	/**
+	 * Asigna el modo de aprendizaje seleccionado al curso proporcionado.
+	 * El modo seleccionado puede ser aleatorio, secuencial o repetición, y determina
+	 * la forma en que se presentarán las preguntas al usuario durante el curso.
+	 *
+	 * @param course Objeto Course al que se asignará el modo seleccionado.
+	 */
 	private void assignCourseMode(Course course) {
 		String selectedMode = (String) view.getModeSelector().getSelectedItem();
 

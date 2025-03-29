@@ -42,6 +42,13 @@ public class CourseExecutionWindowController {
 		return GREEN_COLOR;
 	}
 
+	/**
+	 * Procesa la respuesta del usuario a la pregunta actual.
+	 * Determina si la respuesta es correcta o incorrecta y proporciona retroalimentación visual adecuada.
+	 * En preguntas de opción múltiple muestra la respuesta correcta e incorrecta mediante colores,
+	 * mientras que en preguntas abiertas muestra diálogos informativos al usuario.
+	 * Además, gestiona la lógica específica para cursos con modo de repetición.
+	 */
 	
 	public void procesarRespuesta() {
 		Question question = questions.get(currentQuestionIndex);
@@ -110,6 +117,11 @@ public class CourseExecutionWindowController {
 		}
 	}
 	
+	/**
+	 * Muestra la siguiente pregunta disponible en la interfaz gráfica, ignorando aquellas que ya hayan sido respondidas por el usuario.
+	 * Determina dinámicamente el tipo de pregunta (multiple choice o texto) y muestra el componente gráfico adecuado.
+	 * Si no quedan más preguntas disponibles, muestra un mensaje informativo y cierra la ventana actual.
+	 */
 	public void mostrarPregunta() {
 		while (currentQuestionIndex < questions.size()) {
 			Question question = questions.get(currentQuestionIndex);
@@ -138,7 +150,13 @@ public class CourseExecutionWindowController {
 		});
 	}
 
-
+	/**
+	 * Muestra en la interfaz gráfica una pregunta de tipo multiple choice, creando un grupo de botones de radio
+	 * para representar cada una de las opciones posibles. Las opciones se presentan horizontalmente centradas
+	 * dentro de un panel desplazable, que se adapta dinámicamente según la cantidad de opciones.
+	 *
+	 * @param question Objeto MultipleChoiceQuestion que contiene el enunciado y las opciones a mostrar.
+	 */
 	
 	private void mostrarPreguntaMultipleChoice(MultipleChoiceQuestion question) {
 	    optionsGroup = new ButtonGroup();
@@ -180,7 +198,11 @@ public class CourseExecutionWindowController {
 	}
 
 
-
+	/**
+	 * Muestra en la interfaz gráfica un campo de texto para que el usuario responda preguntas abiertas.
+	 * El campo de texto está centrado horizontalmente, tiene un tamaño definido y un borde personalizado
+	 * para mejorar su visibilidad y estética.
+	 */
 	private void mostrarPreguntaTexto() {
 		userInputField = new JTextField();
 		userInputField.setFont(new Font("Arial", Font.PLAIN, 14));

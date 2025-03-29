@@ -45,7 +45,12 @@ public class LoginWindowController {
 			}
 		});
 	}
-
+	/**
+	 * Añade un MouseListener a la etiqueta proporcionada para manejar el evento de clic.
+	 * Al hacer clic sobre la etiqueta, se cierra la vista actual y se abre la ventana de registro.
+	 *
+	 * @param registerLabel Etiqueta que actúa como enlace o botón para abrir la ventana de registro.
+	 */
 	private void handleClickOnRegister(JLabel registerLabel) {
 		registerLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -56,6 +61,12 @@ public class LoginWindowController {
 		});
 	}
 
+	/**
+	 * Añade un MouseListener a la etiqueta proporcionada para manejar el evento de clic.
+	 * Al hacer clic sobre la etiqueta, se abre una nueva ventana para la recuperación de contraseña.
+	 *
+	 * @param forgotPasswordLabel Etiqueta que permite al usuario acceder a la recuperación de contraseña.
+	 */
 	private void handleClickOnForgotPassword(JLabel forgotPasswordLabel) {
 		forgotPasswordLabel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -82,7 +93,12 @@ public class LoginWindowController {
 			}
 		}
 	}
-
+	/**
+	 * Añade un KeyListener al campo de contraseña para permitir iniciar sesión presionando la tecla Enter.
+	 * Cuando el usuario pulsa Enter dentro del campo, se llama al método {@code login()}.
+	 *
+	 * @param pwdField Campo de contraseña que detectará la pulsación de Enter para iniciar sesión.
+	 */
 	private void handleEnterKeyLogin(JPasswordField pwdField) {
 		pwdField.addKeyListener(new java.awt.event.KeyAdapter() {
 			@Override
@@ -93,7 +109,14 @@ public class LoginWindowController {
 			}
 		});
 	}
-
+	/**
+	 * Valida que los campos de nombre de usuario y contraseña no estén vacíos ni nulos.
+	 * Si alguno de los campos es inválido, se resalta su borde en la interfaz para advertir al usuario.
+	 *
+	 * @param username Nombre de usuario introducido.
+	 * @param password Contraseña introducida.
+	 * @return {@code true} si ambos campos son válidos; {@code false} en caso contrario.
+	 */
 	private boolean validateFields(String username, String password) {
 		boolean isValid = true;
 

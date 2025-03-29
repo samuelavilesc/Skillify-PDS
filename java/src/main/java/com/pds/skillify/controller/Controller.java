@@ -257,14 +257,33 @@ public class Controller {
 		return finishedCourses;
 	}
 
+	/**
+	 * Verifica si el usuario actual ha completado todas las preguntas del curso especificado.
+	 *
+	 * @param course curso a verificar
+	 * @return true si el curso está completado, false en caso contrario
+	 */
 	private boolean isCourseCompleted(Course course) {
 		return getCurrentUsersAnsweredQuestionsInCourse(course) == course.getQuestions().size();
 	}
 
+	/**
+	 * Obtiene la cantidad de preguntas respondidas por el usuario actual en un curso determinado.
+	 *
+	 * @param course curso del cual se contarán las preguntas respondidas
+	 * @return número de preguntas respondidas por el usuario actual
+	 */
 	public int getCurrentUsersAnsweredQuestionsInCourse(Course course) {
 		return currentUser.getAnsweredQuestionsInCourse(course).size();
 	}
 
+	/**
+	 * Verifica si una pregunta específica ha sido respondida por el usuario actual en el curso dado.
+	 *
+	 * @param course curso que contiene la pregunta
+	 * @param quest pregunta a verificar
+	 * @return true si la pregunta ha sido respondida por el usuario actual, false en caso contrario
+	 */
 	public boolean wasAnsweredByCurrentUser(Course course, Question quest) {
 		return this.currentUser.getAnsweredQuestionsInCourse(course).contains(quest.getId());
 	}
@@ -282,31 +301,56 @@ public class Controller {
 		return currentUser.alreadyHasCourse(course);
 	}
 
+	/**
+	 * Devuelve un conjunto de usuarios cuyos nombres empiezan con el prefijo especificado,
+	 * excluyendo al usuario actual.
+	 *
+	 * @param prefix prefijo con el que comienzan los nombres de los usuarios buscados
+	 * @return conjunto de usuarios cuyos nombres comienzan con el prefijo dado, excluyendo al usuario actual
+	 */
 	public Set<User> getUsersStartingWith(String prefix) {
 		Set<User> matchingUsers = userCatalog.getUsersStartingWith(prefix);
 		matchingUsers.remove(currentUser);
 
 		return matchingUsers;
 	}
-
 	// ---------------------- Tiempo de Uso ----------------------
 
+	/**
+	 * Devuelve el tiempo activo total del usuario actual en horas.
+	 * @return tiempo activo en horas del usuario actual
+	 */
 	public long getCurrentUsersActiveTimeInHours() {
 		return currentUser.getActiveTimeInHours();
 	}
 
+	/**
+	 * Devuelve el tiempo activo total del usuario actual en segundos.
+	 * @return tiempo activo en segundos del usuario actual
+	 */
 	public long getCurrentUsersActiveTimeInSeconds() {
 		return currentUser.getActiveTimeInSeconds();
 	}
 
+	/**
+	 * Devuelve la racha actual de inicio de sesión consecutivos del usuario actual.
+	 * @return número actual de días consecutivos iniciando sesión
+	 */
 	public int getCurrentUsersCurrentLoginStreak() {
 		return currentUser.getCurrentLoginStreak();
 	}
 
+	/**
+	 * Devuelve la mejor racha de inicio de sesión consecutivos alcanzada por el usuario actual.
+	 * @return mejor número de días consecutivos iniciando sesión
+	 */
 	public int getCurrentUsersBestLoginStreak() {
 		return currentUser.getBestLoginStreak();
 	}
 
+	/**
+	 * Finaliza la sesión actual del usuario.
+	 */
 	public void endCurrentUserSession() {
 		currentUser.endSession();
 	}

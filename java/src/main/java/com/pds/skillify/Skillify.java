@@ -22,7 +22,7 @@ public class Skillify {
 				try {
 					Font robotoFont = loadRobotoFromResources();
 
-					// Aplicar la fuente globalmente en UIManager
+					
 					UIManager.put("Label.font", robotoFont);
 					UIManager.put("TextField.font", robotoFont);
 					UIManager.put("PasswordField.font", robotoFont);
@@ -35,7 +35,7 @@ public class Skillify {
 					UIManager.put("Button.foreground", Color.WHITE);
 					UIManager.put("Button.background", GREEN_COLOR);
 
-					// Aplicar bordes redondeados a todos los componentes
+				
 					UIManager.put("Button.arc", BORDER_ROUNDNESS);
 					UIManager.put("Component.arc", BORDER_ROUNDNESS);
 					UIManager.put("TextComponent.arc", BORDER_ROUNDNESS);

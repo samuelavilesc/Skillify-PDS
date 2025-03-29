@@ -109,12 +109,22 @@ public class MainWindowController {
 			}
 		});
 	}
-
+	/**
+	 * Añade un ActionListener al botón de comunidad. 
+	 * Al hacer clic en el botón, se ejecuta el método {@code openCommunityWindow()} para abrir la ventana de comunidad.
+	 *
+	 * @param communityButon Botón que permite acceder a la sección de comunidad de la aplicación.
+	 */
 	private void handleClickOnCommunity(JButton communityButon) {
 		communityButon.addActionListener(e -> openCommunityWindow());
 	}
 
-	
+	/**
+	 * Añade un ActionListener al botón de cierre de sesión.
+	 * Al hacer clic en el botón, se ejecuta el método {@code logout()} para cerrar la sesión del usuario actual.
+	 *
+	 * @param logoutButton Botón que permite al usuario cerrar sesión.
+	 */
 	private void handleClickOnLogout(JButton logoutButton) {
 		logoutButton.addActionListener(e -> logout());
 	}
