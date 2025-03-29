@@ -32,74 +32,12 @@ public class CourseExecutionWindowController {
 		this.course = course;
 		this.questions = course.getQuestions();
 	}
-
-	public void mostrarPregunta() {
-		while (currentQuestionIndex < questions.size()) {
-			Question question = questions.get(currentQuestionIndex);
-
-			if (Controller.getInstance().wasAnsweredByCurrentUser(course, question)) {
-				currentQuestionIndex++;
-				continue;
-			}
-
-			window.getLblQuestion().setText("<html><div style='text-align: center;'>" + question.getStatement() + "</div></html>");
-			window.getResponsePanel().removeAll();
-
-			if (question instanceof MultipleChoiceQuestion) {
-				mostrarPreguntaMultipleChoice((MultipleChoiceQuestion) question);
-			} else {
-				mostrarPreguntaTexto();
-			}
-
-			window.getResponsePanel().revalidate();
-			window.getResponsePanel().repaint();
-			return;
-		}
-
-		SwingUtilities.invokeLater(() -> {
-			JOptionPane.showMessageDialog(window, "Has completado todas las preguntas.", "Curso Finalizado", JOptionPane.INFORMATION_MESSAGE);
-			window.dispose();
-		});
+	public Course getCourse() {
+		return course;
 	}
 
-
-	private void mostrarPreguntaTexto() {
-		userInputField = new JTextField();
-		userInputField.setFont(new Font("Arial", Font.PLAIN, 14));
-		userInputField.setPreferredSize(new Dimension(300, 30));
-		userInputField.setHorizontalAlignment(JTextField.CENTER);
-		userInputField.setBorder(BorderFactory.createLineBorder(GREEN_COLOR, 1));
-
-		JPanel inputWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		inputWrapper.setBackground(Color.WHITE);
-		inputWrapper.add(userInputField);
-		window.getResponsePanel().add(inputWrapper);
-	}
-
-	private void mostrarPreguntaMultipleChoice(MultipleChoiceQuestion question) {
-		optionsGroup = new ButtonGroup();
-		optionButtons = new JRadioButton[question.getOptions().size()];
-
-		JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 5));
-		optionsPanel.setOpaque(false);
-		optionsPanel.setBackground(Color.WHITE);
-
-		for (int i = 0; i < question.getOptions().size(); i++) {
-			JRadioButton option = new JRadioButton(question.getOptions().get(i));
-			option.setFont(new Font("Arial", Font.PLAIN, 14));
-			option.setActionCommand(String.valueOf(i));
-			option.setBackground(Color.WHITE);
-			option.setForeground(DEFAULT_TEXT_COLOR);
-			optionsGroup.add(option);
-			optionButtons[i] = option;
-			optionsPanel.add(option);
-		}
-
-		JScrollPane scrollPane = new JScrollPane(optionsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-		scrollPane.setBorder(BorderFactory.createEmptyBorder()); 
-		scrollPane.setPreferredSize(new Dimension(480, 60)); 
-
-		window.getResponsePanel().add(scrollPane);
+	public Color getGreenColor() {
+		return GREEN_COLOR;
 	}
 
 	public void procesarRespuesta() {
@@ -162,12 +100,91 @@ public class CourseExecutionWindowController {
 			}
 		}
 	}
+	public void mostrarPregunta() {
+		while (currentQuestionIndex < questions.size()) {
+			Question question = questions.get(currentQuestionIndex);
 
-	public Course getCourse() {
-		return course;
+			if (Controller.getInstance().wasAnsweredByCurrentUser(course, question)) {
+				currentQuestionIndex++;
+				continue;
+			}
+			window.getLblQuestion().setText("<html><div style='text-align: center;'>" + question.getStatement() + "</div></html>");
+			window.getResponsePanel().removeAll();
+			if (question instanceof MultipleChoiceQuestion) {
+				mostrarPreguntaMultipleChoice((MultipleChoiceQuestion) question);
+			} else {
+				mostrarPreguntaTexto();
+			}
+			window.getResponsePanel().revalidate();
+			window.getResponsePanel().repaint();
+			return;
+		}
+		SwingUtilities.invokeLater(() -> {
+			JOptionPane.showMessageDialog(window, "Has completado todas las preguntas.", "Curso Finalizado", JOptionPane.INFORMATION_MESSAGE);
+			window.dispose();
+		});
 	}
 
-	public Color getGreenColor() {
-		return GREEN_COLOR;
+
+	
+	private void mostrarPreguntaMultipleChoice(MultipleChoiceQuestion question) {
+	    optionsGroup = new ButtonGroup();
+	    optionButtons = new JRadioButton[question.getOptions().size()];
+
+	    JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.LEFT, 10, 5));
+	    optionsPanel.setOpaque(false);
+	    optionsPanel.setBackground(Color.WHITE);
+
+	    int totalWidth = 0;
+
+	    for (int i = 0; i < question.getOptions().size(); i++) {
+	        String optionText = question.getOptions().get(i);
+	        JRadioButton option = new JRadioButton(optionText);
+	        option.setFont(new Font("Arial", Font.PLAIN, 14));
+	        option.setActionCommand(String.valueOf(i));
+	        option.setContentAreaFilled(false);
+	        option.setBorderPainted(false);
+	        option.setFocusPainted(false);
+	        option.setForeground(DEFAULT_TEXT_COLOR);
+	        option.setBackground(Color.WHITE);
+	        int optionWidth = optionText.length() * 7 + 40;
+	        totalWidth += optionWidth;
+	        
+	        optionsGroup.add(option);
+	        optionButtons[i] = option;
+	        optionsPanel.add(option);
+	    }
+	    
+	
+	    optionsPanel.setPreferredSize(new Dimension(totalWidth, 40));
+
+	    JScrollPane scrollPane = new JScrollPane(optionsPanel,
+	            JScrollPane.VERTICAL_SCROLLBAR_NEVER,
+	            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+	    scrollPane.setPreferredSize(new Dimension(400, 50));
+	    scrollPane.setBorder(BorderFactory.createEmptyBorder());
+	    scrollPane.setOpaque(false);
+	    scrollPane.getViewport().setOpaque(false);
+
+	    window.getResponsePanel().add(scrollPane);
 	}
+
+
+	private void mostrarPreguntaTexto() {
+		userInputField = new JTextField();
+		userInputField.setFont(new Font("Arial", Font.PLAIN, 14));
+		userInputField.setPreferredSize(new Dimension(300, 30));
+		userInputField.setHorizontalAlignment(JTextField.CENTER);
+		userInputField.setBorder(BorderFactory.createLineBorder(GREEN_COLOR, 1));
+
+		JPanel inputWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		inputWrapper.setBackground(Color.WHITE);
+		inputWrapper.add(userInputField);
+		window.getResponsePanel().add(inputWrapper);
+	}
+
+
+	
+
+	
 }
