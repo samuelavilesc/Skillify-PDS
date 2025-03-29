@@ -62,6 +62,20 @@ public class CourseExecutionWindowController {
 		});
 	}
 
+
+	private void mostrarPreguntaTexto() {
+		userInputField = new JTextField();
+		userInputField.setFont(new Font("Arial", Font.PLAIN, 14));
+		userInputField.setPreferredSize(new Dimension(300, 30));
+		userInputField.setHorizontalAlignment(JTextField.CENTER);
+		userInputField.setBorder(BorderFactory.createLineBorder(GREEN_COLOR, 1));
+
+		JPanel inputWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
+		inputWrapper.setBackground(Color.WHITE);
+		inputWrapper.add(userInputField);
+		window.getResponsePanel().add(inputWrapper);
+	}
+
 	private void mostrarPreguntaMultipleChoice(MultipleChoiceQuestion question) {
 		optionsGroup = new ButtonGroup();
 		optionButtons = new JRadioButton[question.getOptions().size()];
@@ -81,20 +95,11 @@ public class CourseExecutionWindowController {
 			optionsPanel.add(option);
 		}
 
-		window.getResponsePanel().add(optionsPanel);
-	}
+		JScrollPane scrollPane = new JScrollPane(optionsPanel, JScrollPane.VERTICAL_SCROLLBAR_NEVER, JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
+		scrollPane.setBorder(BorderFactory.createEmptyBorder()); 
+		scrollPane.setPreferredSize(new Dimension(480, 60)); 
 
-	private void mostrarPreguntaTexto() {
-		userInputField = new JTextField();
-		userInputField.setFont(new Font("Arial", Font.PLAIN, 14));
-		userInputField.setPreferredSize(new Dimension(300, 30));
-		userInputField.setHorizontalAlignment(JTextField.CENTER);
-		userInputField.setBorder(BorderFactory.createLineBorder(GREEN_COLOR, 1));
-
-		JPanel inputWrapper = new JPanel(new FlowLayout(FlowLayout.CENTER));
-		inputWrapper.setBackground(Color.WHITE);
-		inputWrapper.add(userInputField);
-		window.getResponsePanel().add(inputWrapper);
+		window.getResponsePanel().add(scrollPane);
 	}
 
 	public void procesarRespuesta() {
@@ -158,7 +163,6 @@ public class CourseExecutionWindowController {
 		}
 	}
 
-	// Accesores
 	public Course getCourse() {
 		return course;
 	}
