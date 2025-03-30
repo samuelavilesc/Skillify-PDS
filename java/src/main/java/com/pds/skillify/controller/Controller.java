@@ -354,5 +354,6 @@ public class Controller {
 	public void endCurrentUserSession() {
 		currentUser.endSession();
 	}
+	
 
 }

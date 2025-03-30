@@ -18,7 +18,7 @@ public class AdapterCourse implements CourseDAO {
 	@Override
 	@Transactional
 	public void registerCourse(Course course) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = getEmf().createEntityManager();
 		for (Question question : course.getQuestions()) {
 			question.setCourse(course);
 		}
@@ -34,7 +34,7 @@ public class AdapterCourse implements CourseDAO {
 
 	@Override
 	public void deleteCourse(Course course) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = getEmf().createEntityManager();
 		em.getTransaction().begin();
 
 		Course courseToDelete = em.find(Course.class, course.getId());
@@ -48,7 +48,7 @@ public class AdapterCourse implements CourseDAO {
 
 	@Override
 	public void updateCourse(Course course) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = getEmf().createEntityManager();
 		em.getTransaction().begin();
 		em.merge(course); // 🔹 Hibernate se encarga de actualizar también las preguntas
 		em.getTransaction().commit();
@@ -58,7 +58,7 @@ public class AdapterCourse implements CourseDAO {
 	@Override
 	@Transactional
 	public Course getCourseById(Long id) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = getEmf().createEntityManager();
 		Course course = em
 				.createQuery("SELECT c FROM Course c LEFT JOIN FETCH c.questions WHERE c.id = :id", Course.class)
 				.setParameter("id", id).getSingleResult();
@@ -68,7 +68,7 @@ public class AdapterCourse implements CourseDAO {
 
 	@Override
 	public List<Course> getAllCourses() {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = getEmf().createEntityManager();
 		List<Course> courses = em.createQuery("SELECT c FROM Course c LEFT JOIN FETCH c.questions", Course.class)
 				.getResultList();
 		em.close();
@@ -77,7 +77,7 @@ public class AdapterCourse implements CourseDAO {
 
 	@Override
 	public Course getCourseByName(String name) {
-		EntityManager em = emf.createEntityManager();
+		EntityManager em = getEmf().createEntityManager();
 		Course course = null;
 
 		try {
@@ -91,6 +91,10 @@ public class AdapterCourse implements CourseDAO {
 		}
 
 		return course;
+	}
+
+	public EntityManagerFactory getEmf() {
+		return emf;
 	}
 
 }

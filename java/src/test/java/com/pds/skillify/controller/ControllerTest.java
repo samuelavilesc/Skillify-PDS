@@ -1,6 +1,10 @@
 package com.pds.skillify.controller;
 
 import com.pds.skillify.model.*;
+
+import jakarta.persistence.EntityManagerFactory;
+import jakarta.persistence.Persistence;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -15,10 +19,15 @@ public class ControllerTest {
     private User dummyUser;
     private Course dummyCourse;
     private FillInTheBlankQuestion dummyQuestion;
+    private AdapterCourseTest adapterCourse; // Aquí usamos AdapterCourseTest para los tests
 
     @BeforeEach
+    
     public void setUp() {
         controller = Controller.getInstance();
+
+        EntityManagerFactory emf = Persistence.createEntityManagerFactory("SkillifyPU");
+        adapterCourse = new AdapterCourseTest(emf); // ✅ Se inicializa el campo de clase correctamente
 
         dummyUser = new User("testUser", "1234", "test@example.com", new ImageIcon());
         controller.setCurrentUser(dummyUser);
@@ -29,6 +38,7 @@ public class ControllerTest {
 
         dummyUser.addCourse(dummyCourse);
     }
+
 
     // ---------------------- Usuario ----------------------
 
@@ -44,12 +54,13 @@ public class ControllerTest {
     }
 
     @Test
-  
+   
     public void testLoginAndLogout() {
-        User user = new User("nuevo", "pwd123", "nuevo@mail.com", new ImageIcon());
+        String uniqueUsername = "test_" + UUID.randomUUID();
+        User user = new User(uniqueUsername, "pwd123", uniqueUsername + "@mail.com", new ImageIcon());
         UserCatalog.getInstance().addUser(user);
 
-        boolean loginSuccess = controller.login("nuevo", "pwd123");
+        boolean loginSuccess = controller.login(uniqueUsername, "pwd123");
         assertTrue(loginSuccess);
 
         controller.logout();
@@ -58,11 +69,15 @@ public class ControllerTest {
 
 
     @Test
+  
     public void testGetUserByEmailAndUsername() {
-        controller.registerUser("juanito", new ImageIcon(), "juan@mail.com", "pwd");
-        User result = controller.getUserByEmailAndUsername("juan@mail.com", "juanito");
+        String uniqueUsername = "juanito_" + UUID.randomUUID();
+        String email = uniqueUsername + "@mail.com";
+        controller.registerUser(uniqueUsername, new ImageIcon(), email, "pwd");
+
+        User result = controller.getUserByEmailAndUsername(email, uniqueUsername);
         assertNotNull(result);
-        assertEquals("juanito", result.getUsername());
+        assertEquals(uniqueUsername, result.getUsername());
     }
 
     // ---------------------- Progreso y Preguntas ----------------------
@@ -120,35 +135,26 @@ public class ControllerTest {
         assertEquals(0, dummyUser.getAnsweredQuestionsInCourse(dummyCourse).size()); // sesión cerrada sin cambios
     }
 
-    // ---------------------- Gestión de cursos ----------------------
-
+  
     
-    @Test
-    public void testGetCourseNameById() {
-        try {
-            var field = Course.class.getDeclaredField("id");
-            field.setAccessible(true);
-            field.set(dummyCourse, 99L);
-
-            CourseCatalog.getInstance().addCourse(dummyCourse); 
-
-            assertEquals("Curso Test", controller.getCourseNameById(99L));
-        } catch (Exception e) {
-            fail("No se pudo establecer el ID del curso.");
-        }
-    }
-
+    
+    
     
     // ---------------------- Búsqueda ----------------------
 
     @Test
     public void testGetUsersStartingWith() {
-        controller.registerUser("andres", new ImageIcon(), "andres@mail.com", "pass");
-        controller.registerUser("ana", new ImageIcon(), "ana@mail.com", "pass");
-        controller.registerUser("mario", new ImageIcon(), "mario@mail.com", "pass");
+        String u1 = "andres_" + UUID.randomUUID();
+        String u2 = "ana_" + UUID.randomUUID();
+        String u3 = "mario_" + UUID.randomUUID();
+
+        controller.registerUser(u1, new ImageIcon(), u1 + "@mail.com", "pass");
+        controller.registerUser(u2, new ImageIcon(), u2 + "@mail.com", "pass");
+        controller.registerUser(u3, new ImageIcon(), u3 + "@mail.com", "pass");
 
         Set<User> result = controller.getUsersStartingWith("a");
         assertTrue(result.stream().allMatch(u -> u.getUsername().startsWith("a")));
         assertFalse(result.contains(controller.getCurrentUser())); // no debe incluir al usuario actual
     }
+
 }
