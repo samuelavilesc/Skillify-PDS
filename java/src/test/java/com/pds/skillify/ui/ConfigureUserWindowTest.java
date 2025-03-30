@@ -1,60 +1,69 @@
 package com.pds.skillify.ui;
-/*
+
 import com.pds.skillify.controller.Controller;
 import com.pds.skillify.model.User;
-import org.junit.jupiter.api.*;
-import org.mockito.MockedStatic;
-import org.netbeans.jemmy.operators.*;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.netbeans.jemmy.JemmyProperties;
+import org.netbeans.jemmy.operators.JButtonOperator;
+import org.netbeans.jemmy.operators.JFrameOperator;
+import org.netbeans.jemmy.operators.JLabelOperator;
+import org.netbeans.jemmy.operators.JPasswordFieldOperator;
 
 import javax.swing.*;
 
-import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ConfigureUserWindowTest {
 
-    private static MockedStatic<Controller> mockedController;
-    private JFrameOperator frame;
-
-    @BeforeAll
-    public static void mockController() {
-        mockedController = mockStatic(Controller.class);
-        Controller mockCtrl = mock(Controller.class);
-
-        User mockUser = new User();
-        mockUser.setUsername("pedro_test");
-        mockUser.setEmail("pedro@example.com");
-
-        when(mockCtrl.getCurrentUser()).thenReturn(mockUser);
-        mockedController.when(Controller::getInstance).thenReturn(mockCtrl);
-    }
-
-    @AfterAll
-    public static void closeMock() {
-        if (mockedController != null) mockedController.close();
-    }
-
     @BeforeEach
-    public void setUp() {
-        // Abrimos la ventana manualmente para asegurar orden correcto
-        SwingUtilities.invokeLater(() -> {
-            ConfigureUserWindow ventana = new ConfigureUserWindow();
-            ventana.setVisible(true);
-        });
+    public void setup() {
+        JemmyProperties.setCurrentTimeout("ComponentOperator.WaitComponentTimeout", 10000);
 
-        // Esperamos a que se abra la ventana con el título correcto
-        frame = new JFrameOperator("Skillify");
+        // Crear un usuario ficticio y asignarlo al controlador
+        User fakeUser = new User();
+        fakeUser.setUsername("Pedro");
+        fakeUser.setEmail("pedro@example.com");
+        Controller.getInstance().setCurrentUser(fakeUser);
     }
 
     @Test
-    public void testComponentesVisibles() {
-        new JLabelOperator(frame, "Nueva Contraseña:");
-        new JPasswordFieldOperator(frame);
-        new JButtonOperator(frame, "Guardar");
+    public void testConfigureUserWindowComponentsVisible() throws Exception {
+        SwingUtilities.invokeAndWait(() -> new ConfigureUserWindow());
+
+        JFrameOperator frame = new JFrameOperator("Skillify");
+
+        // Verificar etiqueta de usuario
+        JLabelOperator usernameLabel = new JLabelOperator(frame, "Pedro");
+        assertNotNull(usernameLabel);
+
+        // Verificar email
+        JLabelOperator emailLabel = new JLabelOperator(frame, "pedro@example.com");
+        assertNotNull(emailLabel);
+
+        // Verificar campo de nueva contraseña
+        JPasswordFieldOperator passwordField = new JPasswordFieldOperator(frame);
+        assertNotNull(passwordField);
+
+        // Verificar botón guardar
+        JButtonOperator saveButton = new JButtonOperator(frame, "Guardar");
+        assertNotNull(saveButton);
     }
 
-    @AfterEach
-    public void tearDown() {
-        if (frame != null) frame.close();
+    @Test
+    public void testChangePasswordAndClickSave() throws Exception {
+        SwingUtilities.invokeAndWait(() -> new ConfigureUserWindow());
+
+        JFrameOperator frame = new JFrameOperator("Skillify");
+        JPasswordFieldOperator passwordField = new JPasswordFieldOperator(frame);
+        JButtonOperator saveButton = new JButtonOperator(frame, "Guardar");
+
+        // Simular entrada de contraseña y click
+        passwordField.clearText();
+        passwordField.typeText("nuevaPassword123");
+        saveButton.push();
+
+        // Aquí podrías verificar algún efecto secundario o mock
+        assertTrue(passwordField.getPassword().length > 0);
     }
-}
-*/
+} 
