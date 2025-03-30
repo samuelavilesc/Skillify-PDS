@@ -112,4 +112,8 @@ public class ConfigureUserWindow extends JFrame {
 	public JButton getBtnGuardar() {
 		return btnGuardar;
 	}
+	public static void main(String[] args) {
+	    SwingUtilities.invokeLater(ConfigureUserWindow::new);
+	}
+
 }
