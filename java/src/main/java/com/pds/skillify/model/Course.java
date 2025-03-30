@@ -119,4 +119,8 @@ public class Course implements Serializable {
 	public void setMode(CourseMode mode) {
 		this.mode = mode;
 	}
+	public void setId(Long id) {
+	    this.id = id;
+	}
+
 }

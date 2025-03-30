@@ -20,6 +20,7 @@ public class ConfigureUserWindow extends JFrame {
 		new ConfigureUserWindowController(this);
 		setVisible(true);
 	}
+	
 
 	private void initialize() {
 		setTitle("Skillify");
@@ -112,4 +113,8 @@ public class ConfigureUserWindow extends JFrame {
 	public JButton getBtnGuardar() {
 		return btnGuardar;
 	}
+	public static void main(String[] args) {
+	    SwingUtilities.invokeLater(ConfigureUserWindow::new);
+	}
+
 }

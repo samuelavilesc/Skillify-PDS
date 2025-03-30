@@ -85,4 +85,7 @@ public class CommunityWindow extends JFrame {
 	public JList<User> getUsersList() {
 		return usersList;
 	}
+	public static void main(String[] args) {
+	    SwingUtilities.invokeLater(() -> new CommunityWindow().setVisible(true));
+	}
 }

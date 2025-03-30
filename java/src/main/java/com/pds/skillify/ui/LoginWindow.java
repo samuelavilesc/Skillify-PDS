@@ -18,11 +18,17 @@ public class LoginWindow extends JFrame {
 	private JLabel registerLabel;
 	private JLabel forgotPasswordLabel;
 
-	public LoginWindow() {
+	public LoginWindow(boolean forTest) {
 		initialize();
-		new LoginWindowController(this);
-		setVisible(true);
+		if (!forTest) {
+			new LoginWindowController(this);
+			setVisible(true);
+		}
 	}
+	public LoginWindow() {
+		this(false); // Normal, con controlador
+	}
+
 
 	private void initialize() {
 		setTitle("Skillify");
