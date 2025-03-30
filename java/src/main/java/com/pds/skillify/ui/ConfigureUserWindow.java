@@ -20,6 +20,7 @@ public class ConfigureUserWindow extends JFrame {
 		new ConfigureUserWindowController(this);
 		setVisible(true);
 	}
+	
 
 	private void initialize() {
 		setTitle("Skillify");

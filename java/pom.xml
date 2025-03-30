@@ -116,19 +116,17 @@
 	</dependencies>
 
 	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.5</version>
-				<configuration>
-					<includes>
-						<include>**/*Test.java</include>
-					</includes>
-					<!-- Esta línea activa ByteBuddy experimental -->
-					<argLine>-Dnet.bytebuddy.experimental=${net.bytebuddy.experimental}</argLine>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+  <plugins>
+    <plugin>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-surefire-plugin</artifactId>
+      <version>3.0.0-M9</version>
+      <configuration>
+        <forkCount>0</forkCount>
+        <reuseForks>false</reuseForks>
+      </configuration>
+    </plugin>
+  </plugins>
+</build>
+
 </project>
