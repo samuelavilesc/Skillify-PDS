@@ -63,6 +63,8 @@ public class UserCatalog {
 	public Set<User> getUsersStartingWith(String prefix) {
 		return users.values().stream().filter(u -> u.getUsername().startsWith(prefix)).collect(Collectors.toSet());
 	}
+	
+
 
 	/**
 	 * Busca un usuario por su identificador único.
@@ -124,6 +126,10 @@ public class UserCatalog {
 		for (User user : usersFromDB) {
 			users.put(user.getEmail(), user);
 		}
+	}
+
+	public boolean emailExists(String email) {
+	    return users.values().stream().anyMatch(u -> u.getEmail().equals(email));
 	}
 
 	/**

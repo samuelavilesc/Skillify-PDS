@@ -82,7 +82,7 @@ public class Controller {
 	 *         usuario ya existe.
 	 */
 	public boolean registerUser(String username, ImageIcon pfp, String email, String password) {
-		if (userCatalog.getUser(username) != null) {
+		  if ((userCatalog.getUser(username) != null) || userCatalog.emailExists(email)) {
 			return false;
 		}
 
