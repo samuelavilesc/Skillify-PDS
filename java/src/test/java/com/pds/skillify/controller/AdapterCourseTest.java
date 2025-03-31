@@ -24,7 +24,7 @@ public void registerCourse(Course course) {
         em.getTransaction().begin();
         Course managedCourse = em.merge(course);
         em.getTransaction().commit();
-        course.setId(managedCourse.getId()); // 💡 Aquí actualizamos el ID
+        course.setId(managedCourse.getId()); // Aquí actualizamos el ID
     } finally {
         em.close();
     }

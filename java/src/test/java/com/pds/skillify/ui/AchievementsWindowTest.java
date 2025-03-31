@@ -14,7 +14,7 @@ public class AchievementsWindowTest {
     public void testAchievementsWindowOpensAndDisplaysTitle() throws Exception {
         // Crear un usuario ficticio
         User dummyUser = new User("pedro_test", "1234", "test@dummy.com", new ImageIcon());
-
+        
         // Ejecutar la ventana en el hilo EDT
         SwingUtilities.invokeLater(() -> new AchievementsWindow(dummyUser));
 
