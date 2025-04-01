@@ -16,7 +16,7 @@ import java.io.File;
 public class ConfigureUserWindowController {
 	private ConfigureUserWindow view;
 	private User actualUser;
-	private ImageIcon newProfilePic = null; // Nueva imagen seleccionada
+	private ImageIcon newProfilePic = null; 
 
 	public ConfigureUserWindowController(ConfigureUserWindow view) {
 		this.view = view;
@@ -30,7 +30,7 @@ public class ConfigureUserWindowController {
 			view.getLblUsuario().setText(actualUser.getUsername());
 			view.getLblEmailValor().setText(actualUser.getEmail());
 
-			// Cargar la imagen de perfil del usuario
+			
 			ImageIcon avatarIcon;
 			if (actualUser.getProfilePic() != null) {
 				avatarIcon = new ImageIcon(
@@ -43,7 +43,7 @@ public class ConfigureUserWindowController {
 	}
 
 	private void initializeHandlers() {
-		// **Evento para cambiar la imagen de perfil**
+		
 		view.getLblImagenPerfil().addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -73,10 +73,10 @@ public class ConfigureUserWindowController {
 			}
 		});
 
-		// **Evento para actualizar los datos al hacer clic en Guardar**
+		
 		view.getBtnGuardar().addActionListener(e -> actualizarUsuario());
 
-		// **Evento para abrir la ventana MainWindow al cerrar la ventana**
+		
 		view.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
@@ -91,29 +91,29 @@ public class ConfigureUserWindowController {
 	private void actualizarUsuario() {
 		String nuevaContrasena = new String(view.getTxtNuevaContrasena().getPassword()).trim();
 
-		// Verificar si la nueva contraseña es válida
+		
 		if (!nuevaContrasena.isEmpty() && nuevaContrasena.length() < 8) {
 			JOptionPane.showMessageDialog(view, "La contraseña debe tener al menos 8 caracteres.", "Error",
 					JOptionPane.ERROR_MESSAGE);
 			return;
 		}
 
-		// Actualizar la contraseña si se ingresó una nueva
+		
 		if (!nuevaContrasena.isEmpty()) {
 			actualUser.setPassword(nuevaContrasena);
 			Controller.getInstance().updateCurrentUser();
 		}
 
-		// Actualizar foto de perfil si se seleccionó una nueva
+		
 		if (newProfilePic != null) {
 			Controller.getInstance().setNewPfP(newProfilePic);
 		}
 
-		// Confirmar cambios
+		
 		JOptionPane.showMessageDialog(view, "Cambios guardados correctamente.", "Éxito",
 				JOptionPane.INFORMATION_MESSAGE);
 
-		// Cerrar ventana y abrir MainWindow con los cambios aplicados
+		
 		view.dispose();
 		new MainWindow();
 	}

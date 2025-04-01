@@ -36,7 +36,7 @@ public class CourseTest {
 
         assertEquals(1, course.getQuestions().size());
         assertTrue(course.getQuestions().contains(q1));
-        assertEquals(course, q1.getCourse()); // Relación establecida
+        assertEquals(course, q1.getCourse()); 
     }
 
     @Test
@@ -60,7 +60,7 @@ public class CourseTest {
         List<Question> firstCall = course.getQuestions();
         List<Question> secondCall = course.getQuestions();
 
-        // Las listas podrían coincidir por azar, pero deberían ser distintas en orden
+    
         assertTrue(firstCall.containsAll(secondCall));
         assertEquals(2, firstCall.size());
     }

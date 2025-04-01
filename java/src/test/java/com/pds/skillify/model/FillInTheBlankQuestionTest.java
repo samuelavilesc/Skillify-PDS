@@ -36,7 +36,7 @@ class FillInTheBlankQuestionTest {
     @Test
     void testCheckAnswer_Incorrect() {
         assertFalse(question.checkAnswer("London"));
-        assertFalse(question.checkAnswer("Pariis")); // Typo
+        assertFalse(question.checkAnswer("Pariis")); 
     }
 
     @Test

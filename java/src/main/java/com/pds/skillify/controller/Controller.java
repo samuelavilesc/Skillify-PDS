@@ -91,7 +91,7 @@ public class Controller {
 
 		if (!userCatalog.existsUser(newUser)) {
 			userCatalog.addUser(newUser);
-			return login(newUser.getUsername(), newUser.getPassword()); // Auto-login después del registro
+			return login(newUser.getUsername(), newUser.getPassword());
 		}
 
 		return false;
@@ -173,16 +173,17 @@ public class Controller {
 			throw new IllegalStateException("No hay usuario autenticado.");
 		}
 
-		// Buscar si el curso ya existe en la base de datos
+		
 		Course existingCourse = courseCatalog.getCourse(newCourse.getName());
 
 		if (existingCourse == null) {
-			// Si el curso no existe, guardarlo en la BD antes de asignarlo
+			
 			courseCatalog.addCourse(newCourse);
 			existingCourse = newCourse;
 		}
 
-		// Verificar que el usuario no tenga ya este curso
+		
+
 		if (!currentUser.alreadyHasCourse(existingCourse)) {
 			currentUser.addCourse(existingCourse);
 			userCatalog.updateUser(currentUser);

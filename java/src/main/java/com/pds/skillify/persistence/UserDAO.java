@@ -32,6 +32,7 @@ public interface UserDAO {
 	 */
 	public void modifyUser(User user);
 
+	
 	/**
 	 * Recupera un usuario de la base de datos a partir de su código.
 	 * 
@@ -41,6 +42,7 @@ public interface UserDAO {
 	 */
 	public User loadUser(Long id);
 
+	
 	/**
 	 * Recupera todos los usuarios almacenados en la base de datos.
 	 * 

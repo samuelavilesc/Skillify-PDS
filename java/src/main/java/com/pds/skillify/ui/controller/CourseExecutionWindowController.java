@@ -162,7 +162,7 @@ public class CourseExecutionWindowController {
 	    optionsGroup = new ButtonGroup();
 	    optionButtons = new JRadioButton[question.getOptions().size()];
 
-	    // FlowLayout centrado para mejor estética
+	   
 	    JPanel optionsPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 30, 10));
 	    optionsPanel.setOpaque(false);
 	    optionsPanel.setBackground(Color.WHITE);
@@ -184,7 +184,7 @@ public class CourseExecutionWindowController {
 	        optionsPanel.add(option);
 	    }
 
-	    // Ajustar dinámicamente al ancho disponible (sin ancho fijo)
+	  
 	    JScrollPane scrollPane = new JScrollPane(optionsPanel,
 	            JScrollPane.VERTICAL_SCROLLBAR_NEVER,
 	            JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);

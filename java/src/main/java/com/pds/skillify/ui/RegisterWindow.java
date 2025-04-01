@@ -34,7 +34,7 @@ public class RegisterWindow extends JFrame {
 		setResizable(false);
 		setLayout(new BorderLayout());
 
-		// Panel superior con el logo
+		
 		JPanel topPanel = new JPanel(new BorderLayout());
 		ImageIcon logo = new ImageIcon(getClass().getResource("/logo.png"));
 		Image img = logo.getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
@@ -44,7 +44,7 @@ public class RegisterWindow extends JFrame {
 		topPanel.add(logoLabel, BorderLayout.NORTH);
 		add(topPanel, BorderLayout.NORTH);
 
-		// Panel central con formulario de registro
+		
 		JPanel panelCentro = new JPanel(new GridBagLayout());
 		panelCentro.setBorder(BorderFactory.createEmptyBorder(1, 50, 1, 50));
 
@@ -53,7 +53,7 @@ public class RegisterWindow extends JFrame {
 		gbc.insets = new Insets(5, 5, 5, 5);
 		gbc.weightx = 1.0;
 
-		// Campos de usuario
+		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
@@ -78,19 +78,19 @@ public class RegisterWindow extends JFrame {
 		passwordField = new JPasswordField();
 		panelCentro.add(passwordField, gbc);
 
-		// Avatar y botón en la misma línea
+		
 		gbc.gridy = 6;
 		gbc.gridwidth = 1;
 		gbc.anchor = GridBagConstraints.CENTER;
 
 		JPanel avatarPanel = new JPanel(new FlowLayout(FlowLayout.CENTER, 10, 0));
 		selectedAvatar = new ImageIcon(getClass().getResource("/user.png"));
-		selectedAvatar.setDescription(getClass().getResource("/user.png").getPath()); //añadimos la ruta por defecto
+		selectedAvatar.setDescription(getClass().getResource("/user.png").getPath()); 
 		genericAvatarLabel = new JLabel();
 		genericAvatarLabel
-				.setIcon(new ImageIcon(selectedAvatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))); // Imagen
-																													// más
-																													// pequeña
+				.setIcon(new ImageIcon(selectedAvatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))); 
+																													
+																													
 		avatarPanel.add(genericAvatarLabel);
 
 		selectAvatarButton = new JButton("Seleccionar");
@@ -100,7 +100,7 @@ public class RegisterWindow extends JFrame {
 
 		add(panelCentro, BorderLayout.CENTER);
 
-		// Panel inferior con botón de crear cuenta
+		
 		JPanel bottomPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbcBottom = new GridBagConstraints();
 		gbcBottom.gridx = 0;
@@ -126,7 +126,7 @@ public class RegisterWindow extends JFrame {
 		add(bottomPanel, BorderLayout.SOUTH);
 	}
 
-	// Getters y Setters
+	
 	public JLabel getLoginLabel() {
 		return loginLabel;
 	}
@@ -153,9 +153,9 @@ public class RegisterWindow extends JFrame {
 
 	public void setAvatar(ImageIcon avatar) {
 		this.selectedAvatar = avatar;
-		genericAvatarLabel.setIcon(new ImageIcon(avatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))); // Imagen
-																													// más
-																													// pequeña
+		genericAvatarLabel.setIcon(new ImageIcon(avatar.getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH))); 
+																													
+																													
 	}
 
 	public ImageIcon getAvatar() {

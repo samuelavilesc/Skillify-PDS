@@ -25,7 +25,7 @@ public class RegisterWindowTest {
 
         JFrameOperator frame = new JFrameOperator("Skillify");
 
-        // Verificar existencia de campos
+      
         JTextFieldOperator usernameField = new JTextFieldOperator(frame, 0);
         JTextFieldOperator emailField = new JTextFieldOperator(frame, 1);
         JPasswordFieldOperator passwordField = new JPasswordFieldOperator(frame, 0);
@@ -40,7 +40,7 @@ public class RegisterWindowTest {
         assertNotNull(createAccountButton);
         assertNotNull(loginLabel);
 
-        // Simular introducción de datos
+    
         usernameField.clearText();
         usernameField.typeText("nuevo_usuario");
         assertEquals("nuevo_usuario", usernameField.getText());
@@ -53,9 +53,9 @@ public class RegisterWindowTest {
         passwordField.typeText("123456");
         assertEquals("123456", new String(passwordField.getPassword()));
 
-        // Simular clics
-        selectAvatarButton.push(); // No abre selector real, solo prueba de botón
-        createAccountButton.push(); // Debería lanzar acción (no comprobamos resultado aquí)
-        loginLabel.clickMouse(); // Simula clic en "Inicia sesión"
+     
+        selectAvatarButton.push(); 
+        createAccountButton.push(); 
+        loginLabel.clickMouse(); 
     }
 }

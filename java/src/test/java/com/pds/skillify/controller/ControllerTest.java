@@ -19,7 +19,7 @@ public class ControllerTest {
     private User dummyUser;
     private Course dummyCourse;
     private FillInTheBlankQuestion dummyQuestion;
-    private AdapterCourseTest adapterCourse; // Aquí usamos AdapterCourseTest para los tests
+    private AdapterCourseTest adapterCourse; 
 
     @BeforeEach
     
@@ -27,7 +27,7 @@ public class ControllerTest {
         controller = Controller.getInstance();
 
         EntityManagerFactory emf = Persistence.createEntityManagerFactory("SkillifyPU");
-        adapterCourse = new AdapterCourseTest(emf); // ✅ Se inicializa el campo de clase correctamente
+        adapterCourse = new AdapterCourseTest(emf); 
 
         dummyUser = new User("testUser", "1234", "test@example.com", new ImageIcon());
         controller.setCurrentUser(dummyUser);
@@ -132,7 +132,7 @@ public class ControllerTest {
         dummyUser.startSession();
         controller.endCurrentUserSession();
 
-        assertEquals(0, dummyUser.getAnsweredQuestionsInCourse(dummyCourse).size()); // sesión cerrada sin cambios
+        assertEquals(0, dummyUser.getAnsweredQuestionsInCourse(dummyCourse).size()); 
     }
 
   
@@ -154,7 +154,7 @@ public class ControllerTest {
 
         Set<User> result = controller.getUsersStartingWith("a");
         assertTrue(result.stream().allMatch(u -> u.getUsername().startsWith("a")));
-        assertFalse(result.contains(controller.getCurrentUser())); // no debe incluir al usuario actual
+        assertFalse(result.contains(controller.getCurrentUser())); 
     }
 
 }

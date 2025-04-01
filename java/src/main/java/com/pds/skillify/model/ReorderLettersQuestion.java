@@ -54,7 +54,7 @@ public class ReorderLettersQuestion extends Question {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		if (!super.equals(o))
-			return false; // Llama a equals de la superclase
+			return false; 
 
 		ReorderLettersQuestion that = (ReorderLettersQuestion) o;
 		

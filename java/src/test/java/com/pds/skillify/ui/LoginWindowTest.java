@@ -23,13 +23,13 @@ public class LoginWindowTest {
 		JemmyProperties.setCurrentTimeout("ComponentOperator.WaitComponentTimeout", 10000);
 
 		SwingUtilities.invokeAndWait(() -> {
-			LoginWindow window = new LoginWindow(true); // Modo test sin controlador
+			LoginWindow window = new LoginWindow(true); 
 			window.setVisible(true);
 		});
 
 		JFrameOperator frame = new JFrameOperator("Skillify");
 
-		// Campos y botones
+	
 		JTextFieldOperator username = new JTextFieldOperator(frame, 0);
 		assertNotNull(username);
 		
@@ -47,30 +47,30 @@ public class LoginWindowTest {
 	}
 	@Test
 	public void testLoginFlow() throws Exception {
-	    // Ejecutar en el hilo de Swing y mostrar ventana en modo test
+	    
 	    SwingUtilities.invokeAndWait(() -> {
-	        LoginWindow window = new LoginWindow(true); // Sin lógica de controlador
+	        LoginWindow window = new LoginWindow(true); 
 	        window.setVisible(true);
 	    });
 
-	    // Operador de la ventana
+	    
 	    JFrameOperator window = new JFrameOperator("Skillify");
 
-	    // Escribir usuario
+	    
 	    JTextFieldOperator userField = new JTextFieldOperator(window, 0);
 	    userField.clearText();
 	    userField.typeText("pedro_test");
 
-	    // Escribir contraseña
+	    
 	    JPasswordFieldOperator passField = new JPasswordFieldOperator(window, 0);
 	    passField.clearText();
 	    passField.typeText("1234");
 
-	    // Pulsar login
+	   
 	    JButtonOperator loginButton = new JButtonOperator(window, "Login");
 	    loginButton.push();
 
-	    // Esperamos que siga visible (no esperamos que se cierre)
+	   
 	    assertTrue(window.isVisible(), "La ventana debería seguir visible tras pulsar login (funcionalidad actual)");
 	}
 

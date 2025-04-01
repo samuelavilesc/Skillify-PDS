@@ -42,15 +42,15 @@ public class AchievementsWindow extends JFrame {
 		setResizable(false);
 		setLayout(new BorderLayout());
 
-		// **Panel superior con título y avatar**
+		
 		JPanel topPanel = new JPanel(new BorderLayout());
 		topPanel.setBorder(BorderFactory.createEmptyBorder(10, 15, 10, 15));
 
-		// **Título "Tus logros"**
+	
 		lblTitulo = new JLabel("Logros de " + user.getUsername());
 		lblTitulo.setFont(new Font("Arial", Font.BOLD, 24));
 
-		// **Cargar imagen del avatar del usuario**
+		
 		ImageIcon avatarIcon;
 		if (user != null && user.getProfilePic() != null) {
 			avatarIcon = new ImageIcon(user.getProfilePic().getImage().getScaledInstance(50, 50, Image.SCALE_SMOOTH));
@@ -60,7 +60,7 @@ public class AchievementsWindow extends JFrame {
 
 		lblAvatar = new JLabel(avatarIcon);
 
-		// **Panel para alinear título y avatar**
+		
 		JPanel tituloPanel = new JPanel(new GridBagLayout());
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.gridx = 0;
@@ -74,7 +74,7 @@ public class AchievementsWindow extends JFrame {
 		topPanel.add(tituloPanel, BorderLayout.CENTER);
 		add(topPanel, BorderLayout.NORTH);
 
-		// **Panel central con logros**
+		
 		panelLogros = new JPanel();
 		panelLogros.setLayout(new BoxLayout(panelLogros, BoxLayout.Y_AXIS));
 		panelLogros.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
@@ -85,38 +85,38 @@ public class AchievementsWindow extends JFrame {
 
 		add(scrollPane, BorderLayout.CENTER);
 
-		// **Panel inferior con estadísticas en horizontal**
-		panelEstadisticas = new JPanel(new GridLayout(2, 3, 20, 5)); // 2 filas, 3 columnas, espacio horizontal y
-																		// vertical
+		
+		panelEstadisticas = new JPanel(new GridLayout(2, 3, 20, 5)); 
+																		
 		panelEstadisticas.setBorder(BorderFactory.createTitledBorder("Estadísticas del Usuario"));
 
 		long horasEstudio = user.getActiveTimeInHours();
 		int rachaActual = user.getCurrentLoginStreak();
 		int mejorRacha = user.getBestLoginStreak();
 
-		// **Primera fila: nombres de las estadísticas**
+		
 		lblHorasEstudio = new JLabel("Horas de estudio", SwingConstants.CENTER);
 		lblRachaActual = new JLabel("Racha actual", SwingConstants.CENTER);
 		lblMejorRacha = new JLabel("Mejor racha", SwingConstants.CENTER);
 
-		// **Segunda fila: valores más grandes**
+	
 		lblHorasValor = new JLabel(String.valueOf(horasEstudio), SwingConstants.CENTER);
 		lblRachaActualValor = new JLabel(String.valueOf(rachaActual), SwingConstants.CENTER);
 		lblMejorRachaValor = new JLabel(String.valueOf(mejorRacha), SwingConstants.CENTER);
 
-		// **Fuente más grande para los valores**
+		
 		Font valorFont = new Font("Arial", Font.BOLD, 22);
 		lblHorasValor.setFont(valorFont);
 		lblRachaActualValor.setFont(valorFont);
 		lblMejorRachaValor.setFont(valorFont);
 
-		// **Fuente en negrita para los nombres**
+		
 		Font tituloFont = new Font("Arial", Font.BOLD, 14);
 		lblHorasEstudio.setFont(tituloFont);
 		lblRachaActual.setFont(tituloFont);
 		lblMejorRacha.setFont(tituloFont);
 
-		// **Añadir componentes al panel de estadísticas**
+		
 		panelEstadisticas.add(lblHorasEstudio);
 		panelEstadisticas.add(lblRachaActual);
 		panelEstadisticas.add(lblMejorRacha);
@@ -125,7 +125,7 @@ public class AchievementsWindow extends JFrame {
 		panelEstadisticas.add(lblRachaActualValor);
 		panelEstadisticas.add(lblMejorRachaValor);
 
-		// **Añadir el panel de estadísticas en la parte inferior**
+		
 		add(panelEstadisticas, BorderLayout.SOUTH);
 	}
 
@@ -142,9 +142,9 @@ public class AchievementsWindow extends JFrame {
 	 * @see Controller#getCourseNameById(Long)
 	 */
 	public void actualizarLogros() {
-		panelLogros.removeAll(); // Limpiar el panel antes de actualizar
+		panelLogros.removeAll(); 
 
-		// Obtener los IDs de los cursos completados desde el usuario
+		
 		Set<Long> cursosCompletados = user.getCompletedCourses();
 
 		if (cursosCompletados.isEmpty()) {
@@ -156,10 +156,10 @@ public class AchievementsWindow extends JFrame {
 		} else {
 			ImageIcon iconoMedalla = new ImageIcon(getClass().getResource("/achievement.png"));
 
-			// Convertir IDs en nombres de cursos para mostrar en la interfaz
-			List<String> nombresCursos = cursosCompletados.stream().map(controller::getCourseNameById) // Obtener nombre
-																										// del curso por
-																										// ID
+			
+			List<String> nombresCursos = cursosCompletados.stream().map(controller::getCourseNameById) 
+																										
+																										
 					.collect(Collectors.toList());
 
 			for (String nombreCurso : nombresCursos) {

@@ -30,7 +30,7 @@ public class Course implements Serializable {
 	private CourseMode mode = CourseMode.SEQUENTIAL;
 
 	
-	// Constructor vacío requerido por JPA
+	
 	public Course() {
 	}
 
@@ -49,7 +49,7 @@ public class Course implements Serializable {
 	
 	public void addQuestion(Question question) {
 		questions.add(question);
-		question.setCourse(this); // Establece la relación en la pregunta
+		question.setCourse(this); 
 	}
 	
 

@@ -59,6 +59,7 @@ public abstract class Question implements Serializable {
 
 	public abstract boolean checkAnswer(String answer);
 
+	
 	@Override
 	public boolean equals(Object o) {
 		if (this == o)

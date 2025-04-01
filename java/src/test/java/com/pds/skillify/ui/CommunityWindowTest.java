@@ -45,7 +45,7 @@ public class CommunityWindowTest {
 
     @Test
     public void testUpdateUserList() {
-        // Creamos un usuario falso para comprobar que se actualiza la lista
+      
         CommunityWindow window = (CommunityWindow) mainWindow.getSource();
         User fakeUser = new User();
         fakeUser.setUsername("usuario_test");

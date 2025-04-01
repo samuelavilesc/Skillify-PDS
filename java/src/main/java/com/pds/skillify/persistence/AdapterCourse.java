@@ -23,9 +23,9 @@ public class AdapterCourse implements CourseDAO {
 			question.setCourse(course);
 		}
 		em.getTransaction().begin();
-		// 🔹 Asegurar que las preguntas tienen el curso asignado antes de persistirlas
+		//  Asegurar que las preguntas tienen el curso asignado antes de persistirlas
 
-		// 🔹 Guardamos primero el curso
+		// Guardamos primero el curso
 		em.persist(course);
 
 		em.getTransaction().commit();
@@ -50,7 +50,7 @@ public class AdapterCourse implements CourseDAO {
 	public void updateCourse(Course course) {
 		EntityManager em = getEmf().createEntityManager();
 		em.getTransaction().begin();
-		em.merge(course); // 🔹 Hibernate se encarga de actualizar también las preguntas
+		em.merge(course); // Hibernate se encarga de actualizar también las preguntas
 		em.getTransaction().commit();
 		em.close();
 	}

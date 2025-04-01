@@ -48,7 +48,7 @@ public abstract class FactoryDAO {
 	protected FactoryDAO() {
 	}
 
-	// Métodos abstractos que deben ser implementados por las subclases concretas.
+	
 
 	public abstract UserDAO getUserDAO();
 

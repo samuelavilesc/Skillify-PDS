@@ -38,7 +38,7 @@ public class CourseStartWindow extends JFrame {
 		setResizable(false);
 		setLayout(new BorderLayout());
 
-		// Panel superior con imagen
+		
 		JPanel topPanel = new JPanel(new BorderLayout());
 		ImageIcon logo = new ImageIcon(getClass().getResource("/curso.png"));
 		Image img = logo.getImage().getScaledInstance(150, 150, Image.SCALE_SMOOTH);
@@ -46,12 +46,12 @@ public class CourseStartWindow extends JFrame {
 		topPanel.add(logoLabel, BorderLayout.CENTER);
 		add(topPanel, BorderLayout.NORTH);
 
-		// Panel central con la información
+		
 		JPanel centerPanel = new JPanel();
 		centerPanel.setLayout(new BoxLayout(centerPanel, BoxLayout.Y_AXIS));
 		centerPanel.setBorder(BorderFactory.createEmptyBorder(10, 20, 10, 20));
 
-		// Título del curso centrado
+		
 		JPanel titlePanel = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JLabel titleLabel = new JLabel(course.getName());
 		titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
@@ -59,7 +59,7 @@ public class CourseStartWindow extends JFrame {
 		centerPanel.add(titlePanel);
 		centerPanel.add(Box.createVerticalStrut(10));
 
-		// Descripción del curso
+	
 		JTextArea descriptionArea = new JTextArea(course.getDescription());
 		descriptionArea.setWrapStyleWord(true);
 		descriptionArea.setLineWrap(true);
@@ -68,7 +68,7 @@ public class CourseStartWindow extends JFrame {
 		centerPanel.add(descriptionArea);
 		centerPanel.add(Box.createVerticalStrut(10));
 
-		// Panel para total de preguntas y respondidas
+		
 		JPanel questionsPanel = new JPanel();
 		questionsPanel.setLayout(new BoxLayout(questionsPanel, BoxLayout.Y_AXIS));
 
@@ -85,7 +85,7 @@ public class CourseStartWindow extends JFrame {
 		centerPanel.add(questionsPanel);
 		centerPanel.add(Box.createVerticalStrut(10));
 
-		// Selector de modo
+		
 		modeSelector = new JComboBox<>(new String[] { "Aleatorio", "Secuencial", "Repetición" });
 		modeSelector.setAlignmentX(Component.CENTER_ALIGNMENT);
 		centerPanel.add(modeSelector);
@@ -93,7 +93,7 @@ public class CourseStartWindow extends JFrame {
 
 		add(centerPanel, BorderLayout.CENTER);
 
-		// Panel inferior con botones
+		
 		JPanel bottomPanel = new JPanel();
 		startButton = new JButton("Empezar");
 		startButton.setPreferredSize(new Dimension(120, 30));

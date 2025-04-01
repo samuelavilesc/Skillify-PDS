@@ -34,7 +34,6 @@ public class ForgotPasswordWindowController {
 		Controller.getInstance().updateUserPassword(user, newPassword);
 		window.showStatusMessage("Contraseña actualizada correctamente.", true);
 
-		// Puedes cerrar la ventana automáticamente tras un breve retraso si quieres
 		window.closeWindow();
 	}
 }

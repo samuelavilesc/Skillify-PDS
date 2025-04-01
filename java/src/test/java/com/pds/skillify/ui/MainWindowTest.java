@@ -25,12 +25,12 @@ public class MainWindowTest {
 
     @Test
     public void testMainWindowComponentsVisible() throws Exception {
-        // Crear usuario falso
+       
         User fakeUser = new User();
         fakeUser.setUsername("Pedro");
         fakeUser.setEmail("pedro@example.com");
 
-        // Inyectarlo en el controlador singleton
+     
         Controller.getInstance().setCurrentUser(fakeUser);
 
         SwingUtilities.invokeAndWait(() -> {
@@ -42,7 +42,7 @@ public class MainWindowTest {
 
         assertNotNull(new JButtonOperator(frame, "Importar curso"));
         assertNotNull(new JListOperator(frame));
-        // Aquí puedes seguir comprobando iconos si los necesitas
+        
     }
 
 

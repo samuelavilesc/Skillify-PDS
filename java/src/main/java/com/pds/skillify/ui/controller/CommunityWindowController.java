@@ -88,15 +88,15 @@ public class CommunityWindowController {
 
 			@Override
 			public void mouseMoved(MouseEvent e) {
-				int index = usersList.locationToIndex(e.getPoint()); // Get index of hovered cell
+				int index = usersList.locationToIndex(e.getPoint()); 
 				if (index != hoveredIndex) {
 					hoveredIndex = index;
-					usersList.repaint(); // Force repaint to apply the new hover effect
+					usersList.repaint(); 
 				}
 			}
 		});
 
-		// Add mouse listener to reset hover when mouse exits the list
+		
 		usersList.addMouseListener(new MouseAdapter() {
 			@Override
 			public void mouseExited(MouseEvent e) {

@@ -105,7 +105,7 @@ public class User implements Serializable {
 
 		} else if (!lastLoginDate.equals(today)) {
 
-			// Inició sesión ayer.
+			
 			if (lastLoginDate.equals(today.minusDays(1))) {
 				currentLoginStreak++;
 			} else {
@@ -259,22 +259,27 @@ public class User implements Serializable {
 		this.currentLoginStreak = currentLoginStreak;
 	}
 
+	
 	public int getBestLoginStreak() {
 		return bestLoginStreak;
 	}
+	
 
 	public void setBestLoginStreak(int bestLoginStreak) {
 		this.bestLoginStreak = bestLoginStreak;
 	}
+	
 
 	public LocalDate getLastLoginDate() {
 		return lastLoginDate;
 	}
+	
 
 	public void setLastLoginDate(LocalDate lastLoginDate) {
 		this.lastLoginDate = lastLoginDate;
 	}
 
+	
 	public Set<Long> getCompletedCourses() {
 		return Collections.unmodifiableSet(completedCourses);
 	}
@@ -284,5 +289,6 @@ public class User implements Serializable {
 			answeredQuestions.get(course).clear();
 		}
 	}
+	
 
 }

@@ -20,7 +20,7 @@ public class ConfigureUserWindowTest {
     public void setup() {
         JemmyProperties.setCurrentTimeout("ComponentOperator.WaitComponentTimeout", 10000);
 
-        // Crear un usuario ficticio y asignarlo al controlador
+       
         User fakeUser = new User();
         fakeUser.setUsername("Pedro");
         fakeUser.setEmail("pedro@example.com");
@@ -33,19 +33,19 @@ public class ConfigureUserWindowTest {
 
         JFrameOperator frame = new JFrameOperator("Skillify");
 
-        // Verificar etiqueta de usuario
+       
         JLabelOperator usernameLabel = new JLabelOperator(frame, "Pedro");
         assertNotNull(usernameLabel);
 
-        // Verificar email
+        
         JLabelOperator emailLabel = new JLabelOperator(frame, "pedro@example.com");
         assertNotNull(emailLabel);
 
-        // Verificar campo de nueva contraseña
+       
         JPasswordFieldOperator passwordField = new JPasswordFieldOperator(frame);
         assertNotNull(passwordField);
 
-        // Verificar botón guardar
+        
         JButtonOperator saveButton = new JButtonOperator(frame, "Guardar");
         assertNotNull(saveButton);
     }
@@ -58,12 +58,12 @@ public class ConfigureUserWindowTest {
         JPasswordFieldOperator passwordField = new JPasswordFieldOperator(frame);
         JButtonOperator saveButton = new JButtonOperator(frame, "Guardar");
 
-        // Simular entrada de contraseña y click
+        
         passwordField.clearText();
         passwordField.typeText("nuevaPassword123");
         saveButton.push();
 
-        // Aquí podrías verificar algún efecto secundario o mock
+        
         assertTrue(passwordField.getPassword().length > 0);
     }
 } 

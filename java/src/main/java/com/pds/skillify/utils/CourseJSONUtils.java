@@ -87,7 +87,7 @@ public class CourseJSONUtils {
 			return false;
 		}
 
-		// Validar cada pregunta
+		
 		for (int i = 0; i < questions.length(); i++) {
 			JSONObject question = questions.getJSONObject(i);
 

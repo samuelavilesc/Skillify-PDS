@@ -14,7 +14,7 @@ public class FillInTheBlankQuestion extends Question {
 	@Column(nullable = false)
 	private String correctAnswer;
 
-	// Constructor por defecto requerido por JPA
+
 	public FillInTheBlankQuestion() {
 	}
 

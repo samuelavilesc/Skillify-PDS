@@ -92,7 +92,9 @@ public class CourseCatalog {
 		}
 	}
 
+	
 	/**
+	 * 
 	 * Elimina un curso del catálogo y de la base de datos.
 	 *
 	 * @param course Curso a eliminar.
@@ -105,6 +107,7 @@ public class CourseCatalog {
 			e.printStackTrace();
 		}
 	}
+	
 
 	/**
 	 * Carga todos los cursos desde la base de datos y los almacena en el catálogo.

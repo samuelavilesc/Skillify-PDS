@@ -64,7 +64,7 @@ public class Skillify {
 
 			Font roboto = Font.createFont(Font.TRUETYPE_FONT, fontStream).deriveFont(Font.PLAIN, 14);
 
-			// Registrar la fuente en el sistema para que la reconozca Java
+		
 			GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
 			ge.registerFont(roboto);
 

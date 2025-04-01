@@ -87,9 +87,9 @@ public class RegisterWindowController {
 		String username = view.getUsernameField().getText().trim();
 		String email = view.getEmailField().getText().trim();
 		String password = new String(view.getPasswordField().getPassword()).trim();
-		ImageIcon avatar = view.getAvatar(); // Obtener el avatar seleccionado
+		ImageIcon avatar = view.getAvatar(); 
 
-		// Validaciones antes de llamar a Controller
+		
 		if (!isValidEmail(email)) {
 			JOptionPane.showMessageDialog(view, "Ingrese un email válido (nombre@email.dominio).", "Error",
 					JOptionPane.ERROR_MESSAGE);
@@ -103,7 +103,7 @@ public class RegisterWindowController {
 			return;
 		}
 
-		// Intentar registrar usuario
+		
 		boolean success = Controller.getInstance().registerUser(username, avatar, email, password);
 
 		if (!success) {
@@ -112,7 +112,7 @@ public class RegisterWindowController {
 			return;
 		}
 
-		// Si todo es correcto, abrir MainWindow y cerrar RegisterWindow
+		
 		JOptionPane.showMessageDialog(view, "Registro exitoso. Bienvenido a Skillify!", "Éxito",
 				JOptionPane.INFORMATION_MESSAGE);
 		new MainWindow();

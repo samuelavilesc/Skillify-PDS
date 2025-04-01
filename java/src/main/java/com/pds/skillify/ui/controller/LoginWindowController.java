@@ -33,7 +33,7 @@ public class LoginWindowController {
 	}
 
 	private void initializeControllers() {
-		Controller.getInstance(); // Iniciar adaptadores
+		Controller.getInstance(); 
 		handleClickOnRegister(view.getRegisterLabel());
 		handleClickOnForgotPassword(view.getForgotPasswordLabel());
 		handleClickOnLogin(view.getLoginButton());
@@ -41,7 +41,7 @@ public class LoginWindowController {
 		view.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				System.exit(0); // Apagar el programa al cerrar la ventana
+				System.exit(0); 
 			}
 		});
 	}

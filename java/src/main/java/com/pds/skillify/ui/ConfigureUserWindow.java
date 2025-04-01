@@ -32,11 +32,11 @@ public class ConfigureUserWindow extends JFrame {
 
 		GridBagConstraints gbc = new GridBagConstraints();
 		gbc.insets = new Insets(5, 10, 5, 10);
-		gbc.fill = GridBagConstraints.HORIZONTAL; // Para expandir el botón
+		gbc.fill = GridBagConstraints.HORIZONTAL; 
 
 		User currentUser = Controller.getInstance().getCurrentUser();
 
-		// Imagen de perfil
+		
 		ImageIcon avatarIcon;
 		if (currentUser != null && currentUser.getProfilePic() != null) {
 			avatarIcon = new ImageIcon(
@@ -48,52 +48,51 @@ public class ConfigureUserWindow extends JFrame {
 		lblImagenPerfil = new JLabel(avatarIcon);
 		lblImagenPerfil.setCursor(new Cursor(Cursor.HAND_CURSOR));
 
-		// Avatar centrado
+		
 		gbc.gridx = 0;
 		gbc.gridy = 0;
 		gbc.gridwidth = 2;
 		gbc.anchor = GridBagConstraints.CENTER;
 		add(lblImagenPerfil, gbc);
 
-		// Nombre del usuario
+		
 		gbc.gridy = 1;
 		lblUsuario = new JLabel(currentUser != null ? currentUser.getUsername() : "Usuario", SwingConstants.CENTER);
 		lblUsuario.setFont(new Font("Arial", Font.BOLD, 18));
 		add(lblUsuario, gbc);
 
-		// Email - Etiqueta
+	
 		gbc.gridy = 2;
 		gbc.anchor = GridBagConstraints.WEST;
 		lblEmail = new JLabel("Email:");
 		add(lblEmail, gbc);
 
-		// Email - Valor
+		
 		gbc.gridy = 3;
 		lblEmailValor = new JLabel(currentUser != null ? currentUser.getEmail() : "email@dominio.com");
 		lblEmailValor.setFont(new Font("Arial", Font.PLAIN, 14));
 		add(lblEmailValor, gbc);
 
-		// Nueva contraseña - Etiqueta
 		gbc.gridy = 4;
 		lblNuevaContrasena = new JLabel("Nueva Contraseña:");
 		add(lblNuevaContrasena, gbc);
 
-		// Campo de contraseña
+		
 		gbc.gridy = 5;
 		txtNuevaContrasena = new JPasswordField(20);
 		add(txtNuevaContrasena, gbc);
 
-		// Botón de Guardar centrado
+		
 		gbc.gridy = 6;
 		gbc.gridwidth = 2;
-		gbc.anchor = GridBagConstraints.CENTER; // Centramos el botón
-		gbc.fill = GridBagConstraints.NONE; // Evita que se expanda
+		gbc.anchor = GridBagConstraints.CENTER; 
+		gbc.fill = GridBagConstraints.NONE; 
 		btnGuardar = new JButton("Guardar");
 		btnGuardar.setPreferredSize(new Dimension(120, 30));
 		add(btnGuardar, gbc);
 	}
 
-	// Getters
+	
 	public JLabel getLblImagenPerfil() {
 		return lblImagenPerfil;
 	}

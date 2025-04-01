@@ -47,11 +47,11 @@ public class CourseStartWindowController {
 	private void openCourseExecution(Course course) {
 		CourseExecutionWindow window = new CourseExecutionWindow(course);
 
-		// Agrega un WindowListener para detectar el cierre de la ventana
+	
 		window.addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosed(WindowEvent e) {
-				// Ejecutar en el hilo de eventos de Swing para evitar bloqueos
+				
 				SwingUtilities.invokeLater(() -> {
 					Controller.getInstance().updateCurrentUser();
 				});

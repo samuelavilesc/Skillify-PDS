@@ -85,15 +85,15 @@ public class MainWindow extends JFrame {
 		scrollPane.setBorder(null);
 		scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
 
-		// Customize the scrollbar
+		
 		JScrollBar verticalScrollBar = scrollPane.getVerticalScrollBar();
 		verticalScrollBar.setUnitIncrement(SCROLLING_SPEED);
 		verticalScrollBar.setBackground(Color.WHITE);
 		verticalScrollBar.setUI(new BasicScrollBarUI() {
 			@Override
 			protected void configureScrollBarColors() {
-				this.trackColor = Color.WHITE; // Fondo del scrollBar
-				this.thumbColor = new Color(220, 220, 220); // Color del scrollBar en sí
+				this.trackColor = Color.WHITE; 
+				this.thumbColor = new Color(220, 220, 220); 
 			}
 
 			@Override
@@ -116,7 +116,7 @@ public class MainWindow extends JFrame {
 				};
 			}
 
-			// Para hacer el scrollBar con bordes redondos
+		
 			@Override
 			protected void paintThumb(Graphics g, JComponent c, Rectangle thumbBounds) {
 				Graphics2D g2 = (Graphics2D) g;

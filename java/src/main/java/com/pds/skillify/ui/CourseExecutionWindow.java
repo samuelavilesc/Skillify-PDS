@@ -65,7 +65,7 @@ public class CourseExecutionWindow extends JFrame {
 		add(mainPanel);
 	}
 
-	// Getters para que el controlador acceda a los componentes
+	
 	public JLabel getLblQuestion() {
 		return lblQuestion;
 	}

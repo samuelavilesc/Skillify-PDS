@@ -17,7 +17,7 @@ public class MultipleChoiceQuestion extends Question {
 	@Column(nullable = false)
 	private int correctAnswer;
 
-	// Constructor por defecto requerido por JPA
+	
 	public MultipleChoiceQuestion() {
 	}
 
@@ -60,7 +60,7 @@ public class MultipleChoiceQuestion extends Question {
 		if (o == null || getClass() != o.getClass())
 			return false;
 		if (!super.equals(o))
-			return false; // Llama a equals de la superclase
+			return false; 
 
 		MultipleChoiceQuestion that = (MultipleChoiceQuestion) o;
 		return correctAnswer == that.correctAnswer && Objects.equals(options, that.options);

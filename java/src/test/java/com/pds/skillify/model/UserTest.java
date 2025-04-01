@@ -50,27 +50,7 @@ class UserTest {
         user.updateLoginStreak();
 
         assertEquals(1, user.getCurrentLoginStreak());
-    }/*
-
-    @Test
-    void testCourseProgressTracking() {
-        Course course = new Course("Java Fundamentals", "Java Fundamentals Course");
-        user.addCourse(course);
-
-        assertTrue(user.alreadyHasCourse(course));
-        assertEquals(0, user.getCourseProgress(course));
-
-        FillInTheBlankQuestion q1 = new FillInTheBlankQuestion("What is Java", "A programming language", course);
-        FillInTheBlankQuestion q2 = new FillInTheBlankQuestion("What is C++", "A programming language", course);
-        course.addQuestion(q1);
-        course.addQuestion(q2);
-
-        user.addAnsweredQuestion(course, q1);
-        assertEquals(50, user.getCourseProgress(course));
-
-        user.addAnsweredQuestion(course, q2);
-        assertEquals(100, user.getCourseProgress(course));
-    }*/
+    }
 
     @Test
     void testAddCompletedCourse() {
@@ -79,23 +59,7 @@ class UserTest {
 
         assertTrue(user.getCompletedCourses().contains(course.getId()));
     }
-/*
-    @Test
-    void testAnsweredQuestionsTracking() {
-        Course course = new Course("Data Structures", "Data Structures Course");
-        FillInTheBlankQuestion q1 = new FillInTheBlankQuestion("What is Java", "A programming language", course);
-        FillInTheBlankQuestion q2 = new FillInTheBlankQuestion("What is C++", "A programming language", course);
 
-        user.addCourse(course);
-        user.addAnsweredQuestion(course, q1);
-
-        assertTrue(user.hasAnsweredQuestion(course, q1));
-        assertFalse(user.hasAnsweredQuestion(course, q2));
-
-        user.addAnsweredQuestion(course, q2);
-        assertTrue(user.hasAnsweredQuestion(course, q2));
-    }
-*/
     @Test
     void testResetCourseProgress() {
     	Course course = new Course("Algorithms", "Algorithms Course");

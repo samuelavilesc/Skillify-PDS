@@ -42,7 +42,7 @@ class MultipleChoiceQuestionTest {
     void testCheckAnswer_InvalidInput() {
         assertFalse(question.checkAnswer("A"));
         assertFalse(question.checkAnswer("Invalid"));
-        assertFalse(question.checkAnswer("")); // Vacío
+        assertFalse(question.checkAnswer("")); 
     }
 
     @Test

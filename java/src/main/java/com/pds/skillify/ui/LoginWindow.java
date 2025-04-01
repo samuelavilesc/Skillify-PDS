@@ -26,7 +26,7 @@ public class LoginWindow extends JFrame {
 		}
 	}
 	public LoginWindow() {
-		this(false); // Normal, con controlador
+		this(false);
 	}
 
 

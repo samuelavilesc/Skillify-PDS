@@ -13,7 +13,7 @@ public class AdapterCourseTest extends AdapterCourse {
         super(emf);
     }
 @Override
-    // Sobrescribimos registerCourse para usar merge() en lugar de persist()
+   
 
 public void registerCourse(Course course) {
     EntityManager em = getEmf().createEntityManager();
@@ -24,7 +24,7 @@ public void registerCourse(Course course) {
         em.getTransaction().begin();
         Course managedCourse = em.merge(course);
         em.getTransaction().commit();
-        course.setId(managedCourse.getId()); // Aquí actualizamos el ID
+        course.setId(managedCourse.getId()); 
     } finally {
         em.close();
     }
