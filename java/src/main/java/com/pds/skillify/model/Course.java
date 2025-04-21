@@ -81,7 +81,8 @@ public class Course implements Serializable {
 
 	
 	public void setQuestions(List<Question> questions) {
-		this.questions = questions;
+		List<Question> copy = new ArrayList<>(questions);
+		this.questions = copy;
 	}
 
 	public List<Question> getQuestions() {

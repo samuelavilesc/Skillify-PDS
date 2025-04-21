@@ -238,7 +238,7 @@ public class Controller {
 	 */
 	public void setQuestionAsAnswered(Course course, Question question) {
 		currentUser.addAnsweredQuestion(course, question);
-		if (isCourseCompleted(course)) {
+		if (isCourseFinished(course)) {
 			currentUser.addCompletedCourse(course);
 		}
 	}
@@ -251,7 +251,7 @@ public class Controller {
 	public List<Course> getFinishedCourses() {
 		List<Course> finishedCourses = new ArrayList<>();
 		for (Course course : currentUser.getAllCourses()) {
-			if (currentUser.getCourseProgress(course) == 100) {
+			if (isCourseFinished(course)) {
 				finishedCourses.add(course);
 			}
 		}
@@ -264,7 +264,7 @@ public class Controller {
 	 * @param course curso a verificar
 	 * @return true si el curso está completado, false en caso contrario
 	 */
-	private boolean isCourseCompleted(Course course) {
+	private boolean isCourseFinished(Course course) {
 		return getCurrentUsersAnsweredQuestionsInCourse(course) == course.getQuestions().size();
 	}
 

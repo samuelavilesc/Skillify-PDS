@@ -2,7 +2,6 @@ package com.pds.skillify.ui;
 
 import com.pds.skillify.model.User;
 import org.junit.jupiter.api.Test;
-import org.netbeans.jemmy.ClassReference;
 import org.netbeans.jemmy.operators.JFrameOperator;
 import org.netbeans.jemmy.operators.JLabelOperator;
 
