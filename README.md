@@ -7,6 +7,12 @@ Skillify es una aplicación de aprendizaje desarrollada en Java como parte de la
 
 El objetivo de Skillify es proporcionar una plataforma interactiva que facilite el aprendizaje de diversas habilidades.
 
+## Instrucciones de ejecución
+Para ejecutar la aplicación, basta con cargar el proyecto en eclipse (carpeta java) y ejecutar la clase main (Skillify.java)
+Tambien se puede hacer uso del fichero ejecutable .jar.
+
+Para **probar la aplicación**, se adjuntan ciertos cursos ya creados que se pueden encontrar en:  _java/src/main/resources/courses_
+
 ## Integrantes del equipo
 - **Samuel Avilés Conesa**
 - **Gloria Sánchez Alonso**
