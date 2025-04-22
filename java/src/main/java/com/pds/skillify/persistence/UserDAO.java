@@ -36,7 +36,7 @@ public interface UserDAO {
 	/**
 	 * Recupera un usuario de la base de datos a partir de su código.
 	 * 
-	 * @param codigo El código único del usuario.
+	 * @param id El código único del usuario.
 	 * @return El usuario correspondiente al código, o {@code null} si no se
 	 *         encuentra.
 	 */

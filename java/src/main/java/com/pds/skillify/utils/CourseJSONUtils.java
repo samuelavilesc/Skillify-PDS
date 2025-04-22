@@ -53,12 +53,10 @@ public class CourseJSONUtils {
 	 * <li>Cada pregunta debe tener los campos "type", "statement" y
 	 * "correctAnswer".</li>
 	 * <li>El tipo de pregunta determina validaciones adicionales:</li>
-	 * <ul>
 	 * <li>Para preguntas de opción múltiple, "options" debe ser un
 	 * {@code JSONArray} no vacío y "correctAnswer" debe ser un índice válido.</li>
 	 * <li>Para preguntas de completar huecos o reordenar letras, "correctAnswer"
 	 * debe ser un {@code String}.</li>
-	 * </ul>
 	 * </ul>
 	 * 
 	 * @param filePath Ruta del archivo JSON a validar.
