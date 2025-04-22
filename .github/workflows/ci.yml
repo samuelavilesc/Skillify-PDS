@@ -1,7 +1,9 @@
 # .github/workflows/ci.yml
-name: Build & Test Skillify
+name: Build Skillify (JAR)
 
-on: [push, pull_request]
+on:
+  push:
+  pull_request:
 
 jobs:
   build:
@@ -17,6 +19,12 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
-      - name: Build with Maven
+      - name: Build fat jar without tests
         working-directory: java
-        run: mvn clean install -DskipTests
+        run: mvn clean package -DskipTests
+
+      - name: Upload fat JAR artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: skillify
+          path: java/target/skillify.jar
